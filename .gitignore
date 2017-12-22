@@ -1,0 +1,8 @@
+/*/bin
+/*/obj
+/*/StyleCop.Cache
+/coverage/*
+/packages/*
+/TestResults
+/.vs
+/results.xml
