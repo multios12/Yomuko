@@ -1,7 +1,7 @@
 ﻿namespace ComicLaunch.Utils
 {
     using System;
-    using Model;
+    using Models.Book;
 
     /// <summary>
     /// ラベル属性に関するユーティリティクラス

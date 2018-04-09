@@ -82,8 +82,8 @@
   <ItemGroup>
     <Reference Include="Microsoft.VisualC" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="SharpCompress, Version=0.15.2.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpCompress.0.15.2\lib\net45\SharpCompress.dll</HintPath>
+    <Reference Include="SharpCompress, Version=0.20.0.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpCompress.0.20.0\lib\net45\SharpCompress.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -96,97 +96,97 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="Model\AnalyzeResult.cs" />
-    <Compile Include="Model\Duplicate\DuplicateModel.cs" />
-    <Compile Include="Model\Shelf\SyncResultModel.cs" />
+    <Compile Include="Models\AnalyzeResult.cs" />
+    <Compile Include="Models\Duplicate\DuplicateModel.cs" />
+    <Compile Include="Models\Shelf\SyncResultModel.cs" />
     <Compile Include="Utils\Kanaxas.cs" />
-    <Compile Include="Viewer\ArchiveMovedEventArgs.cs" />
-    <Compile Include="Viewer\PageEventArgs.cs" />
-    <Compile Include="Viewer\PictureList.cs">
+    <Compile Include="Forms\Viewer\ArchiveMovedEventArgs.cs" />
+    <Compile Include="Forms\Viewer\PageEventArgs.cs" />
+    <Compile Include="Forms\Viewer\PictureList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Viewer\PictureList.Designer.cs">
+    <Compile Include="Forms\Viewer\PictureList.Designer.cs">
       <DependentUpon>PictureList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Viewer\ViewerForm.cs">
+    <Compile Include="Forms\Viewer\ViewerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Viewer\ViewerForm.Designer.cs">
+    <Compile Include="Forms\Viewer\ViewerForm.Designer.cs">
       <DependentUpon>ViewerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Image\ArchiveModel.cs" />
-    <Compile Include="Control\BookmarkList.cs">
+    <Compile Include="Models\Image\ArchiveModel.cs" />
+    <Compile Include="Forms\Main\Control\BookmarkList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Control\BookmarkList.Designer.cs">
+    <Compile Include="Forms\Main\Control\BookmarkList.Designer.cs">
       <DependentUpon>BookmarkList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Control\ItemEventArgs.cs" />
-    <Compile Include="Control\DetailList.cs">
+    <Compile Include="Forms\Main\Control\ItemEventArgs.cs" />
+    <Compile Include="Forms\Main\Control\DetailList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Control\DetailList.Designer.cs">
+    <Compile Include="Forms\Main\Control\DetailList.Designer.cs">
       <DependentUpon>DetailList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Image\PageSizeConstants.cs" />
-    <Compile Include="Control\SelectSearchEventArgs.cs" />
-    <Compile Include="Form\WaitDialog.cs">
+    <Compile Include="Models\Image\PageSizeConstants.cs" />
+    <Compile Include="Forms\Main\Control\SelectSearchEventArgs.cs" />
+    <Compile Include="Forms\Commons\WaitDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\WaitDialog.Designer.cs">
+    <Compile Include="Forms\Commons\WaitDialog.Designer.cs">
       <DependentUpon>WaitDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form\MainForm.cs">
+    <Compile Include="Forms\Main\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\MainForm.Designer.cs">
+    <Compile Include="Forms\Main\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Image\ResizeModeConstants.cs" />
-    <Compile Include="Image\ArchiveEntrySort.cs" />
-    <Compile Include="Model\BookList.Search.cs" />
-    <Compile Include="Model\BookmarkModel.cs" />
-    <Compile Include="Form\ColumnDialog.cs">
+    <Compile Include="Models\Image\ResizeModeConstants.cs" />
+    <Compile Include="Models\Image\ArchiveEntrySort.cs" />
+    <Compile Include="Models\Book\BookList.Search.cs" />
+    <Compile Include="Models\BookmarkModel.cs" />
+    <Compile Include="Forms\Setting\ColumnDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\ColumnDialog.Designer.cs">
+    <Compile Include="Forms\Setting\ColumnDialog.Designer.cs">
       <DependentUpon>ColumnDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form\FileNameItemDialog.cs">
+    <Compile Include="Forms\Setting\FileNameItemDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\FileNameItemDialog.Designer.cs">
+    <Compile Include="Forms\Setting\FileNameItemDialog.Designer.cs">
       <DependentUpon>FileNameItemDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form\CreateBookListDialog.cs">
+    <Compile Include="Forms\ShelfSelect\CreateBookListDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\CreateBookListDialog.Designer.cs">
+    <Compile Include="Forms\ShelfSelect\CreateBookListDialog.Designer.cs">
       <DependentUpon>CreateBookListDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form\PropertyDialog.cs">
+    <Compile Include="Forms\Property\PropertyDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\PropertyDialog.Designer.cs">
+    <Compile Include="Forms\Property\PropertyDialog.Designer.cs">
       <DependentUpon>PropertyDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form\SelectChangeForm.cs">
+    <Compile Include="Forms\Main\SelectChangeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\SelectChangeForm.Designer.cs">
+    <Compile Include="Forms\Main\SelectChangeForm.Designer.cs">
       <DependentUpon>SelectChangeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\BookModel.Win.cs" />
-    <Compile Include="Model\FieldType.cs" />
-    <Compile Include="Model\FileNameList.cs" />
-    <Compile Include="Model\LabelAttribute.cs" />
-    <Compile Include="Model\SearchModel.cs" />
-    <Compile Include="Model\Shelf\ColumnModel.cs" />
-    <Compile Include="Model\Series\SeriesList.cs" />
-    <Compile Include="Model\Series\SeriesModel.cs" />
-    <Compile Include="Model\SyncStatusEventArgs.cs" />
+    <Compile Include="Models\Book\BookModel.Win.cs" />
+    <Compile Include="Models\Book\FieldType.cs" />
+    <Compile Include="Models\Book\FileNameList.cs" />
+    <Compile Include="Models\Book\LabelAttribute.cs" />
+    <Compile Include="Models\Book\SearchModel.cs" />
+    <Compile Include="Models\Shelf\ColumnModel.cs" />
+    <Compile Include="Models\Series\SeriesList.cs" />
+    <Compile Include="Models\Series\SeriesModel.cs" />
+    <Compile Include="Models\SyncStatusEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Model\Series\SeriesModelSort.cs" />
+    <Compile Include="Models\Series\SeriesModelSort.cs" />
     <Compile Include="Properties\Resources1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -197,13 +197,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Form\SelectForm.cs">
+    <Compile Include="Forms\ShelfSelect\SelectForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\SelectForm.Designer.cs">
+    <Compile Include="Forms\ShelfSelect\SelectForm.Designer.cs">
       <DependentUpon>SelectForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form\SettingForm.Designer.cs">
+    <Compile Include="Forms\Setting\SettingForm.Designer.cs">
       <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\LabelAttributeUtils.cs" />
@@ -213,14 +213,14 @@
     <Compile Include="Utils\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\BookModel.cs" />
+    <Compile Include="Models\Book\BookModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\FileNameModel.cs" />
+    <Compile Include="Models\Book\FileNameModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <Compile Include="Model\BookList.Duplicate.cs" />
+    <Compile Include="Models\Book\BookList.Duplicate.cs" />
     <None Include="ComicLaunch.ruleset" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -229,43 +229,43 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\BookList.cs" />
+    <Compile Include="Models\Book\BookList.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Image\ImageOperator.cs" />
+    <Compile Include="Models\Image\ImageOperator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Control\BookmarkList.resx">
+    <EmbeddedResource Include="Forms\Main\Control\BookmarkList.resx">
       <DependentUpon>BookmarkList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Control\DetailList.resx">
+    <EmbeddedResource Include="Forms\Main\Control\DetailList.resx">
       <DependentUpon>DetailList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\ColumnDialog.resx">
+    <EmbeddedResource Include="Forms\Setting\ColumnDialog.resx">
       <DependentUpon>ColumnDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\FileNameItemDialog.resx">
+    <EmbeddedResource Include="Forms\Setting\FileNameItemDialog.resx">
       <DependentUpon>FileNameItemDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\CreateBookListDialog.resx">
+    <EmbeddedResource Include="Forms\ShelfSelect\CreateBookListDialog.resx">
       <DependentUpon>CreateBookListDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\PropertyDialog.resx">
+    <EmbeddedResource Include="Forms\Property\PropertyDialog.resx">
       <DependentUpon>PropertyDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\SelectChangeForm.resx">
+    <EmbeddedResource Include="Forms\Main\SelectChangeForm.resx">
       <DependentUpon>SelectChangeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Viewer\PictureList.resx">
+    <EmbeddedResource Include="Forms\Viewer\PictureList.resx">
       <DependentUpon>PictureList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Viewer\ViewerForm.resx">
+    <EmbeddedResource Include="Forms\Viewer\ViewerForm.resx">
       <DependentUpon>ViewerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\WaitDialog.resx">
+    <EmbeddedResource Include="Forms\Commons\WaitDialog.resx">
       <DependentUpon>WaitDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\MainForm.resx">
+    <EmbeddedResource Include="Forms\Main\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -273,10 +273,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\SelectForm.resx">
+    <EmbeddedResource Include="Forms\ShelfSelect\SelectForm.resx">
       <DependentUpon>SelectForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\SettingForm.resx">
+    <EmbeddedResource Include="Forms\Setting\SettingForm.resx">
       <DependentUpon>SettingForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -285,13 +285,13 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Shelf\ShelfModel.cs" />
+    <Compile Include="Models\Shelf\ShelfModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\FieldTypeExtensions.cs" />
+    <Compile Include="Models\Book\FieldTypeExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form\SettingForm.cs">
+    <Compile Include="Forms\Setting\SettingForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
@@ -312,9 +312,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

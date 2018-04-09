@@ -98,6 +98,10 @@
       <Project>{95d07374-2a31-48da-8f25-c8ce18dc89df}</Project>
       <Name>ComicLaunch</Name>
     </ProjectReference>
+    <ProjectReference Include="..\edge-reader\edge-reader.csproj">
+      <Project>{6af5a2b3-37cb-466e-b88b-66fff8f583b7}</Project>
+      <Name>edge-reader</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

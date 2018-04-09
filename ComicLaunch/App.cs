@@ -1,18 +1,32 @@
 ﻿namespace ComicLaunch
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
     using System.Windows.Shell;
-    using Form;
-    using Viewer;
+    using Forms.Main;
+    using Forms.ShelfSelect;
+    using Forms.Viewer;
 
     /// <summary>
     /// アプリケーションクラス
     /// </summary>
     public static class App
     {
+        /// <summary>オートコンプリート[種別]</summary>
+        public static List<string> AutoCompleteTypes { get; set; } = new List<string>();
+
+        /// <summary>オートコンプリート[種別]</summary>
+        public static List<string> AutoCompleteTitles { get; set; } = new List<string>();
+
+        /// <summary>オートコンプリート[著者]</summary>
+        public static List<string> AutoCompleteWriters { get; set; } = new List<string>();
+
+        /// <summary>オートコンプリート[出版社]</summary>
+        public static List<string> AutoCompletePublishers { get; set; } = new List<string>();
+
         /// <summary>
         /// アプリケーションスタートアップポイント
         /// </summary>
