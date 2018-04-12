@@ -4,10 +4,10 @@
     using System.ComponentModel;
     using System.Linq;
     using System.Windows.Forms;
+    using Book;
     using Form;
-    using Models.Book;
-    using Models.Shelf;
     using Properties;
+    using Shelf;
     using Utils;
 
     /// <summary>設定フォーム</summary>

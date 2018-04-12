@@ -1,7 +1,7 @@
 ﻿namespace ComicLaunch.Forms.Main.Control
 {
     using System;
-    using Models.Book;
+    using Book;
 
     /// <summary>検索条件選択イベント データクラス</summary>
     public class SelectSearchEventArgs : EventArgs

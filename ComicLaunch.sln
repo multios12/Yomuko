@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{5D4CDEC8-F46C-4E58-86BF-E8348B947212}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicLaunch", "ComicLaunch\ComicLaunch.csproj", "{95D07374-2A31-48DA-8F25-C8CE18DC89DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yomuko", "ComicLaunch\Yomuko.csproj", "{95D07374-2A31-48DA-8F25-C8CE18DC89DF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "edge-reader", "edge-reader\edge-reader.csproj", "{6AF5A2B3-37CB-466E-B88B-66FFF8F583B7}"
 EndProject

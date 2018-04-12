@@ -2,8 +2,8 @@
 {
     using System;
     using System.IO;
+    using Book;
     using Image;
-    using Models.Book;
 
     /// <summary>
     /// プロパティダイアログ
@@ -89,7 +89,6 @@
         /// <param name="e">イベント情報</param>
         private void PropertyDialog_Load(object sender, EventArgs e)
         {
-
             this.cboBookType.AutoCompleteCustomSource = new System.Windows.Forms.AutoCompleteStringCollection();
             this.cboBookType.AutoCompleteCustomSource.AddRange(App.AutoCompleteTypes.ToArray());
             this.cboTitle.AutoCompleteCustomSource = new System.Windows.Forms.AutoCompleteStringCollection();

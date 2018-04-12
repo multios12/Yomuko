@@ -1,7 +1,7 @@
 ﻿namespace ComicLaunch.Forms.Setting
 {
     using System;
-    using Models.Book;
+    using Book;
 
     /// <summary>列選択ダイアログ</summary>
     public partial class ColumnDialog

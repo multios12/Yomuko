@@ -90,7 +90,7 @@
                 string filePath;
                 if (args.Count() == 0)
                 {
-                    using (var form = new SelectForm())
+                    using (var form = new ShelfSelectForm())
                     {
                         result = form.ShowDialog();
                         filePath = form.FilePath;

@@ -8,14 +8,13 @@ namespace ComicLaunch.Forms.Main
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Forms;
-    using ComicLaunch.Forms.Main.Control;
+    using Book;
     using Forms.Common;
+    using Forms.Main.Control;
     using Forms.Setting;
     using Image;
-    using Models;
-    using Models.Book;
-    using Models.Shelf;
     using Properties;
+    using Shelf;
     using Utils;
 
     /// <summary>メインフォーム</summary>

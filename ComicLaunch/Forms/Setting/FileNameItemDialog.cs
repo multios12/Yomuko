@@ -2,8 +2,8 @@
 {
     using System;
     using System.ComponentModel;
-    using Models;
-    using Models.Book;
+    using Book;
+    using Shelf;
 
     /// <summary>
     /// ファイル名選択ダイアログ

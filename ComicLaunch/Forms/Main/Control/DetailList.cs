@@ -10,11 +10,11 @@
     using System.Threading.Tasks;
     using System.Windows.Forms;
     using System.Xml.Serialization;
+    using Book;
     using Form;
-    using Models.Book;
-    using Models.Series;
-    using Models.Shelf;
     using Properties;
+    using Series;
+    using Shelf;
     using Utils;
 
     /// <summary>
@@ -618,7 +618,7 @@
         private void BookChangeFileNameMenuItem_Click(object sender, EventArgs e)
         {
             var books = this.GetSelectedBooks();
-            books.ToList().ForEach(m => m.ChangeFileName(this.Shelf.FileNames));
+            books.ToList().ForEach(m => this.Shelf.FileNames.ChangeFileName(m));
 
             var eventArgs = new ItemEventArgs<IEnumerable<BookModel>>(books);
             this.ItemChanged(sender, eventArgs);

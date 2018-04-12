@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{95D07374-2A31-48DA-8F25-C8CE18DC89DF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ComicLaunch</RootNamespace>
+    <AssemblyName>ComicLaunch</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>ComicLaunch.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>ComicLaunch.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ComicLaunch.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ComicLaunch.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>ComicLaunch.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\yomuko.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualC" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="SharpCompress, Version=0.20.0.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpCompress.0.20.0\lib\net45\SharpCompress.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.cs" />
+    <Compile Include="Book\BookmarkModel.cs" />
+    <Compile Include="Book\FieldTypeExtensions.cs" />
+    <Compile Include="Book\AnalyzeResult.cs" />
+    <Compile Include="Duplicate\DuplicateModel.cs" />
+    <Compile Include="Shelf\SyncResultModel.cs" />
+    <Compile Include="Utils\Kanaxas.cs" />
+    <Compile Include="Forms\Viewer\ArchiveMovedEventArgs.cs" />
+    <Compile Include="Forms\Viewer\PageEventArgs.cs" />
+    <Compile Include="Forms\Viewer\PictureList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Viewer\PictureList.Designer.cs">
+      <DependentUpon>PictureList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Viewer\ViewerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Viewer\ViewerForm.Designer.cs">
+      <DependentUpon>ViewerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Image\ArchiveModel.cs" />
+    <Compile Include="Forms\Main\Control\BookmarkList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\Control\BookmarkList.Designer.cs">
+      <DependentUpon>BookmarkList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Main\Control\ItemEventArgs.cs" />
+    <Compile Include="Forms\Main\Control\DetailList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\Control\DetailList.Designer.cs">
+      <DependentUpon>DetailList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Image\PageSizeConstants.cs" />
+    <Compile Include="Forms\Main\Control\SelectSearchEventArgs.cs" />
+    <Compile Include="Forms\Commons\WaitDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Commons\WaitDialog.Designer.cs">
+      <DependentUpon>WaitDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Main\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Image\ResizeModeConstants.cs" />
+    <Compile Include="Image\ArchiveEntrySort.cs" />
+    <Compile Include="Book\BookList.Search.cs" />
+    <Compile Include="Forms\Setting\ColumnDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Setting\ColumnDialog.Designer.cs">
+      <DependentUpon>ColumnDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Setting\FileNameItemDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Setting\FileNameItemDialog.Designer.cs">
+      <DependentUpon>FileNameItemDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Property\PropertyDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Property\PropertyDialog.Designer.cs">
+      <DependentUpon>PropertyDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Main\SelectChangeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\SelectChangeForm.Designer.cs">
+      <DependentUpon>SelectChangeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Book\BookModel.Win.cs" />
+    <Compile Include="Book\FieldType.cs" />
+    <Compile Include="Shelf\FileNameList.cs" />
+    <Compile Include="Book\LabelAttribute.cs" />
+    <Compile Include="Book\SearchModel.cs" />
+    <Compile Include="Shelf\ColumnModel.cs" />
+    <Compile Include="Series\SeriesList.cs" />
+    <Compile Include="Series\SeriesModel.cs" />
+    <Compile Include="Book\SyncStatusEventArgs.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Series\SeriesModelSort.cs" />
+    <Compile Include="Properties\Resources1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ShelfSelect\ShelfSelectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ShelfSelect\ShelfSelectForm.Designer.cs">
+      <DependentUpon>ShelfSelectForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Setting\SettingForm.Designer.cs">
+      <DependentUpon>SettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Book\LabelAttributeUtils.cs" />
+    <Compile Include="Utils\JsonSerializationExtensions.cs" />
+    <Compile Include="Utils\MemoryMappedUtils.cs" />
+    <Compile Include="Utils\SerializationExtensions.cs" />
+    <Compile Include="Utils\StringExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Book\BookModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Shelf\FileNameModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <Compile Include="Book\BookList.Duplicate.cs" />
+    <None Include="ComicLaunch.ruleset" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Book\BookList.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Image\ImageOperator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\Main\Control\BookmarkList.resx">
+      <DependentUpon>BookmarkList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main\Control\DetailList.resx">
+      <DependentUpon>DetailList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Setting\ColumnDialog.resx">
+      <DependentUpon>ColumnDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Setting\FileNameItemDialog.resx">
+      <DependentUpon>FileNameItemDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Property\PropertyDialog.resx">
+      <DependentUpon>PropertyDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main\SelectChangeForm.resx">
+      <DependentUpon>SelectChangeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Viewer\PictureList.resx">
+      <DependentUpon>PictureList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Viewer\ViewerForm.resx">
+      <DependentUpon>ViewerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Commons\WaitDialog.resx">
+      <DependentUpon>WaitDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ShelfSelect\ShelfSelectForm.resx">
+      <DependentUpon>ShelfSelectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Setting\SettingForm.resx">
+      <DependentUpon>SettingForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Shelf\ShelfModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Forms\Setting\SettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\yomuko.ico" />
+    <Content Include="Resources\yomuko.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 および x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
