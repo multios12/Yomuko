@@ -19,7 +19,7 @@
         public static List<string> AutoCompleteTypes { get; set; } = new List<string>();
 
         /// <summary>オートコンプリート[種別]</summary>
-        public static List<string> AutoCompleteTitles { get; set; } = new List<string>();
+        public static List<string> AutoCompleteJunles { get; set; } = new List<string>();
 
         /// <summary>オートコンプリート[著者]</summary>
         public static List<string> AutoCompleteWriters { get; set; } = new List<string>();

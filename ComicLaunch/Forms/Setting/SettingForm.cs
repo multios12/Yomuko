@@ -5,7 +5,6 @@
     using System.Linq;
     using System.Windows.Forms;
     using Book;
-    using Form;
     using Properties;
     using Shelf;
     using Utils;
@@ -37,13 +36,12 @@
         private void SettingForm_Load(object sender, EventArgs e)
         {
             this.txtBookListName.Text = this.Shelf.Title;
-            this.txtBookListRemarks.Text = this.Shelf.Remarks;
             this.DuplicateFolderTextBox.Text = this.Shelf.DuplicateFolderPath;
 
             this.CollectSubTitleCheckBox.Checked = this.Shelf.CollectSubTitle;
 
             this.baseFolders = new BindingList<string>(this.Shelf.BaseFolderPaths);
-            this.BaseFoldersListBox.DataSource = this.baseFolders;
+            this.BaseFolderTextBox.Text = this.baseFolders[0] == null ? string.Empty : this.baseFolders[0];
 
             this.SetFileNameItems();
 
@@ -60,7 +58,6 @@
         private void OkButton_Click(object sender, EventArgs e)
         {
             this.Shelf.Title = this.txtBookListName.Text;
-            this.Shelf.Remarks = this.txtBookListRemarks.Text;
             this.Shelf.DuplicateFolderPath = this.DuplicateFolderTextBox.Text;
 
             if (this.Shelf.FileNames.Any(i => i.FieldType == FieldType.Title) == false)
@@ -78,6 +75,8 @@
 
             // ベースフォルダの保存
             // this.Shelf.BaseFolderPaths.AddRange(this.baseFolderList.ToList());
+            this.baseFolders.Clear();
+            this.baseFolders.Add(this.BaseFolderTextBox.Text);
 
             // 詳細リスト
             this.Shelf.Columns.Clear();
@@ -110,18 +109,7 @@
         {
             if (this.dlgFolder.ShowDialog() == DialogResult.OK)
             {
-                this.baseFolders.Add(this.dlgFolder.SelectedPath);
-            }
-        }
-
-        /// <summary>ボタンクリックイベント</summary>
-        /// <param name="sender">発生元オブジェクト</param>
-        /// <param name="e">イベント情報</param>
-        private void BaseFolderDeleteButton_Click(object sender, EventArgs e)
-        {
-            if (this.BaseFoldersListBox.SelectedItem != null)
-            {
-                this.baseFolders.Remove((string)this.BaseFoldersListBox.SelectedItem);
+                this.BaseFolderTextBox.Text = this.dlgFolder.SelectedPath;
             }
         }
 

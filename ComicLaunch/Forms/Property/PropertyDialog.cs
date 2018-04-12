@@ -35,7 +35,7 @@
             this.Book.Memo = this.txtMemo.Text;
             this.Book.UpdateDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             this.Book.No = this.txtNO.Text;
-            this.Book.Type = this.cboBookType.Text;
+            this.Book.Type = this.BookTypeComboBox.Text;
             this.Book.IsComplete = this.CompleteCheckBox.Checked;
 
             this.Book.CoverFileIndex = (int)this.CoverIndexUpDown.Value;
@@ -68,12 +68,12 @@
                 this.Close();
             }
 
-            App.AutoCompleteTypes.Remove(this.Book.Type);
-            App.AutoCompleteTypes.Insert(0, this.Book.Type);
-            App.AutoCompleteTitles.Remove(this.Book.Title);
-            App.AutoCompleteTitles.Insert(0, this.Book.Title);
-            App.AutoCompleteWriters.Remove(this.Book.Writer);
-            App.AutoCompleteWriters.Insert(0, this.Book.Writer);
+            App.AutoCompleteTypes.Remove(this.Book.Type.Trim());
+            App.AutoCompleteTypes.Insert(0, this.Book.Type.Trim());
+            App.AutoCompleteJunles.Remove(this.Book.Junle.Trim());
+            App.AutoCompleteJunles.Insert(0, this.Book.Junle.Trim());
+            App.AutoCompleteWriters.Remove(this.Book.Writer.Trim());
+            App.AutoCompleteWriters.Insert(0, this.Book.Writer.Trim());
         }
 
         /// <summary>キャンセルボタン クリックイベント</summary>
@@ -89,12 +89,9 @@
         /// <param name="e">イベント情報</param>
         private void PropertyDialog_Load(object sender, EventArgs e)
         {
-            this.cboBookType.AutoCompleteCustomSource = new System.Windows.Forms.AutoCompleteStringCollection();
-            this.cboBookType.AutoCompleteCustomSource.AddRange(App.AutoCompleteTypes.ToArray());
-            this.cboTitle.AutoCompleteCustomSource = new System.Windows.Forms.AutoCompleteStringCollection();
-            this.cboTitle.AutoCompleteCustomSource.AddRange(App.AutoCompleteTitles.ToArray());
-            this.cboWriter.AutoCompleteCustomSource = new System.Windows.Forms.AutoCompleteStringCollection();
-            this.cboWriter.AutoCompleteCustomSource.AddRange(App.AutoCompleteWriters.ToArray());
+            this.BookTypeComboBox.Items.AddRange(App.AutoCompleteTypes.ToArray());
+            this.txtJunle.Items.AddRange(App.AutoCompleteJunles.ToArray());
+            this.cboWriter.Items.AddRange(App.AutoCompleteWriters.ToArray());
 
             this.cboTitle.Text = this.Book.Title;
             this.cboWriter.Text = this.Book.Writer;
@@ -118,7 +115,7 @@
             this.txtNO.Text = this.Book.No;
             this.cboPhotographer.Text = this.Book.Photographer;
 
-            this.cboBookType.Text = this.Book.Type;
+            this.BookTypeComboBox.Text = this.Book.Type;
             if (this.Book.Type?.IndexOf("写真集") > -1)
             {
                 this.cboPhotographer.Text = this.Book.Photographer;
@@ -202,7 +199,7 @@
         /// <param name="e">イベント情報</param>
         private void BookTypeComboBox_TextChanged(object sender, EventArgs e)
         {
-            if (this.cboBookType.Text.IndexOf("写真集") > -1)
+            if (this.BookTypeComboBox.Text.IndexOf("写真集") > -1)
             {
                 this.lblWriter.Text = "モデル";
                 this.lblPhotographer.Text = "撮影者";
@@ -211,7 +208,7 @@
             }
             else
             {
-                if (this.cboBookType.Text.IndexOf("コミック") > -1)
+                if (this.BookTypeComboBox.Text.IndexOf("コミック") > -1)
                 {
                     this.lblWriter.Text = "著者";
                     this.lblPhotographer.Text = "掲載誌";
@@ -240,6 +237,22 @@
             this.archiveBook.PageIndex = (int)this.CoverIndexUpDown.Value;
             this.picCover.Image = this.archiveBook.PagePicture;
             this.picCover.Refresh();
+        }
+
+        private void BookTypeComboBox_Enter(object sender, EventArgs e)
+        {
+            this.BookTypeComboBox.DroppedDown = true;
+        }
+
+        private void JunleComboBox_Enter(object sender, EventArgs e)
+        {
+            this.txtJunle.DroppedDown = true;
+
+        }
+
+        private void PublisherComboBox_Enter(object sender, EventArgs e)
+        {
+            this.cboPublisher.DroppedDown = true;
         }
     }
 }

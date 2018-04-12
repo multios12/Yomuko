@@ -31,13 +31,8 @@
             this.TabControl1 = new System.Windows.Forms.TabControl();
             this.TabPage1 = new System.Windows.Forms.TabPage();
             this.DuplicateCheckBox = new System.Windows.Forms.CheckBox();
-            this.BaseFoldersListBox = new System.Windows.Forms.ListBox();
-            this.txtBookListRemarks = new System.Windows.Forms.TextBox();
             this.txtBookListName = new System.Windows.Forms.TextBox();
-            this.Label3 = new System.Windows.Forms.Label();
             this.Label2 = new System.Windows.Forms.Label();
-            this.BaseFolderDeleteButton = new System.Windows.Forms.Button();
-            this.BaseFolderAddButton = new System.Windows.Forms.Button();
             this.DuplicateFolderChangeButton = new System.Windows.Forms.Button();
             this.Label1 = new System.Windows.Forms.Label();
             this.DuplicateFolderTextBox = new System.Windows.Forms.TextBox();
@@ -63,6 +58,8 @@
             this.dlgFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.butOK = new System.Windows.Forms.Button();
             this.butCancel = new System.Windows.Forms.Button();
+            this.BaseFolderTextBox = new System.Windows.Forms.TextBox();
+            this.BaseFolderAddButton = new System.Windows.Forms.Button();
             ColumnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TabControl1.SuspendLayout();
             this.TabPage1.SuspendLayout();
@@ -89,13 +86,10 @@
             // 
             // TabPage1
             // 
+            this.TabPage1.Controls.Add(this.BaseFolderTextBox);
             this.TabPage1.Controls.Add(this.DuplicateCheckBox);
-            this.TabPage1.Controls.Add(this.BaseFoldersListBox);
-            this.TabPage1.Controls.Add(this.txtBookListRemarks);
             this.TabPage1.Controls.Add(this.txtBookListName);
-            this.TabPage1.Controls.Add(this.Label3);
             this.TabPage1.Controls.Add(this.Label2);
-            this.TabPage1.Controls.Add(this.BaseFolderDeleteButton);
             this.TabPage1.Controls.Add(this.BaseFolderAddButton);
             this.TabPage1.Controls.Add(this.DuplicateFolderChangeButton);
             this.TabPage1.Controls.Add(this.Label1);
@@ -115,29 +109,11 @@
             this.DuplicateCheckBox.Location = new System.Drawing.Point(46, 388);
             this.DuplicateCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.DuplicateCheckBox.Name = "DuplicateCheckBox";
-            this.DuplicateCheckBox.Size = new System.Drawing.Size(220, 24);
+            this.DuplicateCheckBox.Size = new System.Drawing.Size(223, 24);
             this.DuplicateCheckBox.TabIndex = 13;
             this.DuplicateCheckBox.Text = "重複するファイルは移動する";
             this.DuplicateCheckBox.UseVisualStyleBackColor = true;
             this.DuplicateCheckBox.CheckedChanged += new System.EventHandler(this.DuplicateCheckBox_CheckedChanged);
-            // 
-            // BaseFoldersListBox
-            // 
-            this.BaseFoldersListBox.FormattingEnabled = true;
-            this.BaseFoldersListBox.ItemHeight = 20;
-            this.BaseFoldersListBox.Location = new System.Drawing.Point(46, 170);
-            this.BaseFoldersListBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.BaseFoldersListBox.Name = "BaseFoldersListBox";
-            this.BaseFoldersListBox.Size = new System.Drawing.Size(426, 164);
-            this.BaseFoldersListBox.TabIndex = 12;
-            // 
-            // txtBookListRemarks
-            // 
-            this.txtBookListRemarks.Location = new System.Drawing.Point(46, 108);
-            this.txtBookListRemarks.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtBookListRemarks.Name = "txtBookListRemarks";
-            this.txtBookListRemarks.Size = new System.Drawing.Size(511, 32);
-            this.txtBookListRemarks.TabIndex = 6;
             // 
             // txtBookListName
             // 
@@ -146,16 +122,6 @@
             this.txtBookListName.Name = "txtBookListName";
             this.txtBookListName.Size = new System.Drawing.Size(511, 32);
             this.txtBookListName.TabIndex = 6;
-            // 
-            // Label3
-            // 
-            this.Label3.AutoSize = true;
-            this.Label3.Location = new System.Drawing.Point(44, 83);
-            this.Label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Label3.Name = "Label3";
-            this.Label3.Size = new System.Drawing.Size(84, 20);
-            this.Label3.TabIndex = 5;
-            this.Label3.Text = "本棚の説明";
             // 
             // Label2
             // 
@@ -166,28 +132,6 @@
             this.Label2.Size = new System.Drawing.Size(84, 20);
             this.Label2.TabIndex = 5;
             this.Label2.Text = "本棚の名前";
-            // 
-            // BaseFolderDeleteButton
-            // 
-            this.BaseFolderDeleteButton.Location = new System.Drawing.Point(483, 218);
-            this.BaseFolderDeleteButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.BaseFolderDeleteButton.Name = "BaseFolderDeleteButton";
-            this.BaseFolderDeleteButton.Size = new System.Drawing.Size(76, 38);
-            this.BaseFolderDeleteButton.TabIndex = 1;
-            this.BaseFolderDeleteButton.Text = "削除";
-            this.BaseFolderDeleteButton.UseVisualStyleBackColor = true;
-            this.BaseFolderDeleteButton.Click += new System.EventHandler(this.BaseFolderDeleteButton_Click);
-            // 
-            // BaseFolderAddButton
-            // 
-            this.BaseFolderAddButton.Location = new System.Drawing.Point(483, 170);
-            this.BaseFolderAddButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.BaseFolderAddButton.Name = "BaseFolderAddButton";
-            this.BaseFolderAddButton.Size = new System.Drawing.Size(76, 38);
-            this.BaseFolderAddButton.TabIndex = 1;
-            this.BaseFolderAddButton.Text = "追加";
-            this.BaseFolderAddButton.UseVisualStyleBackColor = true;
-            this.BaseFolderAddButton.Click += new System.EventHandler(this.BaseFolderAddButton_Click);
             // 
             // DuplicateFolderChangeButton
             // 
@@ -203,7 +147,7 @@
             // Label1
             // 
             this.Label1.AutoSize = true;
-            this.Label1.Location = new System.Drawing.Point(44, 145);
+            this.Label1.Location = new System.Drawing.Point(44, 89);
             this.Label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label1.Name = "Label1";
             this.Label1.Size = new System.Drawing.Size(159, 20);
@@ -230,11 +174,11 @@
             this.TabPage2.Controls.Add(this.Label4);
             this.TabPage2.Controls.Add(this.FileNameTextBox);
             this.TabPage2.Controls.Add(this.FileNameListBox);
-            this.TabPage2.Location = new System.Drawing.Point(4, 22);
+            this.TabPage2.Location = new System.Drawing.Point(4, 29);
             this.TabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.TabPage2.Name = "TabPage2";
             this.TabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.TabPage2.Size = new System.Drawing.Size(601, 541);
+            this.TabPage2.Size = new System.Drawing.Size(601, 534);
             this.TabPage2.TabIndex = 1;
             this.TabPage2.Text = "ファイル名";
             this.TabPage2.UseVisualStyleBackColor = true;
@@ -298,7 +242,7 @@
             this.Label5.Location = new System.Drawing.Point(12, 85);
             this.Label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label5.Name = "Label5";
-            this.Label5.Size = new System.Drawing.Size(156, 20);
+            this.Label5.Size = new System.Drawing.Size(159, 20);
             this.Label5.TabIndex = 3;
             this.Label5.Text = "ファイル名のサンプル";
             // 
@@ -308,7 +252,7 @@
             this.Label4.Location = new System.Drawing.Point(12, 12);
             this.Label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label4.Name = "Label4";
-            this.Label4.Size = new System.Drawing.Size(156, 20);
+            this.Label4.Size = new System.Drawing.Size(159, 20);
             this.Label4.TabIndex = 3;
             this.Label4.Text = "ファイル名のサンプル";
             // 
@@ -339,11 +283,11 @@
             this.TabPage3.Controls.Add(this.ColumnDeleteButton);
             this.TabPage3.Controls.Add(this.ColumnAddButton);
             this.TabPage3.Controls.Add(this.Label6);
-            this.TabPage3.Location = new System.Drawing.Point(4, 22);
+            this.TabPage3.Location = new System.Drawing.Point(4, 29);
             this.TabPage3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.TabPage3.Name = "TabPage3";
             this.TabPage3.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.TabPage3.Size = new System.Drawing.Size(601, 541);
+            this.TabPage3.Size = new System.Drawing.Size(601, 534);
             this.TabPage3.TabIndex = 2;
             this.TabPage3.Text = "リスト表示";
             this.TabPage3.UseVisualStyleBackColor = true;
@@ -354,7 +298,7 @@
             this.CollectSubTitleCheckBox.Location = new System.Drawing.Point(12, 488);
             this.CollectSubTitleCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.CollectSubTitleCheckBox.Name = "CollectSubTitleCheckBox";
-            this.CollectSubTitleCheckBox.Size = new System.Drawing.Size(369, 24);
+            this.CollectSubTitleCheckBox.Size = new System.Drawing.Size(373, 24);
             this.CollectSubTitleCheckBox.TabIndex = 10;
             this.CollectSubTitleCheckBox.Text = "サブタイトルと巻数をタイトルにまとめて表示する";
             this.CollectSubTitleCheckBox.UseVisualStyleBackColor = true;
@@ -426,7 +370,7 @@
             this.Label6.Location = new System.Drawing.Point(9, 5);
             this.Label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label6.Name = "Label6";
-            this.Label6.Size = new System.Drawing.Size(158, 20);
+            this.Label6.Size = new System.Drawing.Size(159, 20);
             this.Label6.TabIndex = 4;
             this.Label6.Text = "書籍一覧に表示する列";
             // 
@@ -451,6 +395,24 @@
             this.butCancel.Text = "キャンセル";
             this.butCancel.UseVisualStyleBackColor = true;
             this.butCancel.Click += new System.EventHandler(this.CancelButton_Click);
+            // 
+            // BaseFolderTextBox
+            // 
+            this.BaseFolderTextBox.Location = new System.Drawing.Point(48, 114);
+            this.BaseFolderTextBox.Name = "BaseFolderTextBox";
+            this.BaseFolderTextBox.Size = new System.Drawing.Size(430, 32);
+            this.BaseFolderTextBox.TabIndex = 14;
+            // 
+            // BaseFolderAddButton
+            // 
+            this.BaseFolderAddButton.Location = new System.Drawing.Point(481, 108);
+            this.BaseFolderAddButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.BaseFolderAddButton.Name = "BaseFolderAddButton";
+            this.BaseFolderAddButton.Size = new System.Drawing.Size(76, 38);
+            this.BaseFolderAddButton.TabIndex = 1;
+            this.BaseFolderAddButton.Text = "追加";
+            this.BaseFolderAddButton.UseVisualStyleBackColor = true;
+            this.BaseFolderAddButton.Click += new System.EventHandler(this.BaseFolderAddButton_Click);
             // 
             // SettingForm
             // 
@@ -484,13 +446,8 @@
         public System.Windows.Forms.FolderBrowserDialog dlgFolder;
         public System.Windows.Forms.Button butOK;
         public System.Windows.Forms.Button butCancel;
-        public System.Windows.Forms.TextBox txtBookListRemarks;
         public System.Windows.Forms.TextBox txtBookListName;
-        public System.Windows.Forms.Label Label3;
         public System.Windows.Forms.Label Label2;
-        public System.Windows.Forms.ListBox BaseFoldersListBox;
-        public System.Windows.Forms.Button BaseFolderDeleteButton;
-        public System.Windows.Forms.Button BaseFolderAddButton;
         public System.Windows.Forms.Button FileNameDownButton;
         public System.Windows.Forms.Button FileNameUpButton;
         public System.Windows.Forms.Button FileNameDeleteButton;
@@ -512,5 +469,7 @@
         public System.Windows.Forms.TextBox DuplicateFolderTextBox;
         public System.Windows.Forms.CheckBox CollectSubTitleCheckBox;
         public System.Windows.Forms.Button FileNameInitializeButton;
+        private System.Windows.Forms.TextBox BaseFolderTextBox;
+        public System.Windows.Forms.Button BaseFolderAddButton;
     }
 }

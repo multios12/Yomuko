@@ -27,11 +27,11 @@
             this.TableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.OK_Button = new System.Windows.Forms.Button();
             this.NoButton = new System.Windows.Forms.Button();
-            this.cboTitle = new System.Windows.Forms.ComboBox();
+            this.cboTitle = new System.Windows.Forms.TextBox();
             this.cboWriter = new System.Windows.Forms.ComboBox();
             this.Label1 = new System.Windows.Forms.Label();
             this.lblWriter = new System.Windows.Forms.Label();
-            this.txtJunle = new System.Windows.Forms.TextBox();
+            this.txtJunle = new System.Windows.Forms.ComboBox();
             this.Label3 = new System.Windows.Forms.Label();
             this.Label4 = new System.Windows.Forms.Label();
             this.cboPublisher = new System.Windows.Forms.ComboBox();
@@ -46,7 +46,7 @@
             this.txtNO = new System.Windows.Forms.TextBox();
             this.lblPhotographer = new System.Windows.Forms.Label();
             this.cboPhotographer = new System.Windows.Forms.ComboBox();
-            this.cboBookType = new System.Windows.Forms.ComboBox();
+            this.BookTypeComboBox = new System.Windows.Forms.ComboBox();
             this.Label10 = new System.Windows.Forms.Label();
             this.AnalyzeFileNameButton = new System.Windows.Forms.Button();
             this.FavoriteCheckBox = new System.Windows.Forms.CheckBox();
@@ -105,12 +105,11 @@
             // 
             this.cboTitle.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.cboTitle.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.cboTitle.FormattingEnabled = true;
             this.cboTitle.ImeMode = System.Windows.Forms.ImeMode.On;
             this.cboTitle.Location = new System.Drawing.Point(93, 132);
             this.cboTitle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cboTitle.Name = "cboTitle";
-            this.cboTitle.Size = new System.Drawing.Size(469, 26);
+            this.cboTitle.Size = new System.Drawing.Size(469, 24);
             this.cboTitle.TabIndex = 1;
             // 
             // cboWriter
@@ -151,8 +150,9 @@
             this.txtJunle.Location = new System.Drawing.Point(501, 253);
             this.txtJunle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtJunle.Name = "txtJunle";
-            this.txtJunle.Size = new System.Drawing.Size(258, 24);
+            this.txtJunle.Size = new System.Drawing.Size(258, 26);
             this.txtJunle.TabIndex = 8;
+            this.txtJunle.Enter += new System.EventHandler(this.JunleComboBox_Enter);
             // 
             // Label3
             // 
@@ -186,6 +186,7 @@
             this.cboPublisher.Name = "cboPublisher";
             this.cboPublisher.Size = new System.Drawing.Size(258, 26);
             this.cboPublisher.TabIndex = 7;
+            this.cboPublisher.Enter += new System.EventHandler(this.PublisherComboBox_Enter);
             // 
             // Label5
             // 
@@ -301,16 +302,17 @@
             this.cboPhotographer.Size = new System.Drawing.Size(256, 26);
             this.cboPhotographer.TabIndex = 6;
             // 
-            // cboBookType
+            // BookTypeComboBox
             // 
-            this.cboBookType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cboBookType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.cboBookType.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.cboBookType.Location = new System.Drawing.Point(94, 72);
-            this.cboBookType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cboBookType.Name = "cboBookType";
-            this.cboBookType.Size = new System.Drawing.Size(180, 26);
-            this.cboBookType.TabIndex = 0;
+            this.BookTypeComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.BookTypeComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.BookTypeComboBox.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.BookTypeComboBox.Location = new System.Drawing.Point(94, 72);
+            this.BookTypeComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.BookTypeComboBox.Name = "BookTypeComboBox";
+            this.BookTypeComboBox.Size = new System.Drawing.Size(180, 26);
+            this.BookTypeComboBox.TabIndex = 0;
+            this.BookTypeComboBox.Enter += new System.EventHandler(this.BookTypeComboBox_Enter);
             // 
             // Label10
             // 
@@ -427,7 +429,7 @@
             this.Controls.Add(this.CompleteCheckBox);
             this.Controls.Add(this.FavoriteCheckBox);
             this.Controls.Add(this.AnalyzeFileNameButton);
-            this.Controls.Add(this.cboBookType);
+            this.Controls.Add(this.BookTypeComboBox);
             this.Controls.Add(this.txtNO);
             this.Controls.Add(this.SaleDateTextBox);
             this.Controls.Add(this.Label8);
@@ -473,11 +475,11 @@
         public System.Windows.Forms.TableLayoutPanel TableLayoutPanel1;
         public System.Windows.Forms.Button OK_Button;
         public System.Windows.Forms.Button NoButton;
-        public System.Windows.Forms.ComboBox cboTitle;
+        public System.Windows.Forms.TextBox cboTitle;
         public System.Windows.Forms.ComboBox cboWriter;
         public System.Windows.Forms.Label Label1;
         public System.Windows.Forms.Label lblWriter;
-        public System.Windows.Forms.TextBox txtJunle;
+        public System.Windows.Forms.ComboBox txtJunle;
         public System.Windows.Forms.Label Label3;
         public System.Windows.Forms.Label Label4;
         public System.Windows.Forms.ComboBox cboPublisher;
@@ -492,7 +494,7 @@
         public System.Windows.Forms.TextBox txtNO;
         public System.Windows.Forms.Label lblPhotographer;
         public System.Windows.Forms.ComboBox cboPhotographer;
-        public System.Windows.Forms.ComboBox cboBookType;
+        public System.Windows.Forms.ComboBox BookTypeComboBox;
         public System.Windows.Forms.Label Label10;
         public System.Windows.Forms.Button AnalyzeFileNameButton;
         public System.Windows.Forms.CheckBox FavoriteCheckBox;
