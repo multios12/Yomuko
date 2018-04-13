@@ -41,7 +41,7 @@
             this.CollectSubTitleCheckBox.Checked = this.Shelf.CollectSubTitle;
 
             this.baseFolders = new BindingList<string>(this.Shelf.BaseFolderPaths);
-            this.BaseFolderTextBox.Text = this.baseFolders[0] == null ? string.Empty : this.baseFolders[0];
+            this.BaseFolderTextBox.Text = this.baseFolders.Count() == 0 ? string.Empty : this.baseFolders[0];
 
             this.SetFileNameItems();
 

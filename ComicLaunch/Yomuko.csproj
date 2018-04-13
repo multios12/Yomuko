@@ -82,9 +82,6 @@
   <ItemGroup>
     <Reference Include="Microsoft.VisualC" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="SharpCompress, Version=0.20.0.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpCompress.0.20.0\lib\net45\SharpCompress.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -100,6 +97,13 @@
     <Compile Include="Book\FieldTypeExtensions.cs" />
     <Compile Include="Book\AnalyzeResult.cs" />
     <Compile Include="Duplicate\DuplicateModel.cs" />
+    <Compile Include="Forms\Main\BookToAnotherForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\BookToAnotherForm.Designer.cs">
+      <DependentUpon>BookToAnotherForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Image\ArchiveImagerHelper.cs" />
     <Compile Include="Shelf\SyncResultModel.cs" />
     <Compile Include="Utils\Kanaxas.cs" />
     <Compile Include="Forms\Viewer\ArchiveMovedEventArgs.cs" />
@@ -145,7 +149,6 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Image\ResizeModeConstants.cs" />
-    <Compile Include="Image\ArchiveEntrySort.cs" />
     <Compile Include="Book\BookList.Search.cs" />
     <Compile Include="Forms\Setting\ColumnDialog.cs">
       <SubType>Form</SubType>
@@ -230,6 +233,9 @@
     <Compile Include="Image\ImageOperator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\Main\BookToAnotherForm.resx">
+      <DependentUpon>BookToAnotherForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main\Control\BookmarkList.resx">
       <DependentUpon>BookmarkList.cs</DependentUpon>
     </EmbeddedResource>
@@ -303,6 +309,12 @@
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ArchiveImager\ArchiveImager.csproj">
+      <Project>{e7444ff3-cc05-49a6-8c7b-374cc0d2a26d}</Project>
+      <Name>ArchiveImager</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -5,8 +5,6 @@
     using System.Diagnostics;
     using System.Drawing;
     using System.IO;
-    using System.Linq;
-    using SharpCompress.Archives;
 
     /// <summary>
     /// 画像が入った圧縮ファイルを操作するためのクラス
@@ -16,11 +14,8 @@
         /// <summary>ファイルパス</summary>
         private string filePath;
 
-        /// <summary>アーカイブ操作</summary>
-        private IArchive archive;
-
         /// <summary>アーカイブ内のファイルリスト</summary>
-        private List<IArchiveEntry> entries = new List<IArchiveEntry>();
+        private List<string> entryNames = new List<string>();
 
         /// <summary>画像操作クラス</summary>
         private ImageOperator imageOperator = new ImageOperator();
@@ -49,20 +44,7 @@
             }
 
             this.filePath = filePath;
-            this.archive = ArchiveFactory.Open(this.filePath);
-
-            List<string> extensions = new List<string>() { ".jpg", ".jpeg", ".png", ".bmp" };
-
-            foreach (IArchiveEntry entry in this.archive.Entries.Where(a => a.IsDirectory == false))
-            {
-                if (extensions.Contains(Path.GetExtension(entry.Key.ToLower())))
-                {
-                    this.entries.Add(entry);
-                }
-            }
-
-            var sort = new ArchiveEntrySort();
-            this.entries.Sort(sort);
+            this.entryNames = ArchiveImagerHelper.Open(this.filePath);
         }
 
         /// <summary>
@@ -126,7 +108,7 @@
 
             set
             {
-                if (value > this.entries.Count)
+                if (value > this.entryNames.Count)
                 {
                     // MsgBox("エラー");
                     return;
@@ -143,7 +125,8 @@
                 // 画像の取得
                 try
                 {
-                    this.pictureBitmap = this.imageOperator.ResizeBitmap(this.entries[value].OpenEntryStream());
+                    var i = ArchiveImagerHelper.GetStream(this.filePath, this.entryNames[value]);
+                    this.pictureBitmap = this.imageOperator.ResizeBitmap(i);
 
                     this.ScreenLeft = this.pictureBitmap.Width - this.DrawWidth;
                     if (this.ScreenLeft < 0)
@@ -166,7 +149,7 @@
         {
             get
             {
-                return this.entries.Count;
+                return this.entryNames.Count;
             }
         }
 
@@ -186,7 +169,8 @@
         {
             get
             {
-                return this.entries.Select(f => f.Key);
+                // return this.entries.Select(f => f.Key);
+                return this.entryNames;
             }
         }
 
@@ -224,7 +208,7 @@
         {
             if (this.pictureBitmap == null)
             {
-                if (this.pageIndex + 1 < this.entries.Count)
+                if (this.pageIndex + 1 < this.entryNames.Count)
                 {
                     // 次の画像をスクロール
                     this.PageIndex += 1;
@@ -268,7 +252,7 @@
                 }
                 else
                 {
-                    if (this.PageIndex + 1 < this.entries.Count)
+                    if (this.PageIndex + 1 < this.entryNames.Count)
                     {
                         // 次の画像をスクロール
                         this.PageIndex += 1;
@@ -445,7 +429,7 @@
                 if (disposing)
                 {
                     // マネージ状態を破棄します (マネージ オブジェクト)。
-                    this.archive.Dispose();
+                    // this.archive.Dispose();
                 }
 
                 // アンマネージ リソース (アンマネージ オブジェクト) を解放し、下のファイナライザーをオーバーライドします。

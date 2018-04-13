@@ -69,6 +69,7 @@
             this.smiBookChangeFileName = new System.Windows.Forms.ToolStripMenuItem();
             this.smiBookMove = new System.Windows.Forms.ToolStripMenuItem();
             this.DummyItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BookToShelfMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BookDeleteMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.SearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -373,11 +374,12 @@
             this.Separator1,
             this.smiBookChangeFileName,
             this.smiBookMove,
+            this.BookToShelfMenuItem,
             this.BookDeleteMenuItem,
             this.ToolStripSeparator3,
             this.SearchToolStripMenuItem});
             this.DetailMenuStrip.Name = "cmsDetail";
-            this.DetailMenuStrip.Size = new System.Drawing.Size(177, 198);
+            this.DetailMenuStrip.Size = new System.Drawing.Size(177, 242);
             // 
             // smiProperty
             // 
@@ -437,8 +439,15 @@
             // DummyItemToolStripMenuItem
             // 
             this.DummyItemToolStripMenuItem.Name = "DummyItemToolStripMenuItem";
-            this.DummyItemToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.DummyItemToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.DummyItemToolStripMenuItem.Text = "(dummyItem)";
+            // 
+            // BookToShelfMenuItem
+            // 
+            this.BookToShelfMenuItem.Name = "BookToShelfMenuItem";
+            this.BookToShelfMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.BookToShelfMenuItem.Text = "他の本棚に移動";
+            this.BookToShelfMenuItem.Click += new System.EventHandler(this.BookToShelfMenuItem_Click);
             // 
             // BookDeleteMenuItem
             // 
@@ -550,5 +559,6 @@
         System.Windows.Forms.ToolStripMenuItem 片付け箱に入れるToolStripMenuItem;
         System.Windows.Forms.ToolStripSeparator ToolStripSeparator5;
         System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem BookToShelfMenuItem;
     }
 }

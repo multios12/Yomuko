@@ -596,6 +596,16 @@
             this.DetailListView.Refresh();
         }
 
+        /// <summary>他の本棚に移動 メニュークリックイベント</summary>
+        /// <param name="sender">発生元オブジェクト</param>
+        /// <param name="e">イベント情報</param>
+        private void BookToShelfMenuItem_Click(object sender, EventArgs e)
+        {
+            var f = new BookToAnotherForm();
+            f.Shelf = this.Shelf;
+            f.ShowDialog();
+        }
+
         /// <summary>ファイルの移動 ドロップダウンリスト展開中イベント </summary>
         /// <param name="sender">発生元オブジェクト</param>
         /// <param name="e">イベント情報</param>

@@ -247,7 +247,6 @@
         private void JunleComboBox_Enter(object sender, EventArgs e)
         {
             this.txtJunle.DroppedDown = true;
-
         }
 
         private void PublisherComboBox_Enter(object sender, EventArgs e)

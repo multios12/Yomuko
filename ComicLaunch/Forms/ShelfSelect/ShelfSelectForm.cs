@@ -14,6 +14,9 @@
     /// </summary>
     public partial class ShelfSelectForm
     {
+        /// <summary>本棚格納フォルダ</summary>
+        private string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Yomuko");
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -24,9 +27,6 @@
 
         /// <summary>ファイルパス</summary>
         public string FilePath { get; set; }
-
-        /// <summary>本棚格納フォルダ</summary>
-        private string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Yomuko");
 
         #region イベントプロシージャ
 
@@ -107,7 +107,6 @@
         /// <param name="e">イベント情報</param>
         private void SelectListView_AfterLabelEdit(object sender, LabelEditEventArgs e)
         {
-
             if (string.IsNullOrWhiteSpace(e.Label))
             {
                 e.CancelEdit = true;
