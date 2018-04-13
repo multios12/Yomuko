@@ -3,4 +3,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <StartArguments>"%28一般コミック%29 [PEACH-PIT] ローゼンメイデン Rozen Maiden 第08巻.zip" "rozen_maiden_08_000a.jpg"</StartArguments>
   </PropertyGroup>
+  <PropertyGroup>
+    <ProjectView>ShowAllFiles</ProjectView>
+  </PropertyGroup>
 </Project>
