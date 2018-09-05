@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("ArchiveImager")]
-[assembly: AssemblyDescription("/// 引数で指定された圧縮ファイルに含まれる画像ファイルのファイル名リスト、またはファイルのバイナリを標準出力に出力する")]
+[assembly: AssemblyTitle("Sync")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ArchiveImager")]
-[assembly: AssemblyCopyright("Copyright ©  2018 multios12")]
+[assembly: AssemblyProduct("Sync")]
+[assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // このプロジェクトが COM に公開される場合、次の GUID が typelib の ID になります
-[assembly: Guid("e7444ff3-cc05-49a6-8c7b-374cc0d2a26d")]
+[assembly: Guid("33cbca72-f32f-4914-ba46-e10b572bfdcc")]
 
 // アセンブリのバージョン情報は次の 4 つの値で構成されています:
 //

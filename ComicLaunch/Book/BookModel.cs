@@ -8,7 +8,6 @@
     using System.Text.RegularExpressions;
     using System.Windows.Forms;
     using System.Xml.Serialization;
-    using Shelf;
 
     /// <summary>
     ///  書籍情報モデル

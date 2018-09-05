@@ -10,6 +10,7 @@
     /// <summary>
     /// ファイル名リスト
     /// </summary>
+    [Serializable]
     public class FileNameList : List<FileNameModel>
     {
         /// <summary>

@@ -1,14 +1,16 @@
-﻿namespace ArchiveImager
+﻿namespace ArchiverCore
 {
+    using SharpCompress.Archives;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using SharpCompress.Archives;
-    using SharpCompress.Common.Zip;
+    using System.Runtime.Serialization.Json;
 
     public class Program
     {
+        private static List<string> extensions = new List<string>() { ".jpg", ".jpeg", ".png", ".bmp" };
+
         /// <summary>
         /// スタートアップポイント
         /// </summary>
@@ -25,7 +27,12 @@
             }
             else
             {
-                OutputImage(args[0], args[1]);
+                if (!int.TryParse(args[1], out int index))
+                {
+                    Environment.Exit(-1);
+                    return;
+                }
+                OutputImage(args[0], index);
             }
 
             Environment.Exit(0);
@@ -37,16 +44,17 @@
         /// <param name="filePath">圧縮ファイル</param>
         private static void OutputList(string filePath)
         {
-            List<string> extensions = new List<string>() { ".jpg", ".jpeg", ".png", ".bmp" };
-
             var archive = ArchiveFactory.Open(filePath);
-            var v = archive.Volumes;
+            var files = archive.Entries.Where(a => a.IsDirectory == false)
+                .Where(entry => extensions.Contains(Path.GetExtension(entry.Key.ToLower())))
+                .Select(e => e.Key)
+                .OrderBy((e) => e)
+                .ToList();
 
-            var files = archive.Entries.Where(a => a.IsDirectory == false).Where((entry) => extensions.Contains(Path.GetExtension(entry.Key.ToLower()))).Select(e => e.Key).ToList();
-            files.Sort();
-            foreach (var f in files)
+            var serializer = new DataContractJsonSerializer(typeof(List<String>));
+            using (Stream distStream = Console.OpenStandardOutput())
             {
-                Console.WriteLine(f);
+                serializer.WriteObject(distStream, files);
             }
         }
 
@@ -55,18 +63,22 @@
         /// </summary>
         /// <param name="filePath">圧縮ファイル</param>
         /// <param name="entryName">エントリ名</param>
-        private static void OutputImage(string filePath, string entryName)
+        private static void OutputImage(string filePath, int index)
         {
             var archive = ArchiveFactory.Open(filePath);
-            var entry = archive.Entries.Where(e => e.Key == entryName).FirstOrDefault();
-            
+            var entries = archive.Entries.Where(a => a.IsDirectory == false)
+                .Where(e => extensions.Contains(Path.GetExtension(e.Key.ToLower())))
+                .OrderBy((e) => e.Key)
+                .ToList();
+
+            var entry = entries[index];
+
             using (Stream sourceStream = entry.OpenEntryStream())
+            using (Stream distStream = Console.OpenStandardOutput())
             {
-                using (Stream distStream = Console.OpenStandardOutput())
-                {
-                    sourceStream.CopyTo(distStream);
-                }
+                sourceStream.CopyTo(distStream);
             }
         }
     }
+
 }

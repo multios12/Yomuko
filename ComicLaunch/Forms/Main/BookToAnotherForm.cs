@@ -4,8 +4,10 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Windows.Forms;
     using System.Xml;
+    using ComicLaunch.Book;
     using ComicLaunch.Shelf;
     using ComicLaunch.Utils;
 
@@ -24,7 +26,7 @@
             this.InitializeComponent();
         }
 
-        public ShelfModel Shelf { get; set; }
+        public List<BookModel> Books { get; set; }
 
         private void BookToAnotherForm_Load(object sender, EventArgs e)
         {
@@ -78,7 +80,7 @@
 
         private void ShelfListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string filePath = null;
+            string filePath = Path.Combine(this.folderPath, ((string)this.ShelfListBox.SelectedItem) + ".bls");
             if (!File.Exists(filePath))
             {
                 return;
@@ -86,13 +88,49 @@
 
             this.distShelf = new ShelfModel();
             this.distShelf = this.distShelf.ReadXML(filePath);
+            this.distShelf.FilePath = filePath;
 
             var dirs = Directory.GetDirectories(this.distShelf.BaseFolderPaths[0]);
             this.FolderListBox.Items.Clear();
+            this.FolderListBox.Items.Add(this.distShelf.BaseFolderPaths[0]);
+            this.FolderListBox.Items.AddRange(dirs);
+            this.FolderListBox.Enabled = true;
+        }
 
-            foreach (var d in dirs)
+        /// <summary>
+        /// 開始ボタン クリック イベント
+        /// </summary>
+        /// <param name="sender">発生元オブジェクト</param>
+        /// <param name="e">イベント情報</param>
+        private void StartButton_Click(object sender, EventArgs e)
+        {
+            try
             {
-                this.FolderListBox.Items.Add(d);
+                this.StartButton.Visible = false;
+                this.ProgressBar.Visible = true;
+
+                string distFolderPath = (string)this.FolderListBox.SelectedItem;
+
+                var index = 0;
+                foreach (var b in this.Books)
+                {
+                    b.FileMove(distFolderPath);
+
+                    this.ProgressBar.Value = index / this.Books.Count() * 100;
+
+                    this.distShelf.Books.Add(b);
+                    index++;
+                }
+
+                this.DialogResult = DialogResult.Yes;
+                this.Close();
+            }
+            finally
+            {
+                this.distShelf.WriteXML(this.distShelf.FilePath);
+
+                this.StartButton.Visible = true;
+                this.ProgressBar.Visible = false;
             }
         }
     }

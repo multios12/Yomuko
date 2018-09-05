@@ -34,6 +34,7 @@
             this.FolderListBox = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.StartButton = new System.Windows.Forms.Button();
+            this.ProgressBar = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // label1
@@ -82,18 +83,30 @@
             // StartButton
             // 
             this.StartButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.StartButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.StartButton.Location = new System.Drawing.Point(249, 314);
             this.StartButton.Name = "StartButton";
             this.StartButton.Size = new System.Drawing.Size(286, 40);
             this.StartButton.TabIndex = 2;
             this.StartButton.Text = "ファイルの移動開始";
             this.StartButton.UseVisualStyleBackColor = true;
+            this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
+            // 
+            // ProgressBar
+            // 
+            this.ProgressBar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ProgressBar.Location = new System.Drawing.Point(0, 338);
+            this.ProgressBar.Name = "ProgressBar";
+            this.ProgressBar.Size = new System.Drawing.Size(784, 23);
+            this.ProgressBar.TabIndex = 3;
+            this.ProgressBar.Visible = false;
             // 
             // BookToAnotherForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 361);
+            this.Controls.Add(this.ProgressBar);
             this.Controls.Add(this.StartButton);
             this.Controls.Add(this.FolderListBox);
             this.Controls.Add(this.ShelfListBox);
@@ -117,5 +130,6 @@
         private System.Windows.Forms.ListBox FolderListBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button StartButton;
+        private System.Windows.Forms.ProgressBar ProgressBar;
     }
 }

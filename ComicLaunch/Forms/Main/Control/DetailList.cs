@@ -602,8 +602,22 @@
         private void BookToShelfMenuItem_Click(object sender, EventArgs e)
         {
             var f = new BookToAnotherForm();
-            f.Shelf = this.Shelf;
-            f.ShowDialog();
+            IEnumerable<BookModel> models = this.GetSelectedBooks();
+            f.Books = models.DeepCopy().ToList();
+            var ret = f.ShowDialog();
+
+            if (ret == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            // models = models.Select(m => m.FileDelete());
+            this.books.SearchedItems.RemoveRange(this.GetSelectedBooks());
+
+            var eventArgs = new ItemEventArgs<IEnumerable<BookModel>>(models);
+            this?.ItemChanged(sender, eventArgs);
+
+            this.books.Refresh();
         }
 
         /// <summary>ファイルの移動 ドロップダウンリスト展開中イベント </summary>

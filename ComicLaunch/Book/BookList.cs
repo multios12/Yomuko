@@ -79,6 +79,29 @@
         /// <summary>
         /// 指定された値がリストに存在するとき、最初に見つかった値を削除します。
         /// </summary>
+        /// <param name="id">Book ID</param>
+        /// <returns>正常に終了した場合、true</returns>
+        public bool Remove(string id)
+        {
+            if (this.Parent != null)
+            {
+                return this.Parent.Remove(id);
+            }
+
+            foreach (var model in this)
+            {
+                if (model.Id == id)
+                {
+                    return this.Remove(model);
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 指定された値がリストに存在するとき、最初に見つかった値を削除します。
+        /// </summary>
         /// <param name="item">モデル</param>
         /// <returns>正常に終了した場合、true</returns>
         public new bool Remove(BookModel item)
@@ -144,7 +167,7 @@
         /// <exception cref="DirectoryNotFoundException">ベースフォルダが存在しない。または指定されていない</exception>
         public void SyncBaseFolder(List<string> baseFolders, string duplicateFolderPath)
         {
-            Debug.Print("■同期開始");
+            Console.WriteLine("■同期開始");
 
             Array.ForEach(this.ToArray(), b => b.Status = AnalyzeResult.NotRunning);
 
@@ -166,7 +189,7 @@
                     sw.Start();
                     BookModel model = this.AnalyzePath(filePath, syncPaths);
                     long em = sw.ElapsedMilliseconds;
-                    Debug.Print(em + ":" + LabelAttributeUtils.GetLabelName(model.Status) + ":" + filePath);
+                    Console.WriteLine(em + ":" + LabelAttributeUtils.GetLabelName(model.Status) + ":" + filePath);
 
                     if (model.Status == AnalyzeResult.Duplicate && duplicateFolderPath != null)
                     {
@@ -187,7 +210,6 @@
                         break;
                     }
 
-                    Debug.Print(sw.ElapsedMilliseconds + ":" + em);
                     progressIndex += 1;
                 }
             }
@@ -196,7 +218,7 @@
                 this.Fill();
             }
 
-            Debug.Print("■同期完了");
+            Console.WriteLine("■同期完了");
         }
 
         /// <summary>

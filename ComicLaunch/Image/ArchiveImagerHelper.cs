@@ -18,13 +18,17 @@
         /// <returns>エントリ名リスト</returns>
         public static List<string> Open(string filePath)
         {
-            var info = new ProcessStartInfo("ArchiveImager.exe", "\"" + filePath + "\"");
-            info.CreateNoWindow = true;
-            info.UseShellExecute = false;
-            info.RedirectStandardOutput = true;
+            var info = new ProcessStartInfo("ArchiveImager.exe", "\"" + filePath + "\"")
+            {
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                RedirectStandardOutput = true
+            };
 
-            Process process = new Process();
-            process.StartInfo = info;
+            Process process = new Process
+            {
+                StartInfo = info
+            };
             process.Start();
 
             var value = process.StandardOutput.ReadToEnd();
@@ -40,10 +44,12 @@
         /// <returns>ストリーム</returns>
         public static Stream GetStream(string filePath, string entryName)
         {
-            var info = new ProcessStartInfo("ArchiveImager.exe", "\"" + filePath + "\" \"" + entryName + "\"");
-            info.CreateNoWindow = true;
-            info.UseShellExecute = false;
-            info.RedirectStandardOutput = true;
+            var info = new ProcessStartInfo("ArchiveImager.exe", "\"" + filePath + "\" \"" + entryName + "\"")
+            {
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                RedirectStandardOutput = true
+            };
 
             Process process = new Process();
             process.StartInfo = info;

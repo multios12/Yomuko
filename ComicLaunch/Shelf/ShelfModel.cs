@@ -1,15 +1,19 @@
 ﻿namespace ComicLaunch.Shelf
 {
+    using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Xml.Serialization;
     using Book;
+    using ComicLaunch.Utils;
     using Image;
 
     /// <summary>
     /// 本棚モデル
     /// </summary>
     [XmlRoot("Shelf")]
+    [Serializable]
     public class ShelfModel
     {
         /// <summary>しおりリスト</summary>
@@ -95,6 +99,47 @@
             this.Columns.Add(new ColumnModel(FieldType.Writer, 100));
             this.Columns.Add(new ColumnModel(FieldType.Junle, 100));
             this.Columns.Add(new ColumnModel(FieldType.ReleaseDate, 100));
+        }
+
+        public ShelfModel ReadXML(string filePath)
+        {
+            if (Directory.Exists(filePath))
+            {
+                filePath = Path.Combine(filePath, ".yomukodb");
+            }
+
+            var target = SerializationExtensions.ReadXML(this, filePath);
+            target.FilePath = filePath;
+
+            var rootPath = Path.GetDirectoryName(filePath);
+
+            foreach (var b in target.Books)
+            {
+                b.FilePath = rootPath + "\\" + b.FilePath;
+            }
+
+            return target;
+        }
+
+        /// <summary>
+        /// オブジェクトの内容をXMLに書き込む
+        /// </summary>
+        /// <param name="filePath">XMLファイルパス</param>
+        public void WriteXML(string filePath)
+        {
+            var rootPath = Path.GetDirectoryName(this.FilePath) + "\\";
+
+            foreach (var b in this.Books)
+            {
+                b.FilePath = b.FilePath.Replace(rootPath, string.Empty);
+            }
+
+            SerializationExtensions.WriteXML(this, filePath);
+
+            foreach (var b in this.Books)
+            {
+                b.FilePath = rootPath + b.FilePath;
+            }
         }
     }
 }
