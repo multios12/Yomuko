@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
@@ -253,6 +254,10 @@
         /// </summary>
         partial void Fill()
         {
+            Debug.Print("[{0}]{1}", DateTime.Now.ToString("HH:mm:ss"), "BookList.Fill:Start");
+
+            var sw = new Stopwatch();
+            sw.Start();
             this.SearchedItems.Clear();
             this.SeriesItems.Clear();
 
@@ -262,15 +267,40 @@
             }
 
             // 検索条件による抽出
-            this.Where(book => this.searchCriticas.FirstOrDefault(s => !s.Check(book)) == null).ToList()
-                .ForEach(book => this.SearchedItems.Add(book));
+            BookModel[] list;
+            if(this.searchCriticas.Count > 0 && this.searchCriticas[0].IsDuplicate)
+            {
+                
+                list = this.Where(b => this.Exists ((c)=>{
+                    if (b.FilePath == c.FilePath || b.Writer != c.Writer)
+                    {
+                        return false;
+                    }
+
+                    var bTitle = (b.GetValue(FieldType.Title, true) ?? string.Empty).Trim();
+                    var cTitle = (c.GetValue(FieldType.Title, true) ?? string.Empty).Trim();
+
+                    return bTitle == cTitle;
+                })).ToArray();
+            }
+            else
+            {
+                list = this.Where(book => this.searchCriticas.FirstOrDefault(s => !s.Check(book)) == null).ToArray();
+            }
+
+            Debug.Print("[{0}]{1}:{2}", DateTime.Now.ToString("HH:mm:ss"), "BookList.Fill:Filled", sw.ElapsedMilliseconds);
 
             // ソート
-            var list = this.SearchedItems.ToArray();
             list = this.isSortOrderAsc
                 ? list.OrderBy(b => b.GetSortKey(this.sortKey)).ToArray() : list.OrderByDescending(b => b.GetSortKey(this.sortKey)).ToArray();
+            Debug.Print("[{0}]{1}:{2}", DateTime.Now.ToString("HH:mm:ss"), "BookList.Fill:Sorted", sw.ElapsedMilliseconds);
             this.SearchedItems.Clear();
-            Array.ForEach(list.ToArray(), b => this.SearchedItems.Add(b));
+
+            this.SearchedItems.AddRange(list);
+            //Array.ForEach(list, b => this.SearchedItems.Add(b));
+
+            Debug.Print("[{0}]{1}:{2}", DateTime.Now.ToString("HH:mm:ss"), "BookList.Fill:SortedToArray", sw.ElapsedMilliseconds);
+
 
             this.OnPropertyChanged(new PropertyChangedEventArgs(nameof(this.SearchedItems)));
 
@@ -292,6 +322,7 @@
             }
 
             this.SearchedItems.Refresh();
+            Debug.Print("[{0}]{1}:{2}", DateTime.Now.ToString("HH:mm:ss"), "BookList.Fill:End", sw.ElapsedMilliseconds);
         }
     }
 }

@@ -1,13 +1,14 @@
 ﻿namespace ComicLaunch.Shelf
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Xml.Serialization;
     using Book;
 
     /// <summary>
     /// 詳細リスト列の構造体
     /// </summary>
-    [Serializable]
+    [DataContract]
     public class ColumnModel
     {
         /// <summary>
@@ -29,11 +30,11 @@
         }
 
         /// <summary>項目種類</summary>
-        [XmlAttribute]
+        [DataMember]
         public FieldType FieldType { get; set; }
 
         /// <summary>幅</summary>
-        [XmlAttribute]
+        [DataMember]
         public int Width { get; set; }
     }
 }

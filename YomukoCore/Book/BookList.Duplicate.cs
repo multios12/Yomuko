@@ -1,6 +1,8 @@
 ﻿namespace ComicLaunch.Book
 {
+    using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using Duplicate;
 
@@ -18,12 +20,17 @@
         /// <returns>重複リスト</returns>
         public List<DuplicateModel> CreateDuplicateList()
         {
+            Debug.Print("[{0}]{1}", DateTime.Now.ToString("HH:mm:ss"), "BookList.CreateDuplicateList:Start");
+
             this.ToList().ForEach(b => b.Status = AnalyzeResult.NotRunning);
             this.ToList().ForEach(b => this.CreateEliminateValue(b));
 
             var group = this.GroupBy(b => b.EliminateTitle);
             group = group.Where(g => g.Count() > 1);
-            return group.Select(g => new DuplicateModel(g)).ToList();
+
+            var gr = group.Select(g => new DuplicateModel(g)).ToList();
+            Debug.Print("[{0}]{1}", DateTime.Now.ToString("HH:mm:ss"), "BookList.CreateDuplicateList:End");
+            return gr;
         }
 
         /// <summary>

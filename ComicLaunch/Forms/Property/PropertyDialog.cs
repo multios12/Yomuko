@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+    using System.Windows.Forms;
     using Book;
     using Image;
 
@@ -22,73 +23,15 @@
         /// <summary>情報</summary>
         public BookModel Book { get; set; }
 
-        /// <summary>OKボタン クリックイベント</summary>
-        /// <param name="sender">発生元オブジェクト</param>
-        /// <param name="e">イベント情報</param>
-        private void OK_Button_Click(object sender, EventArgs e)
-        {
-            this.Book.Title = this.cboTitle.Text;
-            this.Book.SubTitle = this.SubTitleTextBox.Text;
-            this.Book.Writer = this.cboWriter.Text;
-            this.Book.PublishingCompany = this.cboPublisher.Text;
-            this.Book.Junle = this.txtJunle.Text;
-            this.Book.Memo = this.txtMemo.Text;
-            this.Book.UpdateDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-            this.Book.No = this.txtNO.Text;
-            this.Book.Type = this.BookTypeComboBox.Text;
-            this.Book.IsComplete = this.CompleteCheckBox.Checked;
-
-            this.Book.CoverFileIndex = (int)this.CoverIndexUpDown.Value;
-
-            if (this.FavoriteCheckBox.Checked)
-            {
-                this.Book.Favorite = true;
-            }
-            else
-            {
-                this.Book.Favorite = false;
-            }
-
-            if (this.Book.Type.IndexOf("写真集") > -1)
-            {
-                this.Book.Photographer = this.cboPhotographer.Text;
-            }
-            else
-            {
-                if (this.Book.Type.IndexOf("コミック") > -1)
-                {
-                    this.Book.CarryMagazine = this.cboPhotographer.Text;
-                }
-
-                if (DateTime.TryParse(this.SaleDateTextBox.Text, out DateTime d))
-                {
-                    this.Book.ReleaseDate = this.SaleDateTextBox.Text;
-                }
-
-                this.Close();
-            }
-
-            App.AutoCompleteTypes.Remove(this.Book.Type.Trim());
-            App.AutoCompleteTypes.Insert(0, this.Book.Type.Trim());
-            App.AutoCompleteJunles.Remove(this.Book.Junle.Trim());
-            App.AutoCompleteJunles.Insert(0, this.Book.Junle.Trim());
-            App.AutoCompleteWriters.Remove(this.Book.Writer.Trim());
-            App.AutoCompleteWriters.Insert(0, this.Book.Writer.Trim());
-        }
-
-        /// <summary>キャンセルボタン クリックイベント</summary>
-        /// <param name="sender">発生元オブジェクト</param>
-        /// <param name="e">イベント情報</param>
-        private void NoButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        public Shelf.ShelfModel Shelf { get; set; }
 
         /// <summary>フォーム読込イベント</summary>
         /// <param name="sender">発生元オブジェクト</param>
         /// <param name="e">イベント情報</param>
         private void PropertyDialog_Load(object sender, EventArgs e)
         {
+            this.AutoSaveCheckBox.Checked = Properties.Settings.Default.IsAutoSave;
+
             this.BookTypeComboBox.Items.AddRange(App.AutoCompleteTypes.ToArray());
             this.txtJunle.Items.AddRange(App.AutoCompleteJunles.ToArray());
             this.cboWriter.Items.AddRange(App.AutoCompleteWriters.ToArray());
@@ -100,14 +43,7 @@
             this.txtFilePath.Text = this.Book.FilePath;
             this.txtJunle.Text = this.Book.Junle;
 
-            if (this.Book.Favorite)
-            {
-                this.FavoriteCheckBox.Checked = true;
-            }
-            else
-            {
-                this.FavoriteCheckBox.Checked = false;
-            }
+            this.FavoriteCheckBox.Checked = this.Book.Favorite;
 
             this.BookTypeComboBox_TextChanged(sender, e);
             this.txtMemo.Text = this.Book.Memo;
@@ -146,10 +82,10 @@
                     {
                         this.archiveBook = new ArchiveModel(this.Book.FilePath)
                         {
-                            DrawHeight = this.picCover.Height,
-                            DrawWidth = this.picCover.Width,
-                            ResizeHeight = this.picCover.Height,
-                            ResizeWidth = this.picCover.Width
+                            DrawHeight = this.CoverPicturebox.Height,
+                            DrawWidth = this.CoverPicturebox.Width,
+                            ResizeHeight = this.CoverPicturebox.Height,
+                            ResizeWidth = this.CoverPicturebox.Width
                         };
 
                         // 画像表示処理
@@ -171,6 +107,81 @@
 
                 this.CoverIndexUpDown_ValueChanged(sender, e);
             }
+        }
+
+        private void PropertyDialog_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (!e.Control)
+                {
+                    this.SelectNextControl(this.ActiveControl, !e.Shift, true, true, true);
+                }
+            }
+            else if (e.KeyCode == Keys.F11)
+            {
+                this.OK_Button_Click(null, null);
+            }
+        }
+
+        private void PropertyDialog_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '\r')
+            {
+                e.Handled = true;
+            }
+        }
+
+        /// <summary>OKボタン クリックイベント</summary>
+        /// <param name="sender">発生元オブジェクト</param>
+        /// <param name="e">イベント情報</param>
+        private void OK_Button_Click(object sender, EventArgs e)
+        {
+            this.Book.Title = this.cboTitle.Text;
+            this.Book.SubTitle = this.SubTitleTextBox.Text;
+            this.Book.Writer = this.cboWriter.Text;
+            this.Book.PublishingCompany = this.cboPublisher.Text;
+            this.Book.Junle = this.txtJunle.Text;
+            this.Book.Memo = this.txtMemo.Text;
+            this.Book.UpdateDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            this.Book.No = this.txtNO.Text;
+            this.Book.Type = this.BookTypeComboBox.Text;
+            this.Book.IsComplete = this.CompleteCheckBox.Checked;
+
+            this.Book.CoverFileIndex = (int)this.CoverIndexUpDown.Value;
+            this.Book.Favorite = this.FavoriteCheckBox.Checked;
+
+            if (this.Book.Type.IndexOf("写真集") > -1)
+            {
+                this.Book.Photographer = this.cboPhotographer.Text;
+            }
+            else
+            {
+                if (this.Book.Type.IndexOf("コミック") > -1)
+                {
+                    this.Book.CarryMagazine = this.cboPhotographer.Text;
+                }
+
+                if (DateTime.TryParse(this.SaleDateTextBox.Text, out DateTime d))
+                {
+                    this.Book.ReleaseDate = this.SaleDateTextBox.Text;
+                }
+            }
+
+            if (this.AutoSaveCheckBox.Checked)
+            {
+                this.Shelf.FileNames.ChangeFileName(this.Book);
+            }
+
+            this.Close();
+        }
+
+        /// <summary>キャンセルボタン クリックイベント</summary>
+        /// <param name="sender">発生元オブジェクト</param>
+        /// <param name="e">イベント情報</param>
+        private void NoButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         /// <summary>フォーカス喪失イベント</summary>
@@ -235,23 +246,16 @@
             }
 
             this.archiveBook.PageIndex = (int)this.CoverIndexUpDown.Value;
-            this.picCover.Image = this.archiveBook.PagePicture;
-            this.picCover.Refresh();
+            this.CoverPicturebox.Image = this.archiveBook.PagePicture;
+            this.CoverPicturebox.Refresh();
         }
 
-        private void BookTypeComboBox_Enter(object sender, EventArgs e)
+        private void BackButton_Click(object sender, EventArgs e)
         {
-            this.BookTypeComboBox.DroppedDown = true;
         }
 
-        private void JunleComboBox_Enter(object sender, EventArgs e)
+        private void NextButton_Click(object sender, EventArgs e)
         {
-            this.txtJunle.DroppedDown = true;
-        }
-
-        private void PublisherComboBox_Enter(object sender, EventArgs e)
-        {
-            this.cboPublisher.DroppedDown = true;
         }
     }
 }

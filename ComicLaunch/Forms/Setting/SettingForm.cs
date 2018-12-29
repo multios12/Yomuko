@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel;
+    using System.IO;
     using System.Linq;
     using System.Windows.Forms;
     using Book;
@@ -14,9 +15,6 @@
     {
         /// <summary>ダイアログ</summary>
         private FileNameItemDialog fileNameItemDialog = new FileNameItemDialog();
-
-        /// <summary>ベースフォルダ</summary>
-        private BindingList<string> baseFolders;
 
         /// <summary>コンストラクタ</summary>
         /// <param name="bl">マネージャ</param>
@@ -40,8 +38,7 @@
 
             this.CollectSubTitleCheckBox.Checked = this.Shelf.CollectSubTitle;
 
-            this.baseFolders = new BindingList<string>(this.Shelf.BaseFolderPaths);
-            this.BaseFolderTextBox.Text = this.baseFolders.Count() == 0 ? string.Empty : this.baseFolders[0];
+            this.BaseFolderTextBox.Text = Path.GetDirectoryName(this.Shelf.FilePath);
 
             this.SetFileNameItems();
 
@@ -73,11 +70,6 @@
                 this.Shelf.FileNames.Add(new FileNameModel("[", "] ", FieldType.ReleaseDate, string.Empty));
             }
 
-            // ベースフォルダの保存
-            // this.Shelf.BaseFolderPaths.AddRange(this.baseFolderList.ToList());
-            this.baseFolders.Clear();
-            this.baseFolders.Add(this.BaseFolderTextBox.Text);
-
             // 詳細リスト
             this.Shelf.Columns.Clear();
             foreach (ListViewItem item in this.ColumnListView.Items)
@@ -87,7 +79,7 @@
             }
 
             this.Shelf.CollectSubTitle = this.CollectSubTitleCheckBox.Checked;
-            this.Shelf.WriteXML(this.Shelf.FilePath);
+            this.Shelf.WriteJson();
 
             this.DialogResult = DialogResult.OK;
             this.Dispose();

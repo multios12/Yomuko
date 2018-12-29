@@ -61,7 +61,7 @@ namespace ComicLaunch.Forms.Main
         /// <returns>結果</returns>
         public DialogResult ShowDialog(string filePath)
         {
-            this.shelf = new ShelfModel().ReadXML(filePath);
+            this.shelf = new ShelfModel().ReadJson(filePath);
             this.shelf.FilePath = filePath;
 
             return this.ShowDialog();
@@ -74,6 +74,11 @@ namespace ComicLaunch.Forms.Main
         /// <param name="e">イベントデータ</param>
         private void MainForm_Load(object sender, EventArgs e)
         {
+            Debug.Print("FormLoad開始-----------------------------------");
+
+            Application.ThreadException += this.Application_ThreadException;
+            AppDomain.CurrentDomain.UnhandledException += this.CurrentDomain_UnhandledException;
+
             // ファインダ種別
             this.cboFinderType.Items.AddRange(Enum.GetValues(typeof(FieldType)).Cast<FieldType>().Select(f => f.LabelName()).ToArray());
             this.cboFinderType.SelectedIndex = 0;
@@ -97,12 +102,6 @@ namespace ComicLaunch.Forms.Main
             this.shelf.Books.RefreshSearchCriterias(new SearchModel(FieldType.Title, SearchModel.ALL));
             this.finds = this.shelf.Books.SearchedItems;
             this.finds.PropertyChanged += this.Finds_PropertyChanged;
-
-            this.DetailList.Shelf = this.shelf;
-            this.DetailList.CoverImagePaint += this.DetailList_CoverImagePaint;
-            this.DetailList.Books = this.finds.SearchedItems;
-            this.shelf.Books.SearchCriteriasChanged += this.Books_SearchItemsChanged;
-            this.shelf.Books.SyncStatusChanged += this.Books_SyncStatusChanged;
 
             // カバー表示
             this.picCover.Image = null;
@@ -136,6 +135,49 @@ namespace ComicLaunch.Forms.Main
             this.GroupTypeComboBox_DropDownClosed(null, null);
 
             this.DetailList.Focus();
+
+            this.DetailList.Shelf = this.shelf;
+            this.DetailList.CoverImagePaint += this.DetailList_CoverImagePaint;
+            this.DetailList.Books = this.finds.SearchedItems;
+            this.shelf.Books.SearchCriteriasChanged += this.Books_SearchItemsChanged;
+            this.shelf.Books.SyncStatusChanged += this.Books_SyncStatusChanged;
+            Debug.Print("FormLoad完了-----------------------------------");
+        }
+
+        /// <summary>
+        /// アプリケーション 補足されなかった例外イベント
+        /// </summary>
+        /// <param name="sender">発生元オブジェクト</param>
+        /// <param name="e">イベント情報</param>
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            if (this.shelf == null && !File.Exists(this.shelf.FilePath))
+            {
+                return;
+            }
+
+            var logPath = Path.Combine(Path.GetDirectoryName(this.shelf.FilePath), "error.log");
+            var ex = (Exception)e.ExceptionObject;
+            File.AppendAllText(logPath, ex.Message + "\r\n" + ex.StackTrace + "\r\n");
+            throw ex;
+        }
+
+        /// <summary>
+        /// アプリケーション 補足されなかった例外イベント
+        /// </summary>
+        /// <param name="sender">発生元オブジェクト</param>
+        /// <param name="e">イベント情報</param>
+        private void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        {
+            if (this.shelf == null && !File.Exists(this.shelf.FilePath))
+            {
+                return;
+            }
+
+            var logPath = Path.Combine(Path.GetDirectoryName(this.shelf.FilePath), "error.log");
+            var ex = e.Exception;
+            File.AppendAllText(logPath, ex.Message + "\r\n" + ex.StackTrace + "\r\n");
+            throw ex;
         }
 
         /// <summary>フォームクローズイベント</summary>
@@ -148,8 +190,11 @@ namespace ComicLaunch.Forms.Main
                 return;
             }
 
+            Application.ThreadException -= this.Application_ThreadException;
+            AppDomain.CurrentDomain.UnhandledException -= this.CurrentDomain_UnhandledException;
+
             this.shelf.Columns = this.DetailList.GetColumns();
-            this.shelf.WriteXML(this.shelf.FilePath);
+            this.shelf.WriteJson();
 
             Settings.Default.MainSplit = this.MainSplitContainer.SplitterDistance;
             Settings.Default.SideFilePanel = this.MainSplitContainer.Panel1Collapsed;
@@ -277,6 +322,11 @@ namespace ComicLaunch.Forms.Main
         /// <param name="e">イベントデータ</param>
         private void Finds_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            if (this.DetailList.Books == null)
+            {
+                return;
+            }
+
             if (e.PropertyName == nameof(this.finds.SearchedItems))
             {
                 this.DetailList.IsCollectSubtitle = this.shelf.CollectSubTitle;
@@ -332,7 +382,7 @@ namespace ComicLaunch.Forms.Main
                 }
             }
 
-            this.shelf.WriteXML(this.shelf.FilePath);
+            this.shelf.WriteJson();
         }
 
         /// <summary>詳細表示：モード変更イベント</summary>
@@ -419,7 +469,7 @@ namespace ComicLaunch.Forms.Main
             this.ShowArchive(book.FilePath, e.Item.PageIndex);
 
             this.shelf.Bookmarks = this.BookmarkList1.Bookmarks;
-            this.shelf.WriteXML(this.shelf.FilePath);
+            this.shelf.WriteJson();
         }
 
         /// <summary>ブックマーク表示：非表示選択イベント</summary>
@@ -428,7 +478,7 @@ namespace ComicLaunch.Forms.Main
         private void BookmarkList1_ControlClosed(object sender, EventArgs e)
         {
             this.shelf.Bookmarks = this.BookmarkList1.Bookmarks;
-            this.shelf.WriteXML(this.shelf.FilePath);
+            this.shelf.WriteJson();
             this.smiBookmark.Checked = false;
             this.MainSplitContainer.Visible = true;
             this.BookmarkList1.Visible = false;
@@ -457,9 +507,7 @@ namespace ComicLaunch.Forms.Main
         private async void SyncBaseFolderMenuItem_Click(object sender, EventArgs e)
         {
             // ベースフォルダのチェック
-            this.shelf.BaseFolderPaths.Sort();
-            var workFolders = new List<string>();
-            workFolders.AddRange(this.shelf.BaseFolderPaths.Where(f => !workFolders.Any(w => f.IndexOf(w) >= 0)));
+            var workFolders = new List<string> { Path.GetDirectoryName(this.shelf.FilePath) };
 
             // ベースフォルダの確認
             var failedBaseFolders = workFolders.Where(b => Directory.Exists(b) == false);
@@ -480,8 +528,8 @@ namespace ComicLaunch.Forms.Main
             this.Enabled = false;
             this.waitDialog.Show();
 
-            await Task.Run(() => this.shelf.Books.SyncBaseFolder(workFolders, this.shelf.DuplicateFolderPath));
-            this.shelf.WriteXML(this.shelf.FilePath);
+            await Task.Run(() => this.shelf.Books.SyncBaseFolder(workFolders[0], this.shelf.DuplicateFolderPath));
+            this.shelf.WriteJson();
 
             this.Enabled = true;
             this.waitDialog.Close();

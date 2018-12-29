@@ -1,19 +1,16 @@
 ﻿namespace ComicLaunch.Shelf
 {
-    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Xml.Serialization;
+    using System.Runtime.Serialization;
     using Book;
     using ComicLaunch.Utils;
-    using Image;
+    using ComicLaunch.Image;
 
     /// <summary>
     /// 本棚モデル
     /// </summary>
-    [XmlRoot("Shelf")]
-    [Serializable]
     public class ShelfModel
     {
         /// <summary>しおりリスト</summary>
@@ -23,48 +20,45 @@
         public ShelfModel()
         {
             this.Books = new BookList();
-            this.BaseFolderPaths = new List<string>();
             this.FileNames = new FileNameList();
             this.Columns = new List<ColumnModel>();
             this.Bookmarks = new List<BookmarkModel>();
         }
 
         /// <summary>ファイルパス</summary>
-        [XmlIgnore]
+        [IgnoreDataMember]
         public string FilePath { get; set; }
 
         /// <summary>本棚名</summary>
+        [DataMember]
         public string Title { get; set; }
 
         /// <summary>本棚の説明</summary>
+        [DataMember(EmitDefaultValue =false)]
         public string Remarks { get; set; }
 
-        /// <summary>ベースフォルダを使用するか</summary>
-        public bool UseBaseFolder { get; set; }
-
         /// <summary>重複フォルダ</summary>
+        [DataMember]
         public string DuplicateFolderPath { get; set; }
 
         /// <summary>サブタイトルと巻数をタイトルに表示する </summary>
+        [DataMember(EmitDefaultValue = false)]
         public bool CollectSubTitle { get; set; }
 
         /// <summary>画像表示サイズ</summary>
+        [DataMember]
         public PageSizeConstants PageSize { get; set; }
 
-        /// <summary>ベースフォルダリスト</summary>
-        [XmlArrayItem("Path")]
-        public List<string> BaseFolderPaths { get; set; }
-
         /// <summary>ファイル名生成情報リスト</summary>
-        [XmlArrayItem("FileName")]
+        [DataMember]
         public FileNameList FileNames { get; set; }
 
         /// <summary>詳細リストの列情報</summary>
-        [XmlArrayItem("Column")]
+        [DataMember]
         public List<ColumnModel> Columns { get; set; }
 
         /// <summary>しおりリスト</summary>
-        [XmlArrayItem("Bookmark")]
+        [DataMember]
         public List<BookmarkModel> Bookmarks
         {
             get
@@ -80,7 +74,7 @@
         }
 
         /// <summary>本リスト</summary>
-        [XmlArrayItem("Book")]
+        [DataMember]
         public BookList Books { get; set; }
 
         /// <summary>
@@ -101,14 +95,27 @@
             this.Columns.Add(new ColumnModel(FieldType.ReleaseDate, 100));
         }
 
-        public ShelfModel ReadXML(string filePath)
+        public ShelfModel ReadJson(string filePath)
         {
             if (Directory.Exists(filePath))
             {
-                filePath = Path.Combine(filePath, ".yomukodb");
+                filePath = Path.Combine(filePath, ".yomuko");
+            }
+            else if (Path.GetFileName(filePath) != ".yomuko")
+            {
+                throw new DirectoryNotFoundException("フォルダが存在しない");
             }
 
-            var target = SerializationExtensions.ReadXML(this, filePath);
+            if (!File.Exists(filePath))
+            {
+                this.Title = $"本棚[{Path.GetDirectoryName(filePath)}]";
+                this.FilePath = filePath;
+                this.Initialize();
+                this.WriteJson();
+                return this;
+            }
+
+            var target = SerializationExtensions.ReadJson(this, filePath);
             target.FilePath = filePath;
 
             var rootPath = Path.GetDirectoryName(filePath);
@@ -124,8 +131,7 @@
         /// <summary>
         /// オブジェクトの内容をXMLに書き込む
         /// </summary>
-        /// <param name="filePath">XMLファイルパス</param>
-        public void WriteXML(string filePath)
+        public void WriteJson()
         {
             var rootPath = Path.GetDirectoryName(this.FilePath) + "\\";
 
@@ -134,7 +140,7 @@
                 b.FilePath = b.FilePath.Replace(rootPath, string.Empty);
             }
 
-            SerializationExtensions.WriteXML(this, filePath);
+            SerializationExtensions.WriteJson(this, this.FilePath);
 
             foreach (var b in this.Books)
             {

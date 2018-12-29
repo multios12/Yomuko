@@ -20,12 +20,13 @@
             }
 
             var s = new ShelfModel();
-            s = s.ReadXML(args[0]);
+            s = s.ReadJson(args[0]);
 
-            s.Books.SyncBaseFolder(s.BaseFolderPaths, s.DuplicateFolderPath);
+            s.Books.SyncBaseFolder(filePath, s.DuplicateFolderPath);
 
-            s.WriteXML(s.FilePath);
+            s.WriteJson();
 
+            Environment.Exit(0);
         }
     }
 }

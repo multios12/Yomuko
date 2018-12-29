@@ -1,11 +1,12 @@
 ﻿namespace ComicLaunch.Shelf
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Xml.Serialization;
     using ComicLaunch.Book;
 
     /// <summary>ファイル名生成定義構造体</summary>
-    [Serializable]
+    [DataContract]
     public class FileNameModel
     {
         /// <summary>コンストラクタ</summary>
@@ -27,15 +28,15 @@
         }
 
         /// <summary>区切り文字(後尾)</summary>
-        [XmlAttribute]
+        [DataMember]
         public string Back { get; set; }
 
         /// <summary>区切り文字(先頭)</summary>
-        [XmlAttribute]
+        [DataMember]
         public string Front { get; set; }
 
         /// <summary>種別</summary>
-        [XmlAttribute]
+        [DataMember]
         public string TypeName
         {
             get
@@ -57,15 +58,15 @@
         }
 
         /// <summary>値</summary>
-        [XmlAttribute]
+        [DataMember]
         public string Value { get; set; }
 
         /// <summary>項目種別</summary>
-        [XmlIgnore]
+        [IgnoreDataMember]
         public FieldType? FieldType { get; set; }
 
         /// <summary>サンプル</summary>
-        [XmlIgnore]
+        [IgnoreDataMember]
         public string SampleText => this.Front + " " + this.Back;
     }
 }

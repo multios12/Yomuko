@@ -3,6 +3,7 @@
     using System;
     using System.Windows.Forms;
     using Book;
+    using ComicLaunch.Shelf;
     using Properties;
 
     /// <summary>
@@ -19,6 +20,9 @@
         /// <summary>モデル</summary>
         public BookList Models { get; set; }
 
+        /// <summary>シェルフ</summary>
+        public ShelfModel Shelf { get; set; }
+
         /// <summary>
         /// OKボタンクリックイベント
         /// </summary>
@@ -33,6 +37,15 @@
             }
 
             this.Models.ReplaceValue(BookModel.GetFieldType(this.FieldTypeComboBox.Text), this.SearchCombobox.Text, this.cboValue.Text);
+
+            if (Settings.Default.IsAutoSave)
+            {
+                foreach (var model in this.Models)
+                {
+                    this.Shelf.FileNames.ChangeFileName(model);
+                }
+            }
+
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

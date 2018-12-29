@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,42 +117,61 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="spcMain.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="SeriesContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>164, 17</value>
-  </metadata>
-  <metadata name="DetailMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="ImageList1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>331, 17</value>
-  </metadata>
-  <data name="ImageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACO
-        AwAAAk1TRnQBSQFMAwEBAAGUAQABlAEAARABAAEQAQAE/wEhAQAI/wFCAU0BNgcAATYDAAEoAwABQAMA
-        ARADAAEBAQABIAYAARASAED/wAAM/wEAAV4BmwH/AQABWgGZAf8DaxX/AQABWgGZAf8BAAFlAaEN/8AA
-        DP8BAAFaAZkB/wEEAdEC/wEAAWgBpwH/AVIBRAE+Df8BAAFcAZsB/wHVAfYB/gH/AT4BzgHoDf/AABD/
-        AesB+wL/AQABzgL/ASIByAHsAf8BPAE4ATcF/wEZAZYBvQH/AWUB5gL/AQQB0QL/AQABWgGZDf/AABD/
-        AVEBrAHMAf8BAAHQAv8BGAHYAv8BSQHoAv8BhgHlAfAB/wGIAfgC/wEzAeEC/wEAAc4C/wNrDf/AABD/
-        AQoBZgGiAf8BgQHnAv8BAAHQAv8BMwHhAv8BZQHyAv8BkQH8Av8BSQHoAv8BAAFjAaER/8AAEP8DawH/
-        Ae4B+QH8Af8BAAHOAv8BHgHaAv8BUQHrAv8BkQH8Av8BZAHxAv8BGAFIAWQR/8AADP8BHgFgAZEB/wEA
-        AckB/AH/ATEB4AL/AQkB0wL/AQgB0gL/AToB5AL/AW0B9AL/AYUB+QL/AUEB5QL/AQABWgGZAf8Dawn/
-        wAAE/wNrAf8BAAFtAawB/wEtAd8C/wFtAfQC/wFCAeYC/wEaAdgC/wEAAcwC/wElAdwC/wFZAe0C/wGX
-        Af4C/wFbAe4C/wEhAdsC/wEAAcwB/AH/A2sF/8AABP8BAAHMAv8BRgHoAv8BlgH4Av8BxQH9Av8B5AH7
-        Bv8BAgHRAv8BDwHVAv8BQQHlAv8B5AH7Av8BuwH5Av8BTwHnAf4B/wEAAdAC/wEcAdkC/wEOAWEBnQH/
-        wAAE/wEAAVoBmQH/AQABWgGZAf8BAAFaAZkB/wEAAVoBmQH/AQABWgGZAf8BLAGIAa8B/wEUAdYC/wEA
-        Ac4C/wEiAcgB7AH/ATYBhAGrAf8BNgGFAawB/wEAAVoBmQH/AQABWgGZAf8BAAFaAZkF/8AAGP8BAAFa
-        AZkB/wErAdwC/wEAAc8C/wEAAV0Bmxn/wAAc/wHkAfsC/wENAdQC/wEAAVoBmRn/wAAc/wH6Af4C/wEh
-        AdsC/wNrGf/AABz/ARcBgQGnAf8BLwHdAfwd/8AAQP/AAAFCAU0BPgcAAT4DAAEoAwABQAMAARADAAEB
-        AQABAQUAAYAXAAP/gQAL
-</value>
+  <data name="BookListSyncingBaseFolder" xml:space="preserve">
+    <value>ベースフォルダと同期を行っています</value>
   </data>
-  <metadata name="CoverPaintTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>450, 17</value>
-  </metadata>
+  <data name="ColumnOrderAsc" xml:space="preserve">
+    <value>▲</value>
+  </data>
+  <data name="ColumnOrderDesc" xml:space="preserve">
+    <value>▼</value>
+  </data>
+  <data name="ErrorBookListBaseFolderNotFound" xml:space="preserve">
+    <value>ベースフォルダが見つかりません。設定を確認して下さい
+{0}</value>
+  </data>
+  <data name="ErrorFileNotFound" xml:space="preserve">
+    <value>{0}は見つかりませんでした</value>
+  </data>
+  <data name="ErrorFileNotFoundDelete" xml:space="preserve">
+    <value>ファイルが見つかりませんでした
+リストから削除しますか？</value>
+  </data>
+  <data name="ErrorMoveExists" xml:space="preserve">
+    <value>{0}はすでに存在します</value>
+  </data>
+  <data name="ErrorMoveFileNotFound" xml:space="preserve">
+    <value>{0}が見つからないため、コピーできませんでした</value>
+  </data>
+  <data name="ErrorSearchTitleError" xml:space="preserve">
+    <value>タイトルを抽出できませんでした</value>
+  </data>
+  <data name="ErrorSelectChangeReplaceStringNotFound" xml:space="preserve">
+    <value>タイトルを変更する場合、置き換え前文字列を必ず指定してください</value>
+  </data>
+  <data name="Favorite" xml:space="preserve">
+    <value>お気に入り</value>
+  </data>
+  <data name="GroupAll" xml:space="preserve">
+    <value>＜全て＞</value>
+  </data>
+  <data name="InfoAutoAddedTitle" xml:space="preserve">
+    <value>ファイル名には必ずTitleが必要です。タイトルを自動的に追加します</value>
+  </data>
+  <data name="InfoDetailListIsSetTitle" xml:space="preserve">
+    <value>{0}をタイトルに設定しますか？</value>
+  </data>
+  <data name="InfoIsDeleteBook" xml:space="preserve">
+    <value>リストから削除します
+ファイルも削除する場合は「はい」を選択してください</value>
+  </data>
+  <data name="InfoMoveExistsWhatsOverride" xml:space="preserve">
+    <value>ファイルはすでに存在します。上書きしますか？</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>{0}冊 / 計:{1}冊</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>タイトル</value>
+  </data>
 </root>

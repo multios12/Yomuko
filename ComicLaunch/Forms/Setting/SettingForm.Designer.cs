@@ -30,6 +30,7 @@
             System.Windows.Forms.ColumnHeader ColumnHeader1;
             this.TabControl1 = new System.Windows.Forms.TabControl();
             this.TabPage1 = new System.Windows.Forms.TabPage();
+            this.BaseFolderTextBox = new System.Windows.Forms.TextBox();
             this.DuplicateCheckBox = new System.Windows.Forms.CheckBox();
             this.txtBookListName = new System.Windows.Forms.TextBox();
             this.Label2 = new System.Windows.Forms.Label();
@@ -58,8 +59,7 @@
             this.dlgFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.butOK = new System.Windows.Forms.Button();
             this.butCancel = new System.Windows.Forms.Button();
-            this.BaseFolderTextBox = new System.Windows.Forms.TextBox();
-            this.BaseFolderAddButton = new System.Windows.Forms.Button();
+            this.AutoSaveCheckBox = new System.Windows.Forms.CheckBox();
             ColumnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TabControl1.SuspendLayout();
             this.TabPage1.SuspendLayout();
@@ -86,11 +86,11 @@
             // 
             // TabPage1
             // 
+            this.TabPage1.Controls.Add(this.AutoSaveCheckBox);
             this.TabPage1.Controls.Add(this.BaseFolderTextBox);
             this.TabPage1.Controls.Add(this.DuplicateCheckBox);
             this.TabPage1.Controls.Add(this.txtBookListName);
             this.TabPage1.Controls.Add(this.Label2);
-            this.TabPage1.Controls.Add(this.BaseFolderAddButton);
             this.TabPage1.Controls.Add(this.DuplicateFolderChangeButton);
             this.TabPage1.Controls.Add(this.Label1);
             this.TabPage1.Controls.Add(this.DuplicateFolderTextBox);
@@ -102,6 +102,14 @@
             this.TabPage1.TabIndex = 0;
             this.TabPage1.Text = "本棚";
             this.TabPage1.UseVisualStyleBackColor = true;
+            // 
+            // BaseFolderTextBox
+            // 
+            this.BaseFolderTextBox.Location = new System.Drawing.Point(48, 114);
+            this.BaseFolderTextBox.Name = "BaseFolderTextBox";
+            this.BaseFolderTextBox.ReadOnly = true;
+            this.BaseFolderTextBox.Size = new System.Drawing.Size(511, 32);
+            this.BaseFolderTextBox.TabIndex = 14;
             // 
             // DuplicateCheckBox
             // 
@@ -396,23 +404,18 @@
             this.butCancel.UseVisualStyleBackColor = true;
             this.butCancel.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // BaseFolderTextBox
+            // AutoSaveCheckBox
             // 
-            this.BaseFolderTextBox.Location = new System.Drawing.Point(48, 114);
-            this.BaseFolderTextBox.Name = "BaseFolderTextBox";
-            this.BaseFolderTextBox.Size = new System.Drawing.Size(430, 32);
-            this.BaseFolderTextBox.TabIndex = 14;
-            // 
-            // BaseFolderAddButton
-            // 
-            this.BaseFolderAddButton.Location = new System.Drawing.Point(481, 108);
-            this.BaseFolderAddButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.BaseFolderAddButton.Name = "BaseFolderAddButton";
-            this.BaseFolderAddButton.Size = new System.Drawing.Size(76, 38);
-            this.BaseFolderAddButton.TabIndex = 1;
-            this.BaseFolderAddButton.Text = "追加";
-            this.BaseFolderAddButton.UseVisualStyleBackColor = true;
-            this.BaseFolderAddButton.Click += new System.EventHandler(this.BaseFolderAddButton_Click);
+            this.AutoSaveCheckBox.AutoSize = true;
+            this.AutoSaveCheckBox.Checked = global::ComicLaunch.Properties.Settings.Default.IsAutoSave;
+            this.AutoSaveCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AutoSaveCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::ComicLaunch.Properties.Settings.Default, "IsAutoSave", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.AutoSaveCheckBox.Location = new System.Drawing.Point(48, 152);
+            this.AutoSaveCheckBox.Name = "AutoSaveCheckBox";
+            this.AutoSaveCheckBox.Size = new System.Drawing.Size(313, 24);
+            this.AutoSaveCheckBox.TabIndex = 15;
+            this.AutoSaveCheckBox.Text = "プロパティ変更時にファイル名を自動変更";
+            this.AutoSaveCheckBox.UseVisualStyleBackColor = true;
             // 
             // SettingForm
             // 
@@ -470,6 +473,6 @@
         public System.Windows.Forms.CheckBox CollectSubTitleCheckBox;
         public System.Windows.Forms.Button FileNameInitializeButton;
         private System.Windows.Forms.TextBox BaseFolderTextBox;
-        public System.Windows.Forms.Button BaseFolderAddButton;
+        private System.Windows.Forms.CheckBox AutoSaveCheckBox;
     }
 }

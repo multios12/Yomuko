@@ -5,7 +5,6 @@
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
-    using System.Windows.Shell;
     using Forms.Main;
     using Forms.ShelfSelect;
     using Forms.Viewer;
@@ -93,7 +92,7 @@
                     using (var form = new ShelfSelectForm())
                     {
                         result = form.ShowDialog();
-                        filePath = form.FilePath;
+                        filePath = form.ShelfPath;
                     }
                 }
                 else
@@ -122,11 +121,11 @@
         /// <param name="filePath">ファイルパス</param>
         private static void AddJumpList(string filePath)
         {
-            JumpList list = new JumpList()
-            {
-                ShowRecentCategory = true
-            };
-            JumpList.AddToRecentCategory(filePath);
+            // JumpList list = new JumpList()
+            // {
+            //     ShowRecentCategory = true
+            // };
+            // JumpList.AddToRecentCategory(filePath);
         }
     }
 }

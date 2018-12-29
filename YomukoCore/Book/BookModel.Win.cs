@@ -4,7 +4,7 @@
     using System.ComponentModel;
     using System.Diagnostics;
     using System.IO;
-    using Properties;
+    using YomukoCore.Properties;
     using Utils;
 
     /// <summary>
@@ -34,6 +34,10 @@
                 {
                     return this;
                 }
+
+                FileAttributes attributes = File.GetAttributes(this.FilePath);
+                attributes = attributes & ~FileAttributes.ReadOnly;
+                File.SetAttributes(this.FilePath, attributes);
 
                 File.Delete(this.FilePath);
             }
@@ -77,6 +81,7 @@
                     distFilePath = Path.GetFileNameWithoutExtension(distFilePath) + DateTime.Now.ToString("yyyyMMdd") +
                         Path.GetRandomFileName();
                     distFilePath += Path.GetExtension(this.FilePath);
+                    distFilePath = Path.Combine(distPath, distFilePath);
                 }
 
                 File.Move(this.FilePath, distFilePath);

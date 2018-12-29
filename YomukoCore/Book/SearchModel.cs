@@ -12,9 +12,7 @@
         /// <summary>「全て対象」を表す値</summary>
         public const string ALL = "*";
 
-        /// <summary>
-        /// コンストラクタ
-        /// </summary>
+        /// <summary>コンストラクタ</summary>
         /// <param name="fieldType">種類</param>
         /// <param name="value">値</param>
         public SearchModel(FieldType fieldType, string value)
@@ -22,6 +20,17 @@
             this.FieldType = fieldType;
             this.Value = value;
         }
+
+        /// <summary>コンストラクタ</summary>
+        /// <param name="isDuplicate">重複をチェックする場合true</param>
+        public SearchModel(bool isDuplicate)
+        {
+            this.FieldType = FieldType.Title;
+            this.IsDuplicate = isDuplicate;
+        }
+
+        /// <summary>重複をチェックする場合、true</summary>
+        public bool IsDuplicate { get; set; }
 
         /// <summary>種類</summary>
         public FieldType FieldType { get; set; }

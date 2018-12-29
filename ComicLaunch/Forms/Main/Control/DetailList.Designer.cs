@@ -77,6 +77,7 @@
             this.SearchWriterMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ImageList1 = new System.Windows.Forms.ImageList(this.components);
             this.CoverPaintTimer = new System.Windows.Forms.Timer(this.components);
+            this.DuplicateButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.spcMain)).BeginInit();
             this.spcMain.Panel1.SuspendLayout();
             this.spcMain.Panel2.SuspendLayout();
@@ -96,6 +97,7 @@
             // 
             // spcMain.Panel1
             // 
+            this.spcMain.Panel1.Controls.Add(this.DuplicateButton);
             this.spcMain.Panel1.Controls.Add(this.BookmarkButton);
             this.spcMain.Panel1.Controls.Add(this.FavoriteButton);
             this.spcMain.Panel1.Controls.Add(this.ReturnButton);
@@ -379,7 +381,7 @@
             this.ToolStripSeparator3,
             this.SearchToolStripMenuItem});
             this.DetailMenuStrip.Name = "cmsDetail";
-            this.DetailMenuStrip.Size = new System.Drawing.Size(177, 242);
+            this.DetailMenuStrip.Size = new System.Drawing.Size(177, 220);
             // 
             // smiProperty
             // 
@@ -439,7 +441,7 @@
             // DummyItemToolStripMenuItem
             // 
             this.DummyItemToolStripMenuItem.Name = "DummyItemToolStripMenuItem";
-            this.DummyItemToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.DummyItemToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.DummyItemToolStripMenuItem.Text = "(dummyItem)";
             // 
             // BookToShelfMenuItem
@@ -494,6 +496,17 @@
             // 
             this.CoverPaintTimer.Interval = 200;
             this.CoverPaintTimer.Tick += new System.EventHandler(this.CoverPaintTimer_Tick);
+            // 
+            // DuplicateButton
+            // 
+            this.DuplicateButton.Location = new System.Drawing.Point(362, 1);
+            this.DuplicateButton.Name = "DuplicateButton";
+            this.DuplicateButton.Size = new System.Drawing.Size(75, 23);
+            this.DuplicateButton.TabIndex = 4;
+            this.DuplicateButton.TabStop = false;
+            this.DuplicateButton.Text = "重複ファイル";
+            this.DuplicateButton.UseVisualStyleBackColor = true;
+            this.DuplicateButton.Click += new System.EventHandler(this.DuplicateButton_Click);
             // 
             // DetailList
             // 
@@ -560,5 +573,6 @@
         System.Windows.Forms.ToolStripSeparator ToolStripSeparator5;
         System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem BookToShelfMenuItem;
+        private System.Windows.Forms.Button DuplicateButton;
     }
 }

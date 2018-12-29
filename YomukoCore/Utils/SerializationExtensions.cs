@@ -3,8 +3,8 @@
     using System;
     using System.Diagnostics;
     using System.IO;
-    using System.IO.MemoryMappedFiles;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.Runtime.Serialization.Json;
     using System.Xml.Serialization;
 
     /// <summary>
@@ -12,6 +12,69 @@
     /// </summary>
     public static class SerializationExtensions
     {
+        #region json
+
+        /// <summary>
+        /// JSONから読み込んだ情報をオブジェクトに展開（デシリアライズ）します。
+        /// </summary>
+        /// <typeparam name="T">オブジェクトの型（シリアライズ属性が必要です。）</typeparam>
+        /// <param name="target">処理対象オブジェクト</param>
+        /// <param name="filePath">ファイルパス</param>
+        /// <returns>読み込んだ情報が設定されたオブジェクト</returns>
+        public static T ReadJson<T>(this T target, string filePath)
+        {
+            Type targetType = typeof(T);
+
+            if (File.Exists(filePath) == false)
+            {
+                return (T)Activator.CreateInstance(targetType);
+            }
+
+            try
+            {
+                using (FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                {
+                    var serializer = new DataContractJsonSerializer(targetType);
+                    return (T)serializer.ReadObject(stream);
+                }
+            }
+            catch (Exception ex)
+            {
+                // エラー情報を出力
+                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.StackTrace);
+
+                return (T)Activator.CreateInstance(targetType);
+            }
+        }
+
+        /// <summary>
+        /// オブジェクトの内容をJsonに書き込む
+        /// </summary>
+        /// <typeparam name="T">オブジェクトの型（シリアライズ属性が必要です。）</typeparam>
+        /// <param name="target">処理対象オブジェクト</param>
+        /// <param name="filePath">ファイルパス</param>
+        public static void WriteJson<T>(this T target, string filePath)
+        {
+            try
+            {
+                using (FileStream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
+                {
+                    var serializer = new DataContractJsonSerializer(target.GetType());
+                    serializer.WriteObject(stream, target);
+                }
+            }
+            catch (Exception ex)
+            {
+                // エラー情報を出力
+                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.StackTrace);
+            }
+        }
+        #endregion
+
+        #region XML
+
         /// <summary>
         /// XMLから読み込んだ情報をオブジェクトに展開（デシリアライズ）します。
         /// </summary>
@@ -53,7 +116,7 @@
         /// <param name="target">処理対象オブジェクト</param>
         /// <param name="stream">メモリストリーム</param>
         /// <returns>XMLから読み込んだ情報が設定されたオブジェクト</returns>
-        public static T ReadStream<T>(this T target, Stream stream)
+        public static T ReadXML<T>(this T target, Stream stream)
         {
             Type targetType = typeof(T);
 
@@ -101,7 +164,7 @@
         /// <typeparam name="T">オブジェクトの型（シリアライズ属性が必要です。）</typeparam>
         /// <param name="target">処理対象オブジェクト</param>
         /// <param name="stream">メモリストリーム</param>
-        public static void WriteStream<T>(T target, ref Stream stream)
+        public static void WriteXML<T>(T target, ref Stream stream)
         {
             try
             {
@@ -122,7 +185,7 @@
         /// <typeparam name="T">オブジェクトの型（シリアライズ属性が必要です。）</typeparam>
         /// <param name="target">処理対象オブジェクト</param>
         /// <returns>オブジェクトの内容が書き込まれたメモリストリーム</returns>
-        public static MemoryStream WriteStream<T>(this T target)
+        public static MemoryStream WriteXML<T>(this T target)
         {
             var stream = new MemoryStream();
 
@@ -142,6 +205,8 @@
             return stream;
         }
 
+        #endregion
+
         /// <summary>
         /// オブジェクトをディープコピーします。
         /// </summary>
@@ -150,23 +215,46 @@
         /// <returns>ディープコピーされたオブジェクト</returns>
         public static T DeepCopy<T>(this T target)
         {
-            T result = default(T);
-            var b = new BinaryFormatter();
-            var mem = new MemoryStream();
+    //        Dim result As T
 
-            try
+    //Try
+    //    Dim serializer As New System.Runtime.Serialization.DataContractSerializer(GetType(T))
+
+    //    Using mem As New System.IO.MemoryStream()
+
+    //        serializer.WriteObject(mem, target)
+
+    //        mem.Position = 0
+
+    //        result = CType(serializer.ReadObject(mem), T)
+
+    //    End Using
+
+    //Catch ex As Exception
+
+    //    Throw
+    //End Try
+    //Return result
+
+
+            T result = default(T);
+            // var b = new BinaryFormatter();
+            var serializer = new DataContractJsonSerializer(typeof (T));
+
+          
+            using(var mem = new MemoryStream())
             {
-                b.Serialize(mem, target);
-                mem.Position = 0;
-                result = (T)b.Deserialize(mem);
-            }
-            catch (Exception e)
-            {
-                Debug.Print(e.StackTrace);
-            }
-            finally
-            {
-                mem.Close();
+                try
+                {
+                    serializer.WriteObject(mem, target);
+                    mem.Position = 0;
+                    result = (T) serializer.ReadObject(mem);
+                }
+                catch (Exception e)
+                {
+                    Debug.Print(e.StackTrace);
+                }
+
             }
 
             return result;

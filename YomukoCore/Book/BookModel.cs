@@ -4,15 +4,15 @@
     using System.ComponentModel;
     using System.IO;
     using System.Reflection;
+    using System.Runtime.Serialization;
     using System.Text;
     using System.Text.RegularExpressions;
-    using System.Windows.Forms;
     using System.Xml.Serialization;
 
     /// <summary>
     ///  書籍情報モデル
     /// </summary>
-    [Serializable]
+    [DataContract]
     public partial class BookModel : INotifyPropertyChanged
     {
         /// <summary>コンストラクタ</summary>
@@ -158,102 +158,102 @@
 
         /// <summary>ファイルパス</summary>
         [Label("ファイルパス")]
-        [XmlAttribute]
+        [DataMember(EmitDefaultValue = false)]
         public string FilePath { get; set; }
 
         /// <summary>タイトル</summary>
         [Label("タイトル")]
-        [XmlAttribute]
+        [DataMember(EmitDefaultValue = false)]
         public string Title { get; set; }
 
         /// <summary>巻数</summary>
         [Label("巻数")]
-        [XmlAttribute]
+        [DataMember(EmitDefaultValue = false)]
         public string No { get; set; }
 
         /// <summary>著者</summary>
         [Label("著者")]
-        [XmlAttribute]
+        [DataMember(EmitDefaultValue = false)]
         public string Writer { get; set; }
 
         /// <summary>出版社</summary>
         [Label("出版社")]
-        [XmlAttribute]
+        [DataMember(EmitDefaultValue = false)]
         public string PublishingCompany { get; set; }
 
         /// <summary>ジャンル</summary>
         [Label("ジャンル")]
-        [XmlAttribute]
+        [DataMember(EmitDefaultValue = false)]
         public string Junle { get; set; }
 
         /// <summary>リリース日</summary>
         [Label("リリース日")]
-        [XmlAttribute]
+        [DataMember(EmitDefaultValue = false)]
         public string ReleaseDate { get; set; }
 
         /// <summary>お気に入り</summary>
         [Label("お気に入り")]
-        [XmlAttribute]
+        [DataMember(EmitDefaultValue = false)]
         public bool Favorite { get; set; }
 
         /// <summary>備考</summary>
         [Label("備考")]
-        [XmlAttribute]
+        [DataMember]
         public string Memo { get; set; }
 
         /// <summary>追加日</summary>
         [Label("追加日")]
-        [XmlAttribute]
+        [DataMember(EmitDefaultValue = false)]
         public string CreateDate { get; set; }
 
         /// <summary>更新日</summary>
         [Label("更新日")]
-        [XmlAttribute]
+        [DataMember(EmitDefaultValue = false)]
         public string UpdateDate { get; set; }
 
         /// <summary>ハッシュ</summary>
         [Label("ハッシュ")]
-        [XmlAttribute]
+        [DataMember]
         public string Hash { get; set; }
 
         /// <summary>種類</summary>
         [Label("種類")]
-        [XmlAttribute]
+        [DataMember(EmitDefaultValue = false)]
         public string Type { get; set; }
 
         /// <summary>撮影者</summary>
         [Label("撮影者")]
-        [XmlAttribute]
+        [DataMember(EmitDefaultValue = false)]
         public string Photographer { get; set; }
 
         /// <summary>掲載誌</summary>
         [Label("掲載誌")]
-        [XmlAttribute]
+        [DataMember(EmitDefaultValue = false)]
         public string CarryMagazine { get; set; }
 
         /// <summary>サブタイトル</summary>
         [Label("サブタイトル")]
-        [XmlAttribute]
+        [DataMember(EmitDefaultValue = false)]
         public string SubTitle { get; set; }
 
         /// <summary>表紙ファイルインデックス</summary>
         [Label("表紙ファイルインデックス")]
-        [XmlAttribute]
+        [DataMember(EmitDefaultValue = false)]
         public int CoverFileIndex { get; set; }
 
         /// <summary>表紙表示幅</summary>
         [Label("表紙表示幅")]
-        [XmlAttribute]
+        [DataMember(EmitDefaultValue = false)]
         public int CoverWidth { get; set; }
 
         /// <summary>表紙表示位置横方向</summary>
         [Label("表紙表示位置横方向")]
-        [XmlAttribute]
+        [DataMember(EmitDefaultValue = false)]
         public int CoverLeft { get; set; }
 
         /// <summary>完結</summary>
         [Label("完結")]
-        [XmlAttribute]
+        [DataMember(EmitDefaultValue = false)]
         public bool IsComplete { get; set; }
 
         /// <summary>タイトル（まとめ表示）</summary>

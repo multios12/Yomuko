@@ -6,8 +6,6 @@
     using System.Windows.Forms;
     using System.Xml;
     using ComicLaunch.Shelf;
-    using ComicLaunch.Utils;
-    using Microsoft.WindowsAPICodePack.Dialogs;
 
     /// <summary>
     /// ファイル選択フォーム
@@ -23,7 +21,7 @@
         }
 
         /// <summary>ファイルパス</summary>
-        public string FilePath { get; set; }
+        public string ShelfPath { get; set; }
 
         #region イベントプロシージャ
 
@@ -32,20 +30,16 @@
         /// <param name="e">イベント情報</param>
         private void CreateButton_Click(object sender, EventArgs e)
         {
-            using (var dialog = new CommonOpenFileDialog())
+            using (var dialog = new FolderBrowserDialog())
             {
-                dialog.Title = "フォルダを指定してください";
-
-                // フォルダーを開く設定に
-                dialog.IsFolderPicker = true;
+                dialog.Description = "フォルダを指定してください";
 
                 // 読み取り専用フォルダ/コントロールパネルは開かない
-                dialog.EnsureReadOnly = false;
-                dialog.AllowNonFileSystemItems = false;
-                if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+                // dialog.EnsureReadOnly = false;
+                // dialog.AllowNonFileSystemItems = false;
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    string filePath = Path.Combine(dialog.FileName, ".yomukodb");
-                    Properties.Settings.Default.Shelfs.Add(filePath);
+                    Properties.Settings.Default.Shelfs.Add(dialog.SelectedPath);
 
                     this.ShowBooksList();
                 }
@@ -80,17 +74,8 @@
         {
             if (this.SelectListView.SelectedItems.Count != 0)
             {
-                this.FilePath = this.SelectListView.SelectedItems[0].SubItems[1].Text;
-
-                if (!File.Exists(this.FilePath))
-                {
-                    var shelf = new ShelfModel().ReadXML(this.FilePath);
-                    shelf.FilePath = this.FilePath;
-                    shelf.Title = "新しい本棚";
-                    shelf.Initialize();
-                    shelf.BaseFolderPaths.Add(Path.GetDirectoryName(this.FilePath));
-                    shelf.WriteXML(this.FilePath);
-                }
+                var shelf = new ShelfModel().ReadJson(this.SelectListView.SelectedItems[0].SubItems[1].Text);
+                this.ShelfPath = shelf.FilePath;
 
                 this.DialogResult = DialogResult.OK;
                 this.Hide();
@@ -119,6 +104,8 @@
             {
                 this.ShowBooksList();
             }
+
+            Properties.Settings.Default.Save();
         }
 
         /// <summary>ラベル編集完了イベント</summary>
@@ -137,9 +124,9 @@
                 var target = (ListView)sender;
 
                 var filePath = target.Items[e.Item].SubItems[1].Text;
-                var shelf = new ShelfModel().ReadXML(filePath);
+                var shelf = new ShelfModel().ReadJson(filePath);
                 shelf.Title = e.Label;
-                shelf.WriteXML(filePath);
+                shelf.WriteJson();
                 this.ShowBooksList();
             }
             catch

@@ -63,6 +63,11 @@
                     continue;
                 }
 
+                if (item.FieldType == FieldType.Type && !String.IsNullOrWhiteSpace(model.Junle))
+                {
+                    value = value + "・" + model.Junle;
+                }
+
                 foreach (char c in Path.GetInvalidFileNameChars())
                 {
                     value = value.Replace(c.ToString(), string.Empty);

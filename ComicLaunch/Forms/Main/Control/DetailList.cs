@@ -31,6 +31,10 @@
         /// <summary>直前に選択したファイル名変更インデックス</summary>
         private int selectChangeSelectedIndex;
 
+        private FieldType fieldType;
+        private string search;
+        private string value;
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -137,6 +141,7 @@
         {
             var invoker = (MethodInvoker)delegate
             {
+                Debug.Print("DetailList:PropertyChanged発生");
                 if (e.PropertyName == nameof(BookList.SearchedItems))
                 {
                     this.RefreshDetailList();
@@ -156,6 +161,15 @@
         private void FavoriteButton_Click(object sender, EventArgs e)
         {
             this.books.RefreshSearchCriterias(new SearchModel(FieldType.Favorite, "true"));
+            this.RefreshDetailList();
+        }
+
+        /// <summary>重複ボタン クリックイベント</summary>
+        /// <param name="sender">発生元オブジェクト</param>
+        /// <param name="e">イベント情報</param>
+        private void DuplicateButton_Click(object sender, EventArgs e)
+        {
+            this.books.RefreshSearchCriterias(new SearchModel(true));
             this.RefreshDetailList();
         }
 
@@ -455,7 +469,25 @@
                 case Keys.F2: // プロパティを開く
                     this.PropertyMenuItem_Click(null, null);
                     break;
-                case Keys.F3: // 名前を変更する
+                case Keys.F3: // 一括変更
+                    this.AllPropertyChangeMenuItem_Click(null, null);
+                    break;
+                case Keys.F4: // 一括変更再実行
+                    var models = (BookList)new BookList();
+                    this.GetSelectedBooks().ToList().ForEach(b => models.Add(b));
+
+                    models.ReplaceValue(this.fieldType, this.search, this.value);
+
+                    if (Settings.Default.IsAutoSave)
+                    {
+                        foreach (var model in models)
+                        {
+                            this.Shelf.FileNames.ChangeFileName(model);
+                        }
+                    }
+
+                    break;
+                case Keys.F5: // 名前を変更する
                     this.BookChangeFileNameMenuItem_Click(null, null);
                     break;
                 case Keys.Delete: // 削除
@@ -487,7 +519,7 @@
             }
 
             // プロパティ画面の表示
-            using (var dialog = new PropertyDialog() { Book = model })
+            using (var dialog = new PropertyDialog() { Book = model, Shelf = this.Shelf })
             {
                 if (dialog.ShowDialog(this) == DialogResult.OK)
                 {
@@ -505,7 +537,7 @@
             // ダイアログ表示
             var models = (BookList)new BookList();
             this.GetSelectedBooks().ToList().ForEach(b => models.Add(b));
-            using (var form = new SelectChangeForm() { Models = models })
+            using (var form = new SelectChangeForm() { Models = models, Shelf = this.Shelf })
             {
                 form.FieldTypeComboBox.SelectedIndex = this.selectChangeSelectedIndex;
 
@@ -611,7 +643,6 @@
                 return;
             }
 
-            // models = models.Select(m => m.FileDelete());
             this.books.SearchedItems.RemoveRange(this.GetSelectedBooks());
 
             var eventArgs = new ItemEventArgs<IEnumerable<BookModel>>(models);
@@ -629,11 +660,9 @@
 
             item.DropDownItems.Clear();
 
-            foreach (string filePath in this.Shelf.BaseFolderPaths.Where(b => Directory.Exists(b)))
-            {
-                item.DropDownItems.Add(filePath);
-                Directory.GetDirectories(filePath).ToList().ForEach(folder => item.DropDownItems.Add(folder));
-            }
+            string filePath = Path.GetDirectoryName(this.Shelf.FilePath);
+            item.DropDownItems.Add(filePath);
+            Directory.GetDirectories(filePath).ToList().ForEach(folder => item.DropDownItems.Add(folder));
         }
 
         /// <summary>置き換えメニューアイテム クリックイベント</summary>

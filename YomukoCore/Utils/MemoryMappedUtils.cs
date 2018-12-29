@@ -30,7 +30,7 @@
                         Stream s = stream;
                         List<string> target = new List<string>();
 
-                        return target.ReadStream(s);
+                        return target.ReadXML(s);
                     }
                 }
                 finally

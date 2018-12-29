@@ -11,8 +11,7 @@
     /// <summary>
     /// 情報リスト
     /// </summary>
-    [Serializable]
-    public partial class BookList : ObservableCollection<BookModel>
+    public partial class BookList : List<BookModel>
     {
         /// <summary>TIDカウンタ変数</summary>
         private long bookIDGen;
@@ -162,10 +161,10 @@
         #region ベースフォルダ同期処理
 
         /// <summary>ベースフォルダが指定されている場合、ベースフォルダを検索し、登録されていないデータを新たに登録します</summary>
-        /// <param name="baseFolders">ベースフォルダリスト</param>
+        /// <param name="baseFolderPath">ベースフォルダリスト</param>
         /// <param name="duplicateFolderPath">フォルダパス</param>
         /// <exception cref="DirectoryNotFoundException">ベースフォルダが存在しない。または指定されていない</exception>
-        public void SyncBaseFolder(List<string> baseFolders, string duplicateFolderPath)
+        public void SyncBaseFolder(string baseFolderPath, string duplicateFolderPath)
         {
             Console.WriteLine("■同期開始");
 
@@ -175,8 +174,7 @@
             var syncPaths = new HashSet<string>(this.Select(b => b.FilePath).OrderBy(v => v));
 
             // ファイルの検索と存在確認
-            IEnumerable<string> files = baseFolders
-                .SelectMany(f => this.GetAllFiles(f, "*"))
+            IEnumerable<string> files = this.GetAllFiles(baseFolderPath, "*")
                 .Where(f => !syncPaths.Contains(f));
 
             int progressIndex = 0;

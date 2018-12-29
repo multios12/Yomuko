@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{33CBCA72-F32F-4914-BA46-E10B572BFDCC}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Sync</RootNamespace>
-    <AssemblyName>Sync</AssemblyName>
+    <RootNamespace>ShelfSync</RootNamespace>
+    <AssemblyName>ShelfSync</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -34,12 +34,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -52,6 +48,10 @@
     <ProjectReference Include="..\ComicLaunch\Yomuko.csproj">
       <Project>{95d07374-2a31-48da-8f25-c8ce18dc89df}</Project>
       <Name>Yomuko</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YomukoCore\YomukoCore.csproj">
+      <Project>{3be96cac-88d7-4fd8-90a5-af98a4b95fc6}</Project>
+      <Name>YomukoCore</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
