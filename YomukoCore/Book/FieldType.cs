@@ -1,4 +1,4 @@
-﻿namespace ComicLaunch.Book
+﻿namespace Yomuko.Book
 {
     /// <summary>書籍情報項目</summary>
     public enum FieldType

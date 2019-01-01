@@ -1,4 +1,4 @@
-﻿namespace ComicLaunch.Utils
+﻿namespace Yomuko.Utils
 {
     using System.Collections.Generic;
     using System.IO;

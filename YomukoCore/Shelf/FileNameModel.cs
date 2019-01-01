@@ -1,9 +1,9 @@
-﻿namespace ComicLaunch.Shelf
+﻿namespace Yomuko.Shelf
 {
     using System;
     using System.Runtime.Serialization;
     using System.Xml.Serialization;
-    using ComicLaunch.Book;
+    using Yomuko.Book;
 
     /// <summary>ファイル名生成定義構造体</summary>
     [DataContract]

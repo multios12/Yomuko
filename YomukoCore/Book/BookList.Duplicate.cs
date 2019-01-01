@@ -1,4 +1,4 @@
-﻿namespace ComicLaunch.Book
+﻿namespace Yomuko.Book
 {
     using System;
     using System.Collections.Generic;

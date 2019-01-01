@@ -1,4 +1,4 @@
-﻿namespace ComicLaunch.Utils
+﻿namespace Yomuko.Utils
 {
     /// <summary>文字列拡張クラス</summary>
     public static class StringExtensions

@@ -1,4 +1,4 @@
-﻿namespace ComicLaunch.Book
+﻿namespace Yomuko.Book
 {
     /// <summary>書籍解析結果</summary>
     public enum AnalyzeResult

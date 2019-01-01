@@ -1,4 +1,4 @@
-﻿namespace ComicLaunch.Shelf
+﻿namespace Yomuko.Shelf
 {
     using System;
     using System.Runtime.Serialization;

@@ -12,7 +12,7 @@
  * http://code.google.com/p/kanaxs/
 */
 
-namespace ComicLaunch.Utils
+namespace Yomuko.Utils
 {
     using System;
 

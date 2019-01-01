@@ -1,4 +1,4 @@
-﻿namespace ComicLaunch.Book
+﻿namespace Yomuko.Book
 {
     /// <summary>
     /// 同期状態イベントデータ

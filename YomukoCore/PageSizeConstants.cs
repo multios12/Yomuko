@@ -1,4 +1,4 @@
-﻿namespace ComicLaunch.Image
+﻿namespace Yomuko.Image
 {
     /// <summary>ページサイズ設定列挙型</summary>
     public enum PageSizeConstants

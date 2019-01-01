@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<ArrayOfBookModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <BookModel FilePath="C:\temp\testData.zip" Title="testData" Favorite="false" CreateDate="2016/07/05 22:04:29" UpdateDate="2016/07/05 22:04:29" Hash="3d285ffbb5a690602a8117956b255955" CoverFileIndex="0" CoverWidth="0" CoverLeft="0" IsComplete="false" />
-  <BookModel FilePath="C:\temp\testData1.zip" Title="testData" Favorite="true" CreateDate="2016/07/05 22:04:29" UpdateDate="2016/07/05 22:04:29" Hash="3d285ffbb5a690602a8117956b255955" CoverFileIndex="0" CoverWidth="0" CoverLeft="0" IsComplete="false" />
-  <BookModel FilePath="C:\temp\testData2.zip" Title="testData" Favorite="true" CreateDate="2016/07/05 22:04:29" UpdateDate="2016/07/05 22:04:29" Hash="3d285ffbb5a690602a8117956b255955" CoverFileIndex="0" CoverWidth="0" CoverLeft="0" IsComplete="false" />
-  <BookModel FilePath="C:\temp\rtx\testData3.zip" Title="testData" Favorite="false" CreateDate="2016/07/05 22:04:29" UpdateDate="2016/07/05 22:04:29" Hash="3d285ffbb5a690602a8117956b255955" CoverFileIndex="0" CoverWidth="0" CoverLeft="0" IsComplete="false" />
-</ArrayOfBookModel>

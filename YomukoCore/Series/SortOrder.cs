@@ -1,4 +1,4 @@
-﻿namespace ComicLaunch.Series
+﻿namespace Yomuko.Series
 {
     public enum SortOrder
     {

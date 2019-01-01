@@ -1,4 +1,4 @@
-﻿namespace ComicLaunch.Duplicate
+﻿namespace Yomuko.Duplicate
 {
     using System.Collections.Generic;
     using System.Linq;

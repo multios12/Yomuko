@@ -1,12 +1,12 @@
-﻿namespace ComicLaunch.Shelf
+﻿namespace Yomuko.Shelf
 {
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Runtime.Serialization;
     using Book;
-    using ComicLaunch.Utils;
-    using ComicLaunch.Image;
+    using Yomuko.Utils;
+    using Yomuko.Image;
 
     /// <summary>
     /// 本棚モデル
