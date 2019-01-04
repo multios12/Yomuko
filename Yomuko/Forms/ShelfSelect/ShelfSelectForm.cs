@@ -2,6 +2,8 @@
 {
     using System;
     using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
     using System.Windows.Forms;
     using System.Xml;
     using Yomuko.Shelf;
@@ -32,6 +34,11 @@
             using (var dialog = new FolderBrowserDialog())
             {
                 dialog.Description = "フォルダを指定してください";
+
+                if (Properties.Settings.Default.Shelfs == null)
+                {
+                    Properties.Settings.Default.Shelfs = new System.Collections.Specialized.StringCollection();
+                }
 
                 // 読み取り専用フォルダ/コントロールパネルは開かない
                 // dialog.EnsureReadOnly = false;
@@ -173,6 +180,37 @@
 
                 this.SelectListView.Items.Add(title).SubItems.Add(filePath);
             }
+        }
+
+        private void SelectListView_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+
+                if (files.Where(f => Directory.Exists(f)).Count() > 0)
+                {
+                    e.Effect = DragDropEffects.Link;
+                    return;
+                }
+            }
+
+            e.Effect = DragDropEffects.None;
+        }
+
+        private void SelectListView_DragDrop(object sender, DragEventArgs e)
+        {
+            if (Properties.Settings.Default.Shelfs == null)
+            {
+                Properties.Settings.Default.Shelfs = new System.Collections.Specialized.StringCollection();
+            }
+
+            foreach (var f in (string[])e.Data.GetData(DataFormats.FileDrop, false))
+            {
+                Properties.Settings.Default.Shelfs.Add(f);
+            }
+
+            this.ShowBooksList();
         }
     }
 }

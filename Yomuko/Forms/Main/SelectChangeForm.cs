@@ -3,8 +3,8 @@
     using System;
     using System.Windows.Forms;
     using Book;
-    using Yomuko.Shelf;
     using Properties;
+    using Shelf;
 
     /// <summary>
     /// 値変更フォーム

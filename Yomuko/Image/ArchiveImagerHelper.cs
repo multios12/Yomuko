@@ -42,9 +42,11 @@
         /// <param name="filePath">ファイルパス</param>
         /// <param name="entryName">エントリ名</param>
         /// <returns>ストリーム</returns>
-        public static Stream GetStream(string filePath, string entryName)
+        public static Stream GetStream(string filePath, int entryName)
         {
-            var info = new ProcessStartInfo("ArchiveImager.exe", "\"" + filePath + "\" \"" + entryName + "\"")
+            var args = "\"" + filePath + "\" \"" + entryName + "\"";
+            Debug.WriteLine("args={0}", args);
+            var info = new ProcessStartInfo("ArchiveImager.exe", args)
             {
                 CreateNoWindow = true,
                 UseShellExecute = false,

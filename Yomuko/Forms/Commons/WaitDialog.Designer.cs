@@ -43,22 +43,22 @@
             // noButton
             // 
             this.noButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.noButton.Location = new System.Drawing.Point(176, 120);
+            this.noButton.Location = new System.Drawing.Point(163, 120);
             this.noButton.Name = "noButton";
-            this.noButton.Size = new System.Drawing.Size(88, 23);
+            this.noButton.Size = new System.Drawing.Size(138, 28);
             this.noButton.TabIndex = 9;
             this.noButton.Text = "キャンセル";
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(16, 88);
+            this.progressBar.Location = new System.Drawing.Point(28, 88);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(408, 23);
             this.progressBar.TabIndex = 8;
             // 
             // progressLabel
             // 
-            this.progressLabel.Location = new System.Drawing.Point(16, 64);
+            this.progressLabel.Location = new System.Drawing.Point(28, 64);
             this.progressLabel.Name = "progressLabel";
             this.progressLabel.Size = new System.Drawing.Size(408, 16);
             this.progressLabel.TabIndex = 7;
@@ -67,7 +67,7 @@
             // 
             // detailMessageLabel
             // 
-            this.detailMessageLabel.Location = new System.Drawing.Point(16, 40);
+            this.detailMessageLabel.Location = new System.Drawing.Point(28, 40);
             this.detailMessageLabel.Name = "detailMessageLabel";
             this.detailMessageLabel.Size = new System.Drawing.Size(408, 16);
             this.detailMessageLabel.TabIndex = 6;
@@ -76,7 +76,7 @@
             // 
             // mainMessageLabel
             // 
-            this.mainMessageLabel.Location = new System.Drawing.Point(16, 16);
+            this.mainMessageLabel.Location = new System.Drawing.Point(28, 16);
             this.mainMessageLabel.Name = "mainMessageLabel";
             this.mainMessageLabel.Size = new System.Drawing.Size(408, 16);
             this.mainMessageLabel.TabIndex = 5;

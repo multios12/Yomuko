@@ -38,6 +38,7 @@
 
             if (args.Count() == 0)
             {
+                Console.WriteLine(args);
                 ShowList(args);
                 return;
             }

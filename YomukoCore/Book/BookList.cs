@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.IO;
@@ -22,7 +21,7 @@
         #region イベント
 
         /// <summary>プロパティ変更イベント</summary>
-        public new event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>同期状態変更イベント</summary>
         public event EventHandler<SyncStatusEventArgs> SyncStatusChanged;
@@ -320,7 +319,7 @@
         /// プロパティ変更イベントを実行します。
         /// </summary>
         /// <param name="e">イベントデータ</param>
-        private new void OnPropertyChanged(PropertyChangedEventArgs e)
+        private void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             Debug.Print("[{0}]{1}", DateTime.Now.ToString("HH:mm:ss"), "BookList.OnPropertyChanged");
 

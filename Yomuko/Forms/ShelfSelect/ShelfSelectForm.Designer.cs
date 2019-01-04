@@ -39,6 +39,7 @@
             // 
             // SelectListView
             // 
+            this.SelectListView.AllowDrop = true;
             this.SelectListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -58,6 +59,8 @@
             this.SelectListView.UseCompatibleStateImageBehavior = false;
             this.SelectListView.View = System.Windows.Forms.View.Details;
             this.SelectListView.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.SelectListView_AfterLabelEdit);
+            this.SelectListView.DragDrop += new System.Windows.Forms.DragEventHandler(this.SelectListView_DragDrop);
+            this.SelectListView.DragEnter += new System.Windows.Forms.DragEventHandler(this.SelectListView_DragEnter);
             this.SelectListView.DoubleClick += new System.EventHandler(this.SelectListView_DoubleClick);
             this.SelectListView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SelectListView_KeyDown);
             // 

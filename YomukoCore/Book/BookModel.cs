@@ -293,10 +293,6 @@
         [XmlIgnore]
         public bool IsDuplicate { get; set; }
 
-        /// <summary>あいまい検索用タイトルデータ </summary>
-        [XmlIgnore]
-        public string EliminateTitle { get; set; }
-
         /// <summary>エラーが発生した場合True</summary>
         [XmlIgnore]
         public bool IsError { get; set; }
@@ -308,6 +304,10 @@
         /// <summary>結果ステータス</summary>
         [XmlIgnore]
         public AnalyzeResult Status { get; set; }
+
+        /// <summary>あいまい検索用タイトルデータ </summary>
+        [XmlIgnore]
+        public string EliminateTitle { get; set; }
         #endregion
 
         /// <summary>指定された名前から、対応する書籍情報項目列挙型を返す</summary>

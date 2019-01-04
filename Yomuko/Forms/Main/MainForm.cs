@@ -399,7 +399,7 @@ namespace Yomuko.Forms.Main
         /// <param name="e">イベントデータ</param>
         private void DetailList_CoverImagePaint(object sender, ItemEventArgs<BookModel> e)
         {
-            if (File.Exists(e.Item.FilePath) == false)
+            if (e.Item == null || File.Exists(e.Item.FilePath) == false)
             {
                 this.picCover.Image = null;
                 return;
@@ -665,7 +665,7 @@ namespace Yomuko.Forms.Main
         private void ShowArchive(string filePath, int pageIndex = 0)
         {
             Process p = new Process();
-            p.StartInfo.FileName = "ComicLaunch.exe";
+            p.StartInfo.FileName = System.Reflection.Assembly.GetExecutingAssembly().Location;
             p.StartInfo.Arguments = string.Format(@"""{0}"" {1}", filePath, pageIndex);
 
             p.Start();

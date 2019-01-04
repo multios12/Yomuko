@@ -125,7 +125,7 @@
                 // 画像の取得
                 try
                 {
-                    var i = ArchiveImagerHelper.GetStream(this.filePath, this.entryNames[value]);
+                    var i = ArchiveImagerHelper.GetStream(this.filePath, value);
                     this.pictureBitmap = this.imageOperator.ResizeBitmap(i);
 
                     this.ScreenLeft = this.pictureBitmap.Width - this.DrawWidth;

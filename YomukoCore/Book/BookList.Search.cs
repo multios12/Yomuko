@@ -270,17 +270,14 @@
             BookModel[] list;
             if(this.searchCriticas.Count > 0 && this.searchCriticas[0].IsDuplicate)
             {
-                
+                this.CreateEliminateValue();
+
                 list = this.Where(b => this.Exists ((c)=>{
                     if (b.FilePath == c.FilePath || b.Writer != c.Writer)
                     {
                         return false;
                     }
-
-                    var bTitle = (b.GetValue(FieldType.Title, true) ?? string.Empty).Trim();
-                    var cTitle = (c.GetValue(FieldType.Title, true) ?? string.Empty).Trim();
-
-                    return bTitle == cTitle;
+                    return b.EliminateTitle == c.EliminateTitle;
                 })).ToArray();
             }
             else
