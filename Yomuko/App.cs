@@ -3,16 +3,17 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
     using System.Windows.Forms;
     using Forms.Main;
     using Forms.ShelfSelect;
     using Forms.Viewer;
+    using McMaster.Extensions.CommandLineUtils;
+    using Yomuko.Shelf;
 
     /// <summary>
     /// アプリケーションクラス
     /// </summary>
-    public static class App
+    public class App
     {
         /// <summary>オートコンプリート[種別]</summary>
         public static List<string> AutoCompleteTypes { get; set; } = new List<string>();
@@ -26,80 +27,92 @@
         /// <summary>オートコンプリート[出版社]</summary>
         public static List<string> AutoCompletePublishers { get; set; } = new List<string>();
 
-        /// <summary>
-        /// アプリケーションスタートアップポイント
-        /// </summary>
-        /// <param name="args">引数</param>
+        /// <summary>本棚フォルダパス</summary>
+        [Argument(0, "targetPath", "本棚フォルダパス")]
+        public string TargetPath { get; }
+
+        /// <summary>本棚フォルダパス</summary>
+        [Option("-s|--sync", "同期を実行する", CommandOptionType.NoValue)]
+        public bool IsSync { get; }
+
+        ///// <summary>プログラムのエントリポイント</summary>
+        ///// <param name="args">コマンドライン引数</param>
         [STAThread]
-        public static void Main(string[] args)
+        public static int Main(string[] args) => CommandLineApplication.Execute<App>(args);
+
+        /// <summary>実行イベント</summary>
+        /// <returns>戻り値</returns>
+        public int OnExecute()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            if (args.Count() == 0)
+            try
             {
-                Console.WriteLine(args);
-                ShowList(args);
-                return;
-            }
+                if (this.IsSync)
+                {
+                    ExecuteSync(this.TargetPath);
+                } else if (string.IsNullOrEmpty( this.TargetPath))
+                {
+                    ExecuteShowSelect();
+                }
+                else if (Directory.Exists(this.TargetPath))
+                {
+                    ExecuteShowList(this.TargetPath);
+                }
+                else
+                {
+                    ExecuteShowViewer(this.TargetPath);
+                }
 
-            if (Path.GetExtension(args[0]).ToLower() != ".bls")
-            {
-                ShowViewer(args);
+                return 0;
             }
-            else
+            catch (Exception ex)
             {
-                ShowList(args);
+                Console.Error.WriteLine($"error: {ex.Message}\r\n{ex.StackTrace}");
+                return -1;
             }
         }
 
-        /// <summary>
-        /// 表示します
-        /// </summary>
+        /// <summary>指定したパスを同期します</summary>
+        /// <param name="folderPath">ファイルパス</param>
+        public static void ExecuteSync(string folderPath)
+        {
+            var s = new ShelfModel();
+            s = s.ReadJson(folderPath);
+
+            s.Books.SyncBaseFolder(folderPath, s.DuplicateFolderPath);
+
+            s.WriteJson();
+       }
+
+        /// <summary>ビュアーを表示します</summary>
         /// <param name="args">引数</param>
-        public static void ShowViewer(string[] args)
+        public static void ExecuteShowViewer(string filePath)
         {
             int index = 0;
 
-            if (args.Count() >= 2)
-            {
-                int.TryParse(args[1], out index);
-            }
-
             var form = new ViewerForm();
-            bool result = form.pictureList1.ShowArchive(args[0], index);
+            bool result = form.pictureList1.ShowArchive(filePath, index);
 
             if (result)
             {
-                AddJumpList(args[0]);
+                AddJumpList(filePath);
                 Application.Run(form);
             }
         }
 
-        /// <summary>
-        /// 表示します
-        /// </summary>
-        /// <param name="args">引数</param>
-        public static void ShowList(string[] args)
+        public static void ExecuteShowSelect()
         {
+            string filePath;
             DialogResult result = DialogResult.Retry;
 
             while (result == DialogResult.Retry)
             {
-                // 選択フォームの表示
-                string filePath;
-                if (args.Count() == 0)
+                using (var form = new ShelfSelectForm())
                 {
-                    using (var form = new ShelfSelectForm())
-                    {
-                        result = form.ShowDialog();
-                        filePath = form.ShelfPath;
-                    }
-                }
-                else
-                {
-                    filePath = args[0];
-                    args = new string[] { };
+                    result = form.ShowDialog();
+                    filePath = form.ShelfPath;
                 }
 
                 if (result != DialogResult.OK)
@@ -108,6 +121,25 @@
                 }
 
                 // メインフォームの表示
+                using (MainForm form = new MainForm())
+                {
+                    AddJumpList(filePath);
+                    result = form.ShowDialog(filePath);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 表示します
+        /// </summary>
+        /// <param name="filePath">引数</param>
+        public static void ExecuteShowList(string filePath)
+        {
+            DialogResult result = DialogResult.Retry;
+
+            // メインフォームの表示
+            while (result == DialogResult.Retry)
+            {
                 using (MainForm form = new MainForm())
                 {
                     AddJumpList(filePath);

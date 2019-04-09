@@ -176,6 +176,11 @@
             IEnumerable<string> files = this.GetAllFiles(baseFolderPath, "*")
                 .Where(f => !syncPaths.Contains(f));
 
+            if (!Directory.Exists(duplicateFolderPath))
+            {
+                duplicateFolderPath = null;
+            }
+
             int progressIndex = 0;
             int count = files.Count();
             try
