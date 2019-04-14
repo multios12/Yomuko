@@ -11,7 +11,6 @@
  * shogo4405 <shogo4405 at gmail.com>
  * http://code.google.com/p/kanaxs/
 */
-
 namespace Yomuko.Utils
 {
     using System;

@@ -27,6 +27,10 @@
         [Label("ファイルは移動された")]
         FileMoved,
 
+        /// <summary>ファイルサイズ0</summary>
+        [Label("ファイルサイズ0")]
+        FileSizeZero,
+
         /// <summary>正常に追加された</summary>
         [Label("正常に追加された")]
         Success

@@ -52,7 +52,8 @@
                 if (this.IsSync)
                 {
                     ExecuteSync(this.TargetPath);
-                } else if (string.IsNullOrEmpty( this.TargetPath))
+                }
+                else if (string.IsNullOrEmpty(this.TargetPath))
                 {
                     ExecuteShowSelect();
                 }
@@ -87,7 +88,7 @@
        }
 
         /// <summary>ビュアーを表示します</summary>
-        /// <param name="args">引数</param>
+        /// <param name="filePath">引数</param>
         public static void ExecuteShowViewer(string filePath)
         {
             int index = 0;

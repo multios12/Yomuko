@@ -191,7 +191,7 @@
                     sw.Start();
                     BookModel model = this.AnalyzePath(filePath, syncPaths);
                     long em = sw.ElapsedMilliseconds;
-                    Console.WriteLine(em + ":" + LabelAttributeUtils.GetLabelName(model.Status) + ":" + filePath);
+                    Console.WriteLine($"{em}:{LabelAttributeUtils.GetLabelName(model.Status)}:{filePath}");
 
                     if (model.Status == AnalyzeResult.Duplicate && duplicateFolderPath != null)
                     {
@@ -204,7 +204,6 @@
                     }
 
                     var eventArgs = new SyncStatusEventArgs(filePath, progressIndex, count);
-
                     this.SyncStatusChanged?.Invoke(this, eventArgs);
 
                     if (eventArgs.Cancel)
@@ -251,8 +250,15 @@
 
             // パスに対するモデル取得
             var book = new BookModel(path);
-            string hash = book.Hash;
 
+            if (book.Status == AnalyzeResult.FileSizeZero)
+            {
+                // ファイルサイズがゼロの場合、ハッシュチェック処理を行わず終了する
+                return book;
+            }
+
+            // 同一ハッシュチェック
+            string hash = book.Hash;
             BookModel movedModel = this.Where(b => b.Hash == hash)
                 .FirstOrDefault();
 

@@ -302,7 +302,7 @@
             }
             else if (string.IsNullOrEmpty(series.LastNo) == false)
             {
-                listItem.SubItems.Add(series.LastNo + "巻 " + series.LastReleaseDate);
+                listItem.SubItems.Add($"{series.LastNo}巻 {series.LastReleaseDate}");
             }
             else
             {
@@ -437,7 +437,7 @@
         /// <summary>詳細リストビュー イベント</summary>
         /// <param name="sender">発生元オブジェクト</param>
         /// <param name="e">イベント情報</param>
-        private void DetailListView_DragEnter(object sender, System.Windows.Forms.DragEventArgs e)
+        private void DetailListView_DragEnter(object sender, DragEventArgs e)
         {
             // コントロール内にドラッグされたとき実行される
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
