@@ -236,7 +236,7 @@ namespace Yomuko.Forms.Main
 
             this.DetailList.Refresh();
 
-            Debug.Print("GroupListBox 選択値:{0}", this.GroupListBox.Text);
+            Debug.Print($"GroupListBox 選択値:{this.GroupListBox.Text}");
         }
 
         /// <summary>種別コンボボックス キーダウンイベント</summary>
@@ -303,7 +303,7 @@ namespace Yomuko.Forms.Main
             this.waitDialog.Invoke((MethodInvoker)delegate
                 {
                     this.waitDialog.SubMessage = string.Empty;
-                    this.waitDialog.ProgressMessage = string.Format("{0} / {1}", e.ProgressIndex, e.ProgressCount);
+                    this.waitDialog.ProgressMessage = $"{e.ProgressIndex + 1} / {e.ProgressCount}";
                     this.waitDialog.ProgressMax = e.ProgressCount;
                     this.waitDialog.ProgressValue = e.ProgressIndex;
                 });

@@ -31,8 +31,6 @@
 
             // ファイル解析
             string fileName = Path.GetFileNameWithoutExtension(filePath);
-            var re = new Regex(string.Empty);
-            Match ma;
 
             // ハッシュ取得
             // MD5ハッシュ値を計算する文字列
@@ -42,7 +40,13 @@
                 using (var fileStream = File.OpenRead(filePath))
                 {
                     // 文字列をbyte型配列に変換する
-                    fileStream.Read(fileData, 0, 10000);
+                    int size = fileStream.Read(fileData, 0, 10000);
+                    if (size == 0)
+                    {
+                        this.IsError = true;
+                        this.ErrorMessage = "ファイルサイズ0";
+                        this.Status = AnalyzeResult.FileSizeZero;
+                    }
                 }
             }
 
@@ -59,7 +63,7 @@
             this.Hash = result.ToString();
 
             // 日付の取得
-            re = new Regex(@"(\[|\(|)([0-9][0-9]|)[0-9][0-9]([\/,\-]|)[0-9][0-9]([\/,\-]|)[0-9][0-9](\]|\)|)");
+            var re = new Regex(@"(\[|\(|)([0-9][0-9]|)[0-9][0-9]([\/,\-]|)[0-9][0-9]([\/,\-]|)[0-9][0-9](\]|\)|)");
             if (re.IsMatch(fileName))
             {
                 string matchString;
@@ -71,8 +75,8 @@
                 matchString = matchString.Replace("(", string.Empty);
                 matchString = matchString.Replace(")", string.Empty);
 
-                matchString = matchString.Length == 6 ? "20" + matchString : matchString;
-                matchString = matchString.Substring(0, 4) + "/" + matchString.Substring(4, 2) + "/" + matchString.Substring(6, 2);
+                matchString = matchString.Length == 6 ? $"20{matchString}" : matchString;
+                matchString = $"{matchString.Substring(0, 4)}/{matchString.Substring(4, 2)}/{matchString.Substring(6, 2)}";
                 this.ReleaseDate = matchString;
                 fileName = fileName.Replace(re.Match(fileName).Value, string.Empty);
             }
@@ -95,7 +99,7 @@
             }
 
             // ジャンルの取得
-            ma = Regex.Match(fileName, @"\([^\)]*\)");
+            Match ma = Regex.Match(fileName, @"\([^\)]*\)");
             if (ma.Length > 0)
             {
                 this.Type = Regex.Match(ma.Value, @"[^)|\(]+").Value;
@@ -264,14 +268,14 @@
                 // タイトル（サブタイトルまとめ表示）
                 var bulder = new StringBuilder();
                 bulder.Append(this.Title);
-                if (string.IsNullOrEmpty(this.No) == false)
+                if (!string.IsNullOrEmpty(this.No))
                 {
                     bulder.Append(" 第");
                     bulder.Append(this.No);
                     bulder.Append("巻");
                 }
 
-                if (this.IsComplete == true)
+                if (this.IsComplete)
                 {
                     bulder.Append("(完結)");
                 }

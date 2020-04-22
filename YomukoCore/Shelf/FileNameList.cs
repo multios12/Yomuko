@@ -90,18 +90,16 @@
             tmpFileName = Path.Combine(Path.GetDirectoryName(model.FilePath), tmpFileName);
 
             // ファイル名置き換え
-            var fi = new FileInfo(model.FilePath);
-
             if (tmpFileName == model.FilePath)
             {
                 // 置き換え前と置き換え後が同一の場合、特に処理を行わない
-                Debug.Print("・未変更        ：" + model.FilePath);
+                Debug.Print($"・未変更        ：{model.FilePath}");
             }
-            else if (File.Exists(tmpFileName) == false)
+            else if (!File.Exists(tmpFileName))
             {
                 // ファイル名を変更する
-                Debug.Print("・ファイル名変更：" + model.FilePath);
-                Debug.Print("　　　　　　　　→" + builder.ToString());
+                Debug.Print($"・ファイル名変更：{model.FilePath}");
+                Debug.Print($"　　　　　　　　→{builder.ToString()}");
                 try
                 {
                     File.Move(model.FilePath, tmpFileName);
