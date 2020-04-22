@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ViewerForm));
-            this.pictureList1 = new PictureList();
+            this.pictureList1 = new Yomuko.Forms.Viewer.PictureList();
             this.SuspendLayout();
             // 
             // pictureList1
@@ -38,22 +38,21 @@
             this.pictureList1.IsEnabledSideFilePanel = false;
             this.pictureList1.IsVisibledFileList = false;
             this.pictureList1.Location = new System.Drawing.Point(0, 0);
-            this.pictureList1.Margin = new System.Windows.Forms.Padding(5);
+            this.pictureList1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureList1.Name = "pictureList1";
             this.pictureList1.PageSize = Yomuko.Image.PageSizeConstants.Fit;
-            this.pictureList1.Size = new System.Drawing.Size(379, 328);
+            this.pictureList1.Size = new System.Drawing.Size(887, 561);
             this.pictureList1.TabIndex = 0;
             this.pictureList1.ArchiveClosed += new System.EventHandler(this.PictureList1_ArchiveClosed);
-            this.pictureList1.ArchiveMoved += new System.EventHandler<ArchiveMovedEventArgs>(this.PictureList1_ArchiveMoved);
+            this.pictureList1.ArchiveMoved += new System.EventHandler<Yomuko.Forms.Viewer.ArchiveMovedEventArgs>(this.PictureList1_ArchiveMoved);
             // 
             // ViewerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(379, 328);
+            this.ClientSize = new System.Drawing.Size(887, 561);
             this.Controls.Add(this.pictureList1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ViewerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

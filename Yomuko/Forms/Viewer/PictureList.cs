@@ -24,6 +24,7 @@
         public PictureList()
         {
             this.InitializeComponent();
+            this.fileNamePanel1.SaveClick += this.FileNamePanel1_SaveClick;
         }
 
         /// <summary>クローズ発生イベント</summary>
@@ -100,6 +101,9 @@
 
                 this.spcMain.Panel1Collapsed = this.IsEnabledSideFilePanel;
                 this.DrawPicture(this.PagePictureBox);
+
+                this.fileNamePanel1.SetFilePath(path);
+                this.FileNameLabel.Text = System.IO.Path.GetFileName(path);
             }
             catch (Exception ex)
             {
@@ -248,6 +252,14 @@
             this.ArchiveClosed(this, new EventArgs());
         }
 
+        private void FileNamePanel1_SaveClick(Property.SaveClickEventArgs e)
+        {
+            this.ShowArchive(e.FilePath, this.archiveBook.PageIndex);
+
+            this.fileNamePanel1.Visible = false;
+            this.FileListBox.Visible = true;
+        }
+
         /// <summary>
         /// 指定したピクチャボックスに画像を表示します。
         /// </summary>
@@ -269,6 +281,23 @@
             }
 
             this.PagePictureBox.Image = this.archiveBook.PagePicture;
+        }
+
+        private void FileNameLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.fileNamePanel1.Visible = true;
+            this.FileListBox.Visible = false;
+        }
+
+        private void PagePictureBox_PreviewKeyDown_1(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyData)
+            {
+                case Keys.F2:
+                this.fileNamePanel1.Visible = !this.fileNamePanel1.Visible;
+                this.FileListBox.Visible = !this.FileListBox.Visible;
+                    break;
+            }
         }
     }
 }

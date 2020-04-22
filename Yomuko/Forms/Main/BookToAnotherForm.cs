@@ -15,13 +15,13 @@
         /// <summary>本棚データディクショナリ</summary>
         private Dictionary<string, string> shelfDictionary = new Dictionary<string, string>();
 
-        public List<BookModel> Books { get; set; }
-
         /// <summary>コンストラクタ</summary>
         public BookToAnotherForm()
         {
             this.InitializeComponent();
         }
+
+        public List<BookModel> Books { get; set; }
 
         #region イベント
 

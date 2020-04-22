@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Threading;
     using System.Windows.Forms;
     using Forms.Main;
     using Forms.ShelfSelect;
@@ -26,15 +27,15 @@
         /// <summary>オートコンプリート[出版社]</summary>
         public static List<string> AutoCompletePublishers { get; set; } = new List<string>();
 
-        /// <summary>
-        /// アプリケーションスタートアップポイント
-        /// </summary>
+        /// <summary>アプリケーションスタートアップポイント</summary>
         /// <param name="args">引数</param>
         [STAThread]
         public static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            Application.ThreadException += new ThreadExceptionEventHandler(Application_OnThreadException);
 
             if (args.Count() == 0)
             {
@@ -51,6 +52,11 @@
             {
                 ShowList(args);
             }
+        }
+
+        public static void Application_OnThreadException(object sender, ThreadExceptionEventArgs t)
+        {
+            Environment.GetFolderPath(Environment.SpecialFolder.Personal);
         }
 
         /// <summary>

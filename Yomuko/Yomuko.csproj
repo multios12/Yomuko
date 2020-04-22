@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Yomuko</RootNamespace>
     <AssemblyName>Yomuko</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -97,6 +97,13 @@
     <Compile Include="Forms\Main\BookToAnotherForm.Designer.cs">
       <DependentUpon>BookToAnotherForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Property\FileNamePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Property\FileNamePanel.Designer.cs">
+      <DependentUpon>FileNamePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Property\SaveClickEventArgs.cs" />
     <Compile Include="Forms\Viewer\ArchiveMovedEventArgs.cs" />
     <Compile Include="Forms\Viewer\PageEventArgs.cs" />
     <Compile Include="Forms\Viewer\PictureList.cs">
@@ -208,6 +215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main\Control\DetailList.resx">
       <DependentUpon>DetailList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Property\FileNamePanel.resx">
+      <DependentUpon>FileNamePanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Setting\ColumnDialog.resx">
       <DependentUpon>ColumnDialog.cs</DependentUpon>

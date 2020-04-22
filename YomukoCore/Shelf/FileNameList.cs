@@ -23,6 +23,7 @@
             this.Add(new FileNameModel() { Front = "[", Back = "] ", Value = string.Empty, FieldType = FieldType.Writer });
             this.Add(new FileNameModel() { Front = string.Empty, Back = " ", Value = string.Empty, FieldType = FieldType.Title });
             this.Add(new FileNameModel() { Front = "第", Back = "巻 ", Value = string.Empty, FieldType = FieldType.No });
+            this.Add(new FileNameModel() { Front = string.Empty, Back = " ", Value = string.Empty, FieldType = FieldType.SubTitle });
             this.Add(new FileNameModel() { Front = "[", Back = "] ", Value = string.Empty, FieldType = FieldType.ReleaseDate });
         }
 

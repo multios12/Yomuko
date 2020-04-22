@@ -188,7 +188,7 @@
                     long em = sw.ElapsedMilliseconds;
                     Console.WriteLine(em + ":" + LabelAttributeUtils.GetLabelName(model.Status) + ":" + filePath);
 
-                    if (model.Status == AnalyzeResult.Duplicate && duplicateFolderPath != null)
+                    if (model.Status == AnalyzeResult.Duplicate && !string.IsNullOrEmpty(duplicateFolderPath))
                     {
                         model.FileMove(duplicateFolderPath);
                         syncPaths.Remove(duplicateFolderPath);
