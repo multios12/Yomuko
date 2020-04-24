@@ -98,7 +98,7 @@
                 fileName = fileName.Replace("(完)", string.Empty);
             }
 
-            // ジャンルの取得
+            // 種類の取得
             Match ma = Regex.Match(fileName, @"\([^\)]*\)");
             if (ma.Length > 0)
             {
@@ -113,6 +113,18 @@
                 {
                     this.Type = Regex.Match(ma.Value, "[^）|（]+").Value;
                     fileName = fileName.Replace(Regex.Match(fileName, "（[^）]*）").Value, string.Empty);
+                }
+            }
+
+            // ジャンルの取得
+            if(!string.IsNullOrWhiteSpace(this.Type))
+            {
+                this.Type = this.Type.Trim();
+                var sp = this.Type.Split('・');
+                if (sp.Length > 1)
+                {
+                    this.Type = sp[0];
+                    this.Junle = sp[1];
                 }
             }
 

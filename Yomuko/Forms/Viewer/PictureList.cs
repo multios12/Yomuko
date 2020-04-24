@@ -297,6 +297,9 @@
                 this.fileNamePanel1.Visible = !this.fileNamePanel1.Visible;
                 this.FileListBox.Visible = !this.FileListBox.Visible;
                     break;
+                case Keys.Escape:
+                    Application.Exit();
+                    break;
             }
         }
     }
