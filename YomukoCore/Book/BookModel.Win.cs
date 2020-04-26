@@ -4,8 +4,8 @@
     using System.ComponentModel;
     using System.Diagnostics;
     using System.IO;
-    using YomukoCore.Properties;
     using Utils;
+    using YomukoCore.Properties;
 
     /// <summary>
     /// 管理モデル

@@ -39,6 +39,7 @@
             this.CollectSubTitleCheckBox.Checked = this.Shelf.CollectSubTitle;
 
             this.BaseFolderTextBox.Text = Path.GetDirectoryName(this.Shelf.FilePath);
+            this.AutoSaveCheckBox.Checked = Settings.Default.IsAutoSave;
 
             this.SetFileNameItems();
 
@@ -80,6 +81,9 @@
 
             this.Shelf.CollectSubTitle = this.CollectSubTitleCheckBox.Checked;
             this.Shelf.WriteJson();
+
+            Settings.Default.IsAutoSave = this.AutoSaveCheckBox.Checked;
+            Settings.Default.Save();
 
             this.DialogResult = DialogResult.OK;
             this.Dispose();

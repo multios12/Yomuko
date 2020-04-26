@@ -1,6 +1,7 @@
 ﻿namespace Yomuko.Forms.ShelfSelect
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
@@ -35,9 +36,9 @@
             {
                 dialog.Description = "フォルダを指定してください";
 
-                if (Properties.Settings.Default.Shelfs == null)
+                if (Settings.Default.Shelfs == null)
                 {
-                    Properties.Settings.Default.Shelfs = new System.Collections.Specialized.StringCollection();
+                    Settings.Default.Shelfs = new List<string>();
                 }
 
                 // 読み取り専用フォルダ/コントロールパネルは開かない
@@ -45,7 +46,7 @@
                 // dialog.AllowNonFileSystemItems = false;
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    Properties.Settings.Default.Shelfs.Add(dialog.SelectedPath);
+                    Settings.Default.Shelfs.Add(dialog.SelectedPath);
 
                     this.ShowBooksList();
                 }
@@ -104,14 +105,14 @@
         /// <param name="e">イベント情報</param>
         private void DeleteMenuItem_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.Shelfs.Remove(this.SelectListView.SelectedItems[0].SubItems[1].Text);
+            Settings.Default.Shelfs.Remove(this.SelectListView.SelectedItems[0].SubItems[1].Text);
 
             if (this.SelectListView.SelectedItems.Count != 0)
             {
                 this.ShowBooksList();
             }
 
-            Properties.Settings.Default.Save();
+            Settings.Default.Save();
         }
 
         /// <summary>ラベル編集完了イベント</summary>
@@ -148,12 +149,12 @@
         {
             this.SelectListView.Items.Clear();
 
-            if (Properties.Settings.Default.Shelfs == null)
+            if (Settings.Default.Shelfs == null)
             {
                 return;
             }
 
-            foreach (string filePath in Properties.Settings.Default.Shelfs)
+            foreach (string filePath in Settings.Default.Shelfs)
             {
                 string title = string.Empty;
                 try
@@ -200,14 +201,14 @@
 
         private void SelectListView_DragDrop(object sender, DragEventArgs e)
         {
-            if (Properties.Settings.Default.Shelfs == null)
+            if (Settings.Default.Shelfs == null)
             {
-                Properties.Settings.Default.Shelfs = new System.Collections.Specialized.StringCollection();
+                Settings.Default.Shelfs = new List<string>();
             }
 
             foreach (var f in (string[])e.Data.GetData(DataFormats.FileDrop, false))
             {
-                Properties.Settings.Default.Shelfs.Add(f);
+                Settings.Default.Shelfs.Add(f);
             }
 
             this.ShowBooksList();

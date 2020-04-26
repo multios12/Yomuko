@@ -224,5 +224,15 @@ namespace YomukoCore.Properties {
                 return ResourceManager.GetString("Title", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   型 System.Byte[] のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static byte[] yomuko {
+            get {
+                object obj = ResourceManager.GetObject("yomuko", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

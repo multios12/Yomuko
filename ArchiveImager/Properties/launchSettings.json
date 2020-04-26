@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ArchiveImager": {
+      "commandName": "Project",
+      "commandLineArgs": "\"D:\\result\\(成年コミック) [DISTANCE] あねこもりplus.zip\""
+    }
+  }
+}

@@ -30,7 +30,7 @@
         /// <param name="e">イベント情報</param>
         private void PropertyDialog_Load(object sender, EventArgs e)
         {
-            this.AutoSaveCheckBox.Checked = Properties.Settings.Default.IsAutoSave;
+            this.AutoSaveCheckBox.Checked = Settings.Default.IsAutoSave;
 
             this.BookTypeComboBox.Items.AddRange(App.AutoCompleteTypes.ToArray());
             this.txtJunle.Items.AddRange(App.AutoCompleteJunles.ToArray());
@@ -50,6 +50,8 @@
             this.txtHash.Text = this.Book.Hash;
             this.txtNO.Text = this.Book.No;
             this.cboPhotographer.Text = this.Book.Photographer;
+
+            this.AutoSaveCheckBox.Checked = Settings.Default.IsAutoSave;
 
             this.BookTypeComboBox.Text = this.Book.Type;
             if (this.Book.Type?.IndexOf("写真集") > -1)
@@ -150,6 +152,10 @@
 
             this.Book.CoverFileIndex = (int)this.CoverIndexUpDown.Value;
             this.Book.Favorite = this.FavoriteCheckBox.Checked;
+
+            Settings.Default.IsAutoSave = this.AutoSaveCheckBox.Checked;
+            Settings.Default.Save();
+
 
             if (this.Book.Type.IndexOf("写真集") > -1)
             {

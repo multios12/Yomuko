@@ -18,11 +18,14 @@
         /// <returns>エントリ名リスト</returns>
         public static List<string> Open(string filePath)
         {
-            var info = new ProcessStartInfo("ArchiveImager.exe", "\"" + filePath + "\"")
+            var appPath = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+            appPath = Path.Combine(appPath,    "ArchiveImager.exe");
+            var args = $"/c \"{appPath}\" \"{filePath}\"";
+            var info = new ProcessStartInfo("cmd.exe", args)
             {
                 CreateNoWindow = true,
                 UseShellExecute = false,
-                RedirectStandardOutput = true
+                RedirectStandardOutput = true,
             };
 
             Process process = new Process

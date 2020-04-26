@@ -417,7 +417,7 @@ namespace Yomuko.Forms.Main
                     this.picCover.Image = archiveBook.PagePicture;
                 }
             }
-            catch
+            catch(Exception exe)
             {
                 this.picCover.Image = null;
             }

@@ -1,4 +1,4 @@
-﻿namespace ArchiveImager
+﻿namespace ArchiveImager2
 {
     using System;
     using System.Collections.Generic;
@@ -89,7 +89,7 @@
             var archive = ArchiveFactory.Open(filePath);
             System.Diagnostics.Debug.WriteLine(filePath);
             var entry = archive.Entries.Where(e => e.Key == entryName).FirstOrDefault();
-            
+
             using (Stream sourceStream = entry.OpenEntryStream())
             {
                 using (Stream distStream = Console.OpenStandardOutput())

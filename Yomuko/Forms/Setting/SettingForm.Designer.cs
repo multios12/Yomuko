@@ -407,9 +407,6 @@
             // AutoSaveCheckBox
             // 
             this.AutoSaveCheckBox.AutoSize = true;
-            this.AutoSaveCheckBox.Checked = global::Yomuko.Properties.Settings.Default.IsAutoSave;
-            this.AutoSaveCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.AutoSaveCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Yomuko.Properties.Settings.Default, "IsAutoSave", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.AutoSaveCheckBox.Location = new System.Drawing.Point(48, 152);
             this.AutoSaveCheckBox.Name = "AutoSaveCheckBox";
             this.AutoSaveCheckBox.Size = new System.Drawing.Size(313, 24);

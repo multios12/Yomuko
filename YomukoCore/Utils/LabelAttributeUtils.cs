@@ -1,7 +1,7 @@
-﻿namespace ComicLaunch.Utils
+﻿namespace Yomuko.Utils
 {
     using System;
-    using Models.Book;
+    using Book;
 
     /// <summary>
     /// ラベル属性に関するユーティリティクラス

@@ -37,7 +37,7 @@
 
         private void ShelfListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string filePath = Properties.Settings.Default.Shelfs[this.ShelfListBox.SelectedIndex];
+            string filePath = Settings.Default.Shelfs[this.ShelfListBox.SelectedIndex];
             if (!Directory.Exists(filePath))
             {
                 return;
@@ -95,7 +95,7 @@
         private void ShowShelf()
         {
             this.shelfDictionary.Clear();
-            foreach (string filePath in Properties.Settings.Default.Shelfs)
+            foreach (string filePath in Settings.Default.Shelfs)
             {
                 string title = string.Empty;
                 try

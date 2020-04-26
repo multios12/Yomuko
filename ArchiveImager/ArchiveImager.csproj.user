@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <StartArguments>"%28一般コミック%29 [PEACH-PIT] ローゼンメイデン Rozen Maiden 第08巻.zip" "rozen_maiden_08_000a.jpg"</StartArguments>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ProjectView>ProjectFiles</ProjectView>
-  </PropertyGroup>
-</Project>

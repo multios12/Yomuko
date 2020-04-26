@@ -77,15 +77,15 @@
 
         private void FileNamePanel_Load(object sender, EventArgs e)
         {
-            var lists1 = Properties.Settings.Default.NameText1.Split('\r');
+            var lists1 = Settings.Default.NameText1.Split('\r');
             this.NameTextBox1.Items.AddRange(lists1);
-            var lists2 = Properties.Settings.Default.NameText2.Split('\r');
+            var lists2 = Settings.Default.NameText2.Split('\r');
             this.NameTextBox2.Items.AddRange(lists2);
-            var lists3 = Properties.Settings.Default.NameText3.Split('\r');
+            var lists3 = Settings.Default.NameText3.Split('\r');
             this.NameTextBox3.Items.AddRange(lists3);
-            var lists4 = Properties.Settings.Default.NameText4.Split('\r');
+            var lists4 = Settings.Default.NameText4.Split('\r');
             this.NameTextBox4.Items.AddRange(lists4);
-            var lists7 = Properties.Settings.Default.NameText7.Split('\r');
+            var lists7 = Settings.Default.NameText7.Split('\r');
             this.NameTextBox7.Items.AddRange(lists7);
         }
 
@@ -100,16 +100,16 @@
             this.model.SubTitle = this.NameTextBox7.Text;
 
             var value1 = this.CreateList(this.NameTextBox1.Items, this.model.Type);
-            Properties.Settings.Default.NameText1 = value1;
+            Settings.Default.NameText1 = value1;
             var value2 = this.CreateList(this.NameTextBox2.Items, this.model.Junle);
-            Properties.Settings.Default.NameText2 = value2;
+            Settings.Default.NameText2 = value2;
             var value3 = this.CreateList(this.NameTextBox3.Items, this.model.Writer);
-            Properties.Settings.Default.NameText3 = value3;
+            Settings.Default.NameText3 = value3;
             var value4 = this.CreateList(this.NameTextBox4.Items, this.model.Title);
-            Properties.Settings.Default.NameText4 = value4;
+            Settings.Default.NameText4 = value4;
             var value5 = this.CreateList(this.NameTextBox7.Items, this.model.SubTitle);
-            Properties.Settings.Default.NameText7 = value5;
-            Properties.Settings.Default.Save();
+            Settings.Default.NameText7 = value5;
+            Settings.Default.Save();
 
             var fileNameList = new FileNameList();
             fileNameList.Initialize();

@@ -1,331 +1,176 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{95D07374-2A31-48DA-8F25-C8CE18DC89DF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Yomuko</RootNamespace>
-    <AssemblyName>Yomuko</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>ComicLaunch.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>none</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>ComicLaunch.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>ComicLaunch.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>ComicLaunch.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
     <StartupObject>Yomuko.App</StartupObject>
-  </PropertyGroup>
-  <PropertyGroup>
+    <AssemblyName>Yomuko</AssemblyName>
+    <RootNamespace>Yomuko</RootNamespace>
     <ApplicationIcon>Resources\yomuko.ico</ApplicationIcon>
   </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Microsoft.VisualC" />
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Compile Remove="Forms\Commons\MainForm-DESKTOP-EQ7SF8N.cs" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="App.cs" />
-    <Compile Include="Forms\Main\BookToAnotherForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Main\BookToAnotherForm.Designer.cs">
-      <DependentUpon>BookToAnotherForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Property\FileNamePanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Property\FileNamePanel.Designer.cs">
-      <DependentUpon>FileNamePanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Property\SaveClickEventArgs.cs" />
-    <Compile Include="Forms\Viewer\ArchiveMovedEventArgs.cs" />
-    <Compile Include="Forms\Viewer\PageEventArgs.cs" />
-    <Compile Include="Forms\Viewer\PictureList.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Viewer\PictureList.Designer.cs">
-      <DependentUpon>PictureList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Viewer\ViewerForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Viewer\ViewerForm.Designer.cs">
-      <DependentUpon>ViewerForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Main\Control\BookmarkList.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Main\Control\BookmarkList.Designer.cs">
-      <DependentUpon>BookmarkList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Main\Control\ItemEventArgs.cs" />
-    <Compile Include="Forms\Main\Control\DetailList.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Main\Control\DetailList.Designer.cs">
-      <DependentUpon>DetailList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Main\Control\SelectSearchEventArgs.cs" />
-    <Compile Include="Forms\Commons\WaitDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Commons\WaitDialog.Designer.cs">
-      <DependentUpon>WaitDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Main\MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Main\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Setting\ColumnDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Setting\ColumnDialog.Designer.cs">
-      <DependentUpon>ColumnDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Setting\FileNameItemDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Setting\FileNameItemDialog.Designer.cs">
-      <DependentUpon>FileNameItemDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Property\PropertyDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Property\PropertyDialog.Designer.cs">
-      <DependentUpon>PropertyDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Main\SelectChangeForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Main\SelectChangeForm.Designer.cs">
-      <DependentUpon>SelectChangeForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Image\ArchiveImagerHelper.cs" />
-    <Compile Include="Image\ArchiveModel.cs" />
-    <Compile Include="Image\ImageOperator.cs" />
-    <Compile Include="Image\ResizeModeConstants.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\ShelfSelect\ShelfSelectForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ShelfSelect\ShelfSelectForm.Designer.cs">
-      <DependentUpon>ShelfSelectForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Setting\SettingForm.Designer.cs">
-      <DependentUpon>SettingForm.cs</DependentUpon>
-    </Compile>
+    <None Remove="Forms\Commons\MainForm.cs.bak" />
+    <None Remove="Resources\yomuko.ico" />
+    <None Remove="Resources\yomuko.png" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ComicLaunch.ruleset">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Forms\Main\BookToAnotherForm.resx">
-      <DependentUpon>BookToAnotherForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Main\Control\BookmarkList.resx">
-      <DependentUpon>BookmarkList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Main\Control\DetailList.resx">
-      <DependentUpon>DetailList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Property\FileNamePanel.resx">
-      <DependentUpon>FileNamePanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Setting\ColumnDialog.resx">
-      <DependentUpon>ColumnDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Setting\FileNameItemDialog.resx">
-      <DependentUpon>FileNameItemDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Property\PropertyDialog.resx">
-      <DependentUpon>PropertyDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Main\SelectChangeForm.resx">
-      <DependentUpon>SelectChangeForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Viewer\PictureList.resx">
-      <DependentUpon>PictureList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Viewer\ViewerForm.resx">
-      <DependentUpon>ViewerForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Commons\WaitDialog.resx">
-      <DependentUpon>WaitDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Main\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ShelfSelect\ShelfSelectForm.resx">
-      <DependentUpon>ShelfSelectForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Setting\SettingForm.resx">
-      <DependentUpon>SettingForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Forms\Setting\SettingForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-  </ItemGroup>
+
   <ItemGroup>
     <Content Include="Resources\yomuko.ico" />
     <Content Include="Resources\yomuko.png" />
   </ItemGroup>
+
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 および x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
+    <ProjectReference Include="..\ArchiveImager\ArchiveImager.csproj" />
+    <ProjectReference Include="..\YomukoCore\YomukoCore.csproj" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\ArchiveImager\ArchiveImager.csproj">
-      <Project>{e7444ff3-cc05-49a6-8c7b-374cc0d2a26d}</Project>
-      <Name>ArchiveImager</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\YomukoCore\YomukoCore.csproj">
-      <Project>{3be96cac-88d7-4fd8-90a5-af98a4b95fc6}</Project>
-      <Name>YomukoCore</Name>
-    </ProjectReference>
+    <Compile Update="Forms\Commons\WaitDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Commons\WaitDialog.Designer.cs">
+      <DependentUpon>WaitDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Main\BookToAnotherForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Main\BookToAnotherForm.Designer.cs">
+      <DependentUpon>BookToAnotherForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Main\Control\BookmarkList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\Main\Control\BookmarkList.Designer.cs">
+      <DependentUpon>BookmarkList.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Main\Control\DetailList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\Main\Control\DetailList.Designer.cs">
+      <DependentUpon>DetailList.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Main\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Main\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Main\SelectChangeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Main\SelectChangeForm.Designer.cs">
+      <DependentUpon>SelectChangeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Property\FileNamePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\Property\FileNamePanel.Designer.cs">
+      <DependentUpon>FileNamePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Property\PropertyDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Property\PropertyDialog.Designer.cs">
+      <DependentUpon>PropertyDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Setting\ColumnDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Setting\ColumnDialog.Designer.cs">
+      <DependentUpon>ColumnDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Setting\FileNameItemDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Setting\FileNameItemDialog.Designer.cs">
+      <DependentUpon>FileNameItemDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Setting\SettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Setting\SettingForm.Designer.cs">
+      <DependentUpon>SettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\ShelfSelect\ShelfSelectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\ShelfSelect\ShelfSelectForm.Designer.cs">
+      <DependentUpon>ShelfSelectForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Viewer\PictureList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\Viewer\PictureList.Designer.cs">
+      <DependentUpon>PictureList.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Viewer\ViewerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Viewer\ViewerForm.Designer.cs">
+      <DependentUpon>ViewerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
+
   <ItemGroup>
-    <PackageReference Include="ILMerge">
-      <Version>3.0.29</Version>
-    </PackageReference>
-    <PackageReference Include="McMaster.Extensions.CommandLineUtils">
-      <Version>2.3.3</Version>
-    </PackageReference>
-    <PackageReference Include="OpenCover">
-      <Version>4.7.922</Version>
-    </PackageReference>
-    <PackageReference Include="ReportGenerator">
-      <Version>3.1.2</Version>
-    </PackageReference>
-    <PackageReference Include="StyleCop.Analyzers">
-      <Version>1.1.118</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="WindowsAPICodePack-Core">
-      <Version>1.1.2</Version>
-    </PackageReference>
-    <PackageReference Include="WindowsAPICodePack-Shell">
-      <Version>1.1.1</Version>
-    </PackageReference>
+    <EmbeddedResource Update="Forms\Commons\WaitDialog.resx">
+      <DependentUpon>WaitDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Main\BookToAnotherForm.resx">
+      <DependentUpon>BookToAnotherForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Main\Control\BookmarkList.resx">
+      <DependentUpon>BookmarkList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Main\Control\DetailList.resx">
+      <DependentUpon>DetailList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Main\MainForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Main\SelectChangeForm.resx">
+      <DependentUpon>SelectChangeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Property\FileNamePanel.resx">
+      <DependentUpon>FileNamePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Property\PropertyDialog.resx">
+      <DependentUpon>PropertyDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Setting\ColumnDialog.resx">
+      <DependentUpon>ColumnDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Setting\FileNameItemDialog.resx">
+      <DependentUpon>FileNameItemDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Setting\SettingForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\ShelfSelect\ShelfSelectForm.resx">
+      <DependentUpon>ShelfSelectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Viewer\PictureList.resx">
+      <DependentUpon>PictureList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Viewer\ViewerForm.resx">
+      <DependentUpon>ViewerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>set fname_new=$(TargetName)_merge$(TargetExt)
-rem "C:\Program Files (x86)\Microsoft\ILMerge\ILMerge" /wildcards /out:%25fname_new%25 $(TargetFileName) YomukoCore.dll
-del /q *.config
-copy $(SolutionDir)\ShelfSync\bin\$(ConfigurationName)\ShelfSync.exe $(TargetDir)</PostBuildEvent>
-  </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>
