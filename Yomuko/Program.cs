@@ -1,37 +1,25 @@
 ﻿namespace Yomuko
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading;
     using System.Windows.Forms;
     using Forms.Main;
     using Forms.ShelfSelect;
-    using Forms.Viewer;
+    using Yomuko.Forms.Viewer;
 
     /// <summary>
     /// アプリケーションクラス
     /// </summary>
-    public static class App
+    public static class Program
     {
-        /// <summary>オートコンプリート[種別]</summary>
-        public static List<string> AutoCompleteTypes { get; set; } = new List<string>();
-
-        /// <summary>オートコンプリート[種別]</summary>
-        public static List<string> AutoCompleteJunles { get; set; } = new List<string>();
-
-        /// <summary>オートコンプリート[著者]</summary>
-        public static List<string> AutoCompleteWriters { get; set; } = new List<string>();
-
-        /// <summary>オートコンプリート[出版社]</summary>
-        public static List<string> AutoCompletePublishers { get; set; } = new List<string>();
-
         /// <summary>アプリケーションスタートアップポイント</summary>
         /// <param name="args">引数</param>
         [STAThread]
         public static void Main(string[] args)
         {
+            Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -60,30 +48,8 @@
         }
 
         /// <summary>
-        /// 表示します
-        /// </summary>
-        /// <param name="args">引数</param>
-        public static void ShowViewer(string[] args)
-        {
-            int index = 0;
-
-            if (args.Count() >= 2)
-            {
-                int.TryParse(args[1], out index);
-            }
-
-            var form = new ViewerForm();
-            bool result = form.pictureList1.ShowArchive(args[0], index);
-
-            if (result)
-            {
-                AddJumpList(args[0]);
-                Application.Run(form);
-            }
-        }
-
-        /// <summary>
-        /// 表示します
+        /// 書籍管理フォームを表示する
+        /// 
         /// </summary>
         /// <param name="args">引数</param>
         public static void ShowList(string[] args)
@@ -116,23 +82,29 @@
                 // メインフォームの表示
                 using (MainForm form = new MainForm())
                 {
-                    AddJumpList(filePath);
                     result = form.ShowDialog(filePath);
                 }
             }
         }
 
-        /// <summary>
-        /// ジャンプリストに追加します。
-        /// </summary>
-        /// <param name="filePath">ファイルパス</param>
-        private static void AddJumpList(string filePath)
+        /// <summary>ビュアフォームを表示する</summary>
+        /// <param name="args">引数</param>
+        public static void ShowViewer(string[] args)
         {
-            // JumpList list = new JumpList()
-            // {
-            //     ShowRecentCategory = true
-            // };
-            // JumpList.AddToRecentCategory(filePath);
+            int index = 0;
+
+            if (args.Count() >= 2)
+            {
+                int.TryParse(args[1], out index);
+            }
+
+            var form = new ViewerForm();
+            bool result = form.pictureList1.ShowArchive(args[0], index);
+
+            if (result)
+            {
+                Application.Run(form);
+            }
         }
     }
 }

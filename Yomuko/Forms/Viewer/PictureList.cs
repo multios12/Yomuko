@@ -252,7 +252,7 @@
             this.ArchiveClosed(this, new EventArgs());
         }
 
-        private void FileNamePanel1_SaveClick(Property.SaveClickEventArgs e)
+        private void FileNamePanel1_SaveClick(SaveClickEventArgs e)
         {
             this.ShowArchive(e.FilePath, this.archiveBook.PageIndex);
 

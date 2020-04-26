@@ -2,7 +2,6 @@
 {
     using System;
     using System.Runtime.Serialization;
-    using System.Xml.Serialization;
     using Yomuko.Book;
 
     /// <summary>ファイル名生成定義構造体</summary>

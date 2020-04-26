@@ -6,7 +6,6 @@
     using System.Runtime.Serialization;
     using Book;
     using Yomuko.Utils;
-    using Yomuko.Image;
 
     /// <summary>
     /// 本棚モデル

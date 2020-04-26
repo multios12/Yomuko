@@ -33,6 +33,6 @@
 
         /// <summary>正常に追加された</summary>
         [Label("正常に追加された")]
-        Success
+        Success,
     }
 }

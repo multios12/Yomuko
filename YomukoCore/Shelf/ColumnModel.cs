@@ -1,8 +1,6 @@
 ﻿namespace Yomuko.Shelf
 {
-    using System;
     using System.Runtime.Serialization;
-    using System.Xml.Serialization;
     using Book;
 
     /// <summary>

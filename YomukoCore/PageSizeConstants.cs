@@ -1,4 +1,4 @@
-﻿namespace Yomuko.Image
+﻿namespace Yomuko
 {
     /// <summary>ページサイズ設定列挙型</summary>
     public enum PageSizeConstants

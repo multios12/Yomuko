@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
-    <StartupObject>Yomuko.App</StartupObject>
+    <StartupObject>Yomuko.Program</StartupObject>
     <AssemblyName>Yomuko</AssemblyName>
     <RootNamespace>Yomuko</RootNamespace>
     <ApplicationIcon>Resources\yomuko.ico</ApplicationIcon>
@@ -43,15 +43,11 @@
     <Compile Update="Forms\Main\BookToAnotherForm.Designer.cs">
       <DependentUpon>BookToAnotherForm.cs</DependentUpon>
     </Compile>
-    <Compile Update="Forms\Main\Control\BookmarkList.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="Forms\Main\Control\BookmarkList.cs" />
     <Compile Update="Forms\Main\Control\BookmarkList.Designer.cs">
       <DependentUpon>BookmarkList.cs</DependentUpon>
     </Compile>
-    <Compile Update="Forms\Main\Control\DetailList.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="Forms\Main\Control\DetailList.cs" />
     <Compile Update="Forms\Main\Control\DetailList.Designer.cs">
       <DependentUpon>DetailList.cs</DependentUpon>
     </Compile>
@@ -67,41 +63,31 @@
     <Compile Update="Forms\Main\SelectChangeForm.Designer.cs">
       <DependentUpon>SelectChangeForm.cs</DependentUpon>
     </Compile>
-    <Compile Update="Forms\Property\FileNamePanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Forms\Property\FileNamePanel.Designer.cs">
-      <DependentUpon>FileNamePanel.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Forms\Property\PropertyDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="Forms\Property\PropertyDialog.cs" />
     <Compile Update="Forms\Property\PropertyDialog.Designer.cs">
       <DependentUpon>PropertyDialog.cs</DependentUpon>
     </Compile>
-    <Compile Update="Forms\Setting\ColumnDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="Forms\Setting\ColumnDialog.cs" />
     <Compile Update="Forms\Setting\ColumnDialog.Designer.cs">
       <DependentUpon>ColumnDialog.cs</DependentUpon>
     </Compile>
-    <Compile Update="Forms\Setting\FileNameItemDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="Forms\Setting\FileNameItemDialog.cs" />
     <Compile Update="Forms\Setting\FileNameItemDialog.Designer.cs">
       <DependentUpon>FileNameItemDialog.cs</DependentUpon>
     </Compile>
-    <Compile Update="Forms\Setting\SettingForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="Forms\Setting\SettingForm.cs" />
     <Compile Update="Forms\Setting\SettingForm.Designer.cs">
       <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
-    <Compile Update="Forms\ShelfSelect\ShelfSelectForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="Forms\ShelfSelect\ShelfSelectForm.cs" />
     <Compile Update="Forms\ShelfSelect\ShelfSelectForm.Designer.cs">
       <DependentUpon>ShelfSelectForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Viewer\FileNamePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\Viewer\FileNamePanel.Designer.cs">
+      <DependentUpon>FileNamePanel.cs</DependentUpon>
     </Compile>
     <Compile Update="Forms\Viewer\PictureList.cs">
       <SubType>UserControl</SubType>
@@ -142,9 +128,6 @@
     <EmbeddedResource Update="Forms\Main\SelectChangeForm.resx">
       <DependentUpon>SelectChangeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Update="Forms\Property\FileNamePanel.resx">
-      <DependentUpon>FileNamePanel.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Update="Forms\Property\PropertyDialog.resx">
       <DependentUpon>PropertyDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -160,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Forms\ShelfSelect\ShelfSelectForm.resx">
       <DependentUpon>ShelfSelectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Viewer\FileNamePanel.resx">
+      <DependentUpon>FileNamePanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="Forms\Viewer\PictureList.resx">
       <DependentUpon>PictureList.cs</DependentUpon>

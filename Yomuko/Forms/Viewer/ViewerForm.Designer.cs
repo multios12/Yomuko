@@ -40,7 +40,7 @@
             this.pictureList1.Location = new System.Drawing.Point(0, 0);
             this.pictureList1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureList1.Name = "pictureList1";
-            this.pictureList1.PageSize = Yomuko.Image.PageSizeConstants.Fit;
+            this.pictureList1.PageSize = Yomuko.PageSizeConstants.Fit;
             this.pictureList1.Size = new System.Drawing.Size(887, 561);
             this.pictureList1.TabIndex = 0;
             this.pictureList1.ArchiveClosed += new System.EventHandler(this.PictureList1_ArchiveClosed);

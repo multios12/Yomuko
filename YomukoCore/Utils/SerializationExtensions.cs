@@ -215,30 +215,7 @@
         /// <returns>ディープコピーされたオブジェクト</returns>
         public static T DeepCopy<T>(this T target)
         {
-    //        Dim result As T
-
-    //Try
-    //    Dim serializer As New System.Runtime.Serialization.DataContractSerializer(GetType(T))
-
-    //    Using mem As New System.IO.MemoryStream()
-
-    //        serializer.WriteObject(mem, target)
-
-    //        mem.Position = 0
-
-    //        result = CType(serializer.ReadObject(mem), T)
-
-    //    End Using
-
-    //Catch ex As Exception
-
-    //    Throw
-    //End Try
-    //Return result
-
-
             T result = default(T);
-            // var b = new BinaryFormatter();
             var serializer = new DataContractJsonSerializer(typeof (T));
 
           

@@ -2,10 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ApplicationIcon>Resources\yomuko.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="Utils\JsonSerializationExtensions.cs" />
+    <Compile Remove="Utils\LabelAttributeUtils.cs" />
   </ItemGroup>
 
   <ItemGroup>

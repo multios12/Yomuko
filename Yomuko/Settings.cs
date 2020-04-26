@@ -3,12 +3,16 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Runtime.CompilerServices;
     using Yomuko.Utils;
+
+    /// <summary>設定管理</summary>
+    /// .net Framework4のwindowsFormsと同じメソッド名で、設定機能を提供する
     public class Settings
     {
+        /// <summary>設定オブジェクト</summary>
         private static Settings settings;
 
+        /// <summary>現在の設定</summary>
         public static Settings Default
         {
             get
@@ -29,6 +33,7 @@
             }
         }
 
+        /// <summary>設定を保存する</summary>
         public void Save()
         {
             string filePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
@@ -36,15 +41,15 @@
             this.WriteJson(filePath);
         }
 
-        public List<string> Shelfs;
-        public int MainSplit = 0;
-        public bool SideFilePanel = false;
-        public string Location = "0, 0";
-        public bool IsAutoSave = true;
-        public string NameText1;
-        public string NameText2;
-        public string NameText3;
-        public string NameText4;
-        public string NameText7;
+        /// <summary>選択フォームに表示する本棚ファイル</summary>
+        public List<string> Shelfs { get; set; }
+        public int MainSplit { get; set; } = 0;
+        public bool SideFilePanel { get; set; }
+        public bool IsAutoSave { get; set; } = true;
+        public string NameText1 { get; set; }
+        public string NameText2 { get; set; }
+        public string NameText3 { get; set; }
+        public string NameText4 { get; set; }
+        public string NameText7 { get; set; }
     }
 }

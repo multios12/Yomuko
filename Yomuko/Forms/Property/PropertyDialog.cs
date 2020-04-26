@@ -32,10 +32,6 @@
         {
             this.AutoSaveCheckBox.Checked = Settings.Default.IsAutoSave;
 
-            this.BookTypeComboBox.Items.AddRange(App.AutoCompleteTypes.ToArray());
-            this.txtJunle.Items.AddRange(App.AutoCompleteJunles.ToArray());
-            this.cboWriter.Items.AddRange(App.AutoCompleteWriters.ToArray());
-
             this.cboTitle.Text = this.Book.Title;
             this.cboWriter.Text = this.Book.Writer;
             this.SubTitleTextBox.Text = this.Book.SubTitle;
