@@ -3,7 +3,6 @@
     using System;
     using System.Diagnostics;
     using System.IO;
-    using System.Runtime.Serialization.Formatters.Binary;
     using System.Runtime.Serialization.Json;
     using System.Xml.Serialization;
 
@@ -216,16 +215,16 @@
         public static T DeepCopy<T>(this T target)
         {
             T result = default(T);
-            var serializer = new DataContractJsonSerializer(typeof (T));
+            var serializer = new DataContractJsonSerializer(typeof(T));
 
-          
-            using(var mem = new MemoryStream())
+
+            using (var mem = new MemoryStream())
             {
                 try
                 {
                     serializer.WriteObject(mem, target);
                     mem.Position = 0;
-                    result = (T) serializer.ReadObject(mem);
+                    result = (T)serializer.ReadObject(mem);
                 }
                 catch (Exception e)
                 {

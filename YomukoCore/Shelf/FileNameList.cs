@@ -1,11 +1,11 @@
 ﻿namespace Yomuko.Shelf
 {
+    using Book;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
     using System.Text;
-    using Book;
 
     /// <summary>
     /// ファイル名リスト

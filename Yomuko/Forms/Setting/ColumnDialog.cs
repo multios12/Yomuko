@@ -1,7 +1,7 @@
 ﻿namespace Yomuko.Forms.Setting
 {
-    using System;
     using Book;
+    using System;
 
     /// <summary>列選択ダイアログ</summary>
     public partial class ColumnDialog

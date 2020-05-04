@@ -1,30 +1,27 @@
-﻿namespace Sync
+﻿namespace ShelfSync
 {
     using System;
-    using System.IO;
-    using Yomuko.Shelf;
+    using System.Text;
 
-    class Program
+    public class Program
     {
         /// <summary>
-        /// プログラムのスタートアップポイント
+        /// アプリケーションのスタートアップポイント
         /// </summary>
         /// <param name="args">引数</param>
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            var filePath = args[0];
-            if (!File.Exists(filePath) && !Directory.Exists(filePath))
+            try
             {
+                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+                Sync.SyncBaseFolder(args[0]);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"{ex.Message}\r{ex.StackTrace}");
                 Environment.Exit(-1);
                 return;
             }
-
-            var s = new ShelfModel();
-            s = s.ReadJson(args[0]);
-
-            s.Books.SyncBaseFolder(filePath, s.DuplicateFolderPath);
-
-            s.WriteJson();
 
             Environment.Exit(0);
         }

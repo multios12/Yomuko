@@ -1,12 +1,12 @@
 ﻿namespace Yomuko.Forms.Main.Control
 {
+    using Book;
+    using Image;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
     using System.Windows.Forms;
-    using Book;
-    using Image;
 
     /// <summary>
     /// ブックマークリスト

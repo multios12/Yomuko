@@ -1,10 +1,10 @@
 ﻿namespace Yomuko.Form
 {
+    using Book;
+    using Image;
     using System;
     using System.IO;
     using System.Windows.Forms;
-    using Book;
-    using Image;
 
     /// <summary>
     /// プロパティダイアログ

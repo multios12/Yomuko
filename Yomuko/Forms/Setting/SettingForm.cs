@@ -1,14 +1,12 @@
 ﻿namespace Yomuko.Forms.Setting
 {
-    using System;
-    using System.ComponentModel;
-    using System.IO;
-    using System.Linq;
-    using System.Windows.Forms;
     using Book;
     using Properties;
     using Shelf;
-    using Utils;
+    using System;
+    using System.IO;
+    using System.Linq;
+    using System.Windows.Forms;
 
     /// <summary>設定フォーム</summary>
     public partial class SettingForm

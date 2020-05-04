@@ -1,10 +1,10 @@
 ﻿namespace Yomuko.Shelf
 {
+    using Book;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Runtime.Serialization;
-    using Book;
     using Yomuko.Utils;
 
     /// <summary>
@@ -33,7 +33,7 @@
         public string Title { get; set; }
 
         /// <summary>本棚の説明</summary>
-        [DataMember(EmitDefaultValue =false)]
+        [DataMember(EmitDefaultValue = false)]
         public string Remarks { get; set; }
 
         /// <summary>重複フォルダ</summary>

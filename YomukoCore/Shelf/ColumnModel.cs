@@ -1,7 +1,7 @@
 ﻿namespace Yomuko.Shelf
 {
-    using System.Runtime.Serialization;
     using Book;
+    using System.Runtime.Serialization;
 
     /// <summary>
     /// 詳細リスト列の構造体

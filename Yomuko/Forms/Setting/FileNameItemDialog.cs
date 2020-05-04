@@ -1,9 +1,9 @@
 ﻿namespace Yomuko.Forms.Setting
 {
-    using System;
-    using System.ComponentModel;
     using Book;
     using Shelf;
+    using System;
+    using System.ComponentModel;
 
     /// <summary>
     /// ファイル名選択ダイアログ

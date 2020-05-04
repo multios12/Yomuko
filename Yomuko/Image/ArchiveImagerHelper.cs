@@ -19,7 +19,7 @@
         public static List<string> Open(string filePath)
         {
             var appPath = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
-            appPath = Path.Combine(appPath,    "ArchiveImager.exe");
+            appPath = Path.Combine(appPath, "ArchiveImager.exe");
             var args = $"/c \"{appPath}\" \"{filePath}\"";
             var info = new ProcessStartInfo("cmd.exe", args)
             {

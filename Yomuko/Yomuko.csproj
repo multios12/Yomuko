@@ -83,6 +83,12 @@
     <Compile Update="Forms\ShelfSelect\ShelfSelectForm.Designer.cs">
       <DependentUpon>ShelfSelectForm.cs</DependentUpon>
     </Compile>
+    <Compile Update="Forms\Sync\SyncForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Sync\SyncForm.Designer.cs">
+      <DependentUpon>SyncForm.cs</DependentUpon>
+    </Compile>
     <Compile Update="Forms\Viewer\FileNamePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -144,6 +150,9 @@
     <EmbeddedResource Update="Forms\ShelfSelect\ShelfSelectForm.resx">
       <DependentUpon>ShelfSelectForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Sync\SyncForm.resx">
+      <DependentUpon>SyncForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Update="Forms\Viewer\FileNamePanel.resx">
       <DependentUpon>FileNamePanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -158,5 +167,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy $(SolutionDir)ShelfSync\$(OutDir)ShelfSync.*  $(ProjectDir)$(OutDir)" />
+  </Target>
 
 </Project>

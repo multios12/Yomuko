@@ -1,11 +1,11 @@
 ﻿namespace Yomuko.Book
 {
+    using Duplicate;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
     using System.Text.RegularExpressions;
-    using Duplicate;
 
     /// <summary>
     /// リスト（重複検出）
@@ -45,7 +45,7 @@
         /// </remarks>
         public void CreateEliminateValue()
         {
-            foreach(var model in this)
+            foreach (var model in this)
             {
                 model.Status = AnalyzeResult.NotRunning;
 

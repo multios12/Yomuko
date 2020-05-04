@@ -1,8 +1,8 @@
 ﻿namespace Yomuko.Duplicate
 {
+    using Book;
     using System.Collections.Generic;
     using System.Linq;
-    using Book;
 
     /// <summary>重複検出モデル</summary>
     public class DuplicateModel

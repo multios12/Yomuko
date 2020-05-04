@@ -1,12 +1,13 @@
 ﻿namespace Yomuko
 {
+    using Forms.Main;
+    using Forms.ShelfSelect;
     using System;
     using System.IO;
     using System.Linq;
     using System.Threading;
     using System.Windows.Forms;
-    using Forms.Main;
-    using Forms.ShelfSelect;
+    using Yomuko.Forms.Sync;
     using Yomuko.Forms.Viewer;
 
     /// <summary>
@@ -32,7 +33,13 @@
                 return;
             }
 
-            if (Path.GetExtension(args[0]).ToLower() != ".bls")
+            if (args[0].ToLower() == "sync")
+            {
+                ShowSync(args);
+
+
+            }
+            else if (Path.GetExtension(args[0]).ToLower() != ".bls")
             {
                 ShowViewer(args);
             }
@@ -106,5 +113,17 @@
                 Application.Run(form);
             }
         }
+
+        private static void ShowSync(string[] args)
+        {
+            if (args.Count() >= 2)
+            {
+            }
+
+            var form = new SyncForm();
+            form.BasePath = args[1];
+            Application.Run(form);
+        }
+
     }
 }

@@ -1,10 +1,10 @@
 ﻿namespace Yomuko.Forms.Main
 {
-    using System;
-    using System.Windows.Forms;
     using Book;
     using Properties;
     using Shelf;
+    using System;
+    using System.Windows.Forms;
 
     /// <summary>
     /// 値変更フォーム

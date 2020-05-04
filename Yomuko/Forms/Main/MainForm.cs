@@ -1,13 +1,5 @@
 namespace Yomuko.Forms.Main
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Windows.Forms;
     using Book;
     using Forms.Common;
     using Forms.Main.Control;
@@ -15,7 +7,16 @@ namespace Yomuko.Forms.Main
     using Image;
     using Properties;
     using Shelf;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Windows.Forms;
     using Utils;
+    using Yomuko.Forms.Sync;
+    using Yomuko.Sync;
 
     /// <summary>メインフォーム</summary>
     public partial class MainForm : Form
@@ -417,7 +418,7 @@ namespace Yomuko.Forms.Main
                     this.picCover.Image = archiveBook.PagePicture;
                 }
             }
-            catch(Exception exe)
+            catch (Exception exe)
             {
                 this.picCover.Image = null;
             }
@@ -504,7 +505,7 @@ namespace Yomuko.Forms.Main
         /// <summary>メニュー クリックイベント</summary>
         /// <param name="sender">発生元オブジェクト</param>
         /// <param name="e">イベントデータ</param>
-        private async void SyncBaseFolderMenuItem_Click(object sender, EventArgs e)
+        private void SyncBaseFolderMenuItem_Click(object sender, EventArgs e)
         {
             // ベースフォルダのチェック
             var workFolders = new List<string> { Path.GetDirectoryName(this.shelf.FilePath) };
@@ -520,19 +521,13 @@ namespace Yomuko.Forms.Main
                 return;
             }
 
-            this.waitDialog = new WaitDialog()
+            using (var form = new SyncForm())
             {
-                Owner = this,
-                MainMessage = Resources.BookListSyncingBaseFolder
-            };
-            this.Enabled = false;
-            this.waitDialog.Show();
-
-            await Task.Run(() => this.shelf.Books.SyncBaseFolder(workFolders[0], this.shelf.DuplicateFolderPath));
-            this.shelf.WriteJson();
-
-            this.Enabled = true;
-            this.waitDialog.Close();
+                form.Owner = this;
+                this.Enabled = false;
+                form.Show(workFolders[0]);
+                this.Enabled = true;
+            }
         }
 
         /// <summary>メニュー クリックイベント</summary>

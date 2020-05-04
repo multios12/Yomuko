@@ -1,10 +1,10 @@
 ﻿namespace ArchiveImager2
 {
+    using SharpCompress.Archives;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using SharpCompress.Archives;
 
     public class Program
     {

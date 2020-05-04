@@ -294,8 +294,8 @@
             switch (e.KeyData)
             {
                 case Keys.F2:
-                this.fileNamePanel1.Visible = !this.fileNamePanel1.Visible;
-                this.FileListBox.Visible = !this.FileListBox.Visible;
+                    this.fileNamePanel1.Visible = !this.fileNamePanel1.Visible;
+                    this.FileListBox.Visible = !this.FileListBox.Visible;
                     break;
                 case Keys.Escape:
                     Application.Exit();

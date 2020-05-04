@@ -9,8 +9,9 @@
     /// 本棚モデルテストクラス
     /// </summary>
     [TestClass]
-    public class ShelfModelTest
+    public class SyncTest
     {
+        [TestInitialize]
         public void setup()
         {
 

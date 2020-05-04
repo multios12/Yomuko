@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ShelfSync": {
+      "commandName": "Project",
+      "commandLineArgs": "\"D:\\result\""
+    }
+  }
+}

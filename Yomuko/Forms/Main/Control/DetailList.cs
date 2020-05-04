@@ -1,5 +1,10 @@
 ﻿namespace Yomuko.Forms.Main.Control
 {
+    using Book;
+    using Form;
+    using Properties;
+    using Series;
+    using Shelf;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -10,11 +15,6 @@
     using System.Threading.Tasks;
     using System.Windows.Forms;
     using System.Xml.Serialization;
-    using Book;
-    using Form;
-    using Properties;
-    using Series;
-    using Shelf;
     using Utils;
 
     /// <summary>

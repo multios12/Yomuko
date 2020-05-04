@@ -1,7 +1,7 @@
 ﻿namespace Yomuko.Forms.Main.Control
 {
-    using System;
     using Book;
+    using System;
 
     /// <summary>検索条件選択イベント データクラス</summary>
     public class SelectSearchEventArgs : EventArgs

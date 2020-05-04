@@ -1,7 +1,6 @@
 ﻿namespace Yomuko.Forms.Property
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using System.Windows.Forms;
@@ -140,7 +139,8 @@
 
         private void NameTextBox_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            if (e.KeyData == Keys.Down) {
+            if (e.KeyData == Keys.Down)
+            {
 
             }
         }

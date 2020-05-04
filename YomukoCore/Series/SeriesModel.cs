@@ -1,7 +1,7 @@
 ﻿namespace Yomuko.Series
 {
-    using System.Collections.Generic;
     using Book;
+    using System.Collections.Generic;
 
     /// <summary>
     /// シリーズモデル

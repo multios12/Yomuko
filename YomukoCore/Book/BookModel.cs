@@ -49,6 +49,10 @@
                     }
                 }
             }
+            else
+            {
+                this.Status = AnalyzeResult.FileNotFound;
+            }
 
             // ハッシュ値を計算する
             var md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
@@ -117,7 +121,7 @@
             }
 
             // ジャンルの取得
-            if(!string.IsNullOrWhiteSpace(this.Type))
+            if (!string.IsNullOrWhiteSpace(this.Type))
             {
                 this.Type = this.Type.Trim();
                 var sp = this.Type.Split('・');

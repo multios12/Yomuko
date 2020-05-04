@@ -13,8 +13,6 @@
 */
 namespace Yomuko.Utils
 {
-    using System;
-
     /// <summary>
     /// ひらがなとカタカナ、半角と全角の文字変換を行うメソッドを提供します。
     /// </summary>

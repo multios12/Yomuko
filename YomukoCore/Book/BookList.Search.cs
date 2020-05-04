@@ -1,5 +1,6 @@
 ﻿namespace Yomuko.Book
 {
+    using Series;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -8,7 +9,6 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Xml.Serialization;
-    using Series;
 
     /// <summary>
     /// 検索処理を集めたパーシャルクラス
@@ -268,11 +268,12 @@
 
             // 検索条件による抽出
             BookModel[] list;
-            if(this.searchCriticas.Count > 0 && this.searchCriticas[0].IsDuplicate)
+            if (this.searchCriticas.Count > 0 && this.searchCriticas[0].IsDuplicate)
             {
                 this.CreateEliminateValue();
 
-                list = this.Where(b => this.Exists ((c)=>{
+                list = this.Where(b => this.Exists((c) =>
+                {
                     if (b.FilePath == c.FilePath || b.Writer != c.Writer)
                     {
                         return false;
