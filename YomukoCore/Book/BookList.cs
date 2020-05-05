@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics;
-    using System.IO;
     using System.Linq;
 
     /// <summary>
@@ -15,21 +14,15 @@
         /// <summary>TIDカウンタ変数</summary>
         private long bookIDGen;
 
-        /// <summary>対応拡張子</summary>
-        private string[] extensions = { ".zip", ".lzh", ".rar" };
-
         #region イベント
 
         /// <summary>プロパティ変更イベント</summary>
         public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>同期状態変更イベント</summary>
-        public event EventHandler<SyncStatusEventArgs> SyncStatusChanged;
         #endregion
 
         /// <summary>生成元リストを表す</summary>
         public BookList Parent { get; set; }
-
+        
         /// <summary>
         /// 指定した値をリストに追加します。
         /// </summary>
@@ -58,11 +51,7 @@
         /// <param name="filePath">ファイルパス</param>
         public void Add(string filePath)
         {
-            var model = this.AnalyzePath(filePath);
-            if (model.Status == AnalyzeResult.Success)
-            {
-                model.Status = AnalyzeResult.NotRunning;
-            }
+            var model = new BookModel(filePath);
         }
 
         /// <summary>
@@ -157,157 +146,6 @@
             }
         }
 
-        #region ベースフォルダ同期処理
-
-        /// <summary>ベースフォルダが指定されている場合、ベースフォルダを検索し、登録されていないデータを新たに登録します</summary>
-        /// <param name="baseFolderPath">ベースフォルダリスト</param>
-        /// <param name="duplicateFolderPath">フォルダパス</param>
-        /// <exception cref="DirectoryNotFoundException">ベースフォルダが存在しない。または指定されていない</exception>
-        public void SyncBaseFolder(string baseFolderPath, string duplicateFolderPath)
-        {
-            Console.WriteLine("■同期開始");
-
-            Array.ForEach(this.ToArray(), b => b.Status = AnalyzeResult.NotRunning);
-
-            // 既存ファイルチェック用パス配列の作成
-            var syncPaths = new HashSet<string>(this.Select(b => b.FilePath).OrderBy(v => v));
-
-            // ファイルの検索と存在確認
-            IEnumerable<string> files = this.GetAllFiles(baseFolderPath, "*")
-                .Where(f => !syncPaths.Contains(f));
-
-            if (!Directory.Exists(duplicateFolderPath))
-            {
-                duplicateFolderPath = null;
-            }
-
-            int progressIndex = 0;
-            int count = files.Count();
-            try
-            {
-                foreach (string filePath in files)
-                {
-                    var sw = new Stopwatch();
-                    sw.Start();
-                    BookModel model = this.AnalyzePath(filePath, syncPaths);
-                    long em = sw.ElapsedMilliseconds;
-                    Console.WriteLine($"{em}:{LabelAttributeUtils.GetLabelName(model.Status)}:{filePath}");
-
-                    if (model.Status == AnalyzeResult.Duplicate && !string.IsNullOrEmpty(duplicateFolderPath))
-                    {
-                        model.FileMove(duplicateFolderPath);
-                        syncPaths.Remove(duplicateFolderPath);
-                    }
-                    else if (model.Status == AnalyzeResult.Success)
-                    {
-                        this.Add(model);
-                    }
-
-                    var eventArgs = new SyncStatusEventArgs(filePath, progressIndex, count);
-                    this.SyncStatusChanged?.Invoke(this, eventArgs);
-
-                    if (eventArgs.Cancel)
-                    {
-                        break;
-                    }
-
-                    progressIndex += 1;
-                }
-            }
-            finally
-            {
-                this.Fill();
-            }
-
-            Console.WriteLine("■同期完了");
-        }
-
-        /// <summary>
-        /// ファイルのパスを解析し、書籍リストに追加する
-        /// </summary>
-        /// <param name="path">ファイルのパス</param>
-        /// <param name="syncPaths">既存データのファイルパスリスト。二分探索で使用するため、昇順でソートする必要がある</param>
-        /// <returns>処理結果</returns>
-        /// <remarks>ファイルを解析し、リストに登録する</remarks>
-        private BookModel AnalyzePath(string path, HashSet<string> syncPaths = null)
-        {
-            // 拡張子のチェック
-            if (this.extensions.Contains(Path.GetExtension(path).ToLower()) == false)
-            {
-                return new BookModel(path, AnalyzeResult.AnalyzeFailed);
-            }
-
-            // 既存データかどうかをチェック(二分探索)
-            if (syncPaths.Contains(path))
-            {
-                return new BookModel(path, AnalyzeResult.Always);
-            }
-
-            if (File.Exists(path) == false)
-            {
-                return new BookModel(path, AnalyzeResult.FileNotFound);
-            }
-
-            // パスに対するモデル取得
-            var book = new BookModel(path);
-
-            if (book.Status == AnalyzeResult.FileSizeZero)
-            {
-                // ファイルサイズがゼロの場合、ハッシュチェック処理を行わず終了する
-                return book;
-            }
-
-            // 同一ハッシュチェック
-            string hash = book.Hash;
-            BookModel movedModel = this.Where(b => b.Hash == hash)
-                .FirstOrDefault();
-
-            if (movedModel != null && (movedModel.Status != AnalyzeResult.NotRunning || movedModel.FileExists() == false))
-            {
-                // ハッシュが同一で同期されていないデータが存在する場合、移動とみなす
-                movedModel.FilePath = path;
-                return movedModel;
-            }
-            else if (movedModel?.Status == AnalyzeResult.NotRunning)
-            {
-                // ハッシュが同一で同期されたデータが存在する場合、重複とみなす
-                movedModel.Status = AnalyzeResult.Duplicate;
-                book.Status = AnalyzeResult.Duplicate;
-                return book;
-            }
-            else
-            {
-                // 同じハッシュを持つファイルが無い（新規ファイル）
-                book.Status = AnalyzeResult.Success;
-                return book;
-            }
-        }
-
-        /// <summary>指定されたフォルダ以下にあるすべてのファイルを取得する
-        /// </summary>
-        /// <param name="folder">ファイルを検索するフォルダ名。</param>
-        /// <param name="searchPattern">ファイル名検索文字列
-        /// ワイルドカード指定子(*, ?)を使用する。</param>
-        /// <returns>ファイル名リスト</returns>
-        private List<string> GetAllFiles(string folder, string searchPattern)
-        {
-            // folderにあるファイルを取得する
-            var files = new List<string>();
-            IEnumerable<string> fs = Directory.GetFiles(folder, searchPattern);
-            files.AddRange(fs);
-
-            // folderのサブフォルダを取得する
-            IEnumerable<string> subFolders = Directory.GetDirectories(folder);
-
-            // サブフォルダにあるファイルも調べる
-            foreach (string d in subFolders)
-            {
-                files.AddRange(this.GetAllFiles(d, searchPattern));
-            }
-
-            return files;
-        }
-
         /// <summary>
         /// 新しいTIDを作成します。
         /// </summary>
@@ -324,7 +162,6 @@
                 return this.Parent.CreateTid();
             }
         }
-        #endregion
 
         /// <summary>
         /// プロパティ変更イベントを実行します。

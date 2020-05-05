@@ -11,11 +11,26 @@
     /// </summary>
     public class ArchiveModel : IDisposable
     {
-        /// <summary>ファイルパス</summary>
         private string filePath;
 
         /// <summary>アーカイブ内のファイルリスト</summary>
-        private List<string> entryNames = new List<string>();
+        private List<string> _entryNames;
+
+        /// <summary>アーカイブ内のファイルリスト</summary>
+        private List<string> entryNames { 
+            get 
+            {
+                if(_entryNames == null)
+                {
+                    this.entryNames = ArchiveImagerHelper.Open(this.filePath);
+                }
+                return this._entryNames;
+            }
+            set
+            {
+                this._entryNames = value;
+            }
+        }
 
         /// <summary>画像操作クラス</summary>
         private ImageOperator imageOperator = new ImageOperator();
@@ -44,7 +59,6 @@
             }
 
             this.filePath = filePath;
-            this.entryNames = ArchiveImagerHelper.Open(this.filePath);
         }
 
         /// <summary>
@@ -108,10 +122,12 @@
 
             set
             {
-                if (value > this.entryNames.Count)
+                if (value != 0)
                 {
-                    // MsgBox("エラー");
-                    return;
+                    if (value > this.entryNames.Count)
+                    {
+                        return;
+                    }
                 }
 
                 this.pageIndex = value;

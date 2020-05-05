@@ -18,24 +18,22 @@
         /// <returns>エントリ名リスト</returns>
         public static List<string> Open(string filePath)
         {
+            Debug.Print("ArchiveImagerHelper.Open:Start");
             var appPath = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
             appPath = Path.Combine(appPath, "ArchiveImager.exe");
-            var args = $"/c \"{appPath}\" \"{filePath}\"";
-            var info = new ProcessStartInfo("cmd.exe", args)
+            var info = new ProcessStartInfo(appPath, $"\"{filePath}\"")
             {
                 CreateNoWindow = true,
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
             };
 
-            Process process = new Process
-            {
-                StartInfo = info
-            };
+            Process process = new Process { StartInfo = info };
             process.Start();
 
+            process.WaitForExit(2000);
             var value = process.StandardOutput.ReadToEnd();
-            process.WaitForExit();
+            Debug.Print("ArchiveImagerHelper.Open:End");
             return value.Split(new string[] { "\r\n" }, StringSplitOptions.None).ToList();
         }
 
@@ -48,7 +46,7 @@
         public static Stream GetStream(string filePath, int entryName)
         {
             var args = "\"" + filePath + "\" \"" + entryName + "\"";
-            Debug.WriteLine("args={0}", args);
+            Debug.Print($"{args}");
             var info = new ProcessStartInfo("ArchiveImager.exe", args)
             {
                 CreateNoWindow = true,

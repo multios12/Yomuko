@@ -21,7 +21,7 @@
         {
             var appPath = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
             appPath = Path.Combine(appPath, "ShelfSync.exe");
-            var info = new ProcessStartInfo(appPath, basePath)
+            var info = new ProcessStartInfo(appPath, $"\"{basePath}\"")
             {
                 CreateNoWindow = true,
                 UseShellExecute = false,

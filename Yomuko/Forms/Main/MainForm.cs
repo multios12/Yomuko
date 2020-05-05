@@ -1,7 +1,6 @@
 namespace Yomuko.Forms.Main
 {
     using Book;
-    using Forms.Common;
     using Forms.Main.Control;
     using Forms.Setting;
     using Image;
@@ -16,7 +15,6 @@ namespace Yomuko.Forms.Main
     using System.Windows.Forms;
     using Utils;
     using Yomuko.Forms.Sync;
-    using Yomuko.Sync;
 
     /// <summary>メインフォーム</summary>
     public partial class MainForm : Form
@@ -33,9 +31,6 @@ namespace Yomuko.Forms.Main
         /// <summary>検索結果リスト</summary>
         private BookList finds = new BookList();
 
-        /// <summary>処理中ダイアログ</summary>
-        private WaitDialog waitDialog;
-
         /// <summary>コンストラクタ</summary>
         public MainForm()
         {
@@ -51,7 +46,6 @@ namespace Yomuko.Forms.Main
             };
 
             this.DetailList.ItemSelected += this.DetailList_ItemSelected;
-            this.DetailList.CoverImagePaint += this.DetailList_CoverImagePaint;
             this.DetailList.ItemChanged += this.DetailList_ItemChanged;
         }
 
@@ -99,13 +93,10 @@ namespace Yomuko.Forms.Main
             });
             this.GroupTypeComboBox.SelectedIndex = 0;
 
-            this.shelf.Books.Refresh();
-            this.shelf.Books.RefreshSearchCriterias(new SearchModel(FieldType.Title, SearchModel.ALL));
-            this.finds = this.shelf.Books.SearchedItems;
-            this.finds.PropertyChanged += this.Finds_PropertyChanged;
-
             // カバー表示
             this.picCover.Image = null;
+
+            Debug.Print("FormLoad2-----------------------------------");
 
             // フォームの整形
             if (this.shelf.Columns.Count == 0)
@@ -130,19 +121,24 @@ namespace Yomuko.Forms.Main
             // 検索フィルタ
             this.ShowSearchFilterMenuItem_Click(null, null);
 
-            // ファイルリスト
+            // ファイルリストｓ
             this.ShowFileListMenuItem_Click(null, null);
+            this.shelf.Books.RefreshSearchCriterias(new SearchModel(FieldType.Title, SearchModel.ALL));
+            this.finds = this.shelf.Books.SearchedItems;
+            Debug.Print("FormLoad6.2-----------------------------------");
 
             this.GroupTypeComboBox_DropDownClosed(null, null);
+            Debug.Print("FormLoad7-----------------------------------");
 
             this.DetailList.Focus();
 
             this.DetailList.Shelf = this.shelf;
-            this.DetailList.CoverImagePaint += this.DetailList_CoverImagePaint;
             this.DetailList.Books = this.finds.SearchedItems;
+            this.DetailList.CoverImagePaint += this.DetailList_CoverImagePaint;
             this.shelf.Books.SearchCriteriasChanged += this.Books_SearchItemsChanged;
-            this.shelf.Books.SyncStatusChanged += this.Books_SyncStatusChanged;
+            this.finds.PropertyChanged += this.Finds_PropertyChanged;
             Debug.Print("FormLoad完了-----------------------------------");
+            this.DetailList.IsLoaded = true;
         }
 
         /// <summary>
@@ -289,27 +285,6 @@ namespace Yomuko.Forms.Main
             }
         }
 
-        /// <summary>全件 同期状態変更イベント</summary>
-        /// <param name="sender">発生元オブジェクト</param>
-        /// <param name="e">イベントデータ</param>
-        private void Books_SyncStatusChanged(object sender, SyncStatusEventArgs e)
-        {
-            if (this.waitDialog.IsAborting)
-            {
-                e.Cancel = true;
-                return;
-            }
-
-            // 進行状況ダイアログの表示
-            this.waitDialog.Invoke((MethodInvoker)delegate
-                {
-                    this.waitDialog.SubMessage = string.Empty;
-                    this.waitDialog.ProgressMessage = $"{e.ProgressIndex + 1} / {e.ProgressCount}";
-                    this.waitDialog.ProgressMax = e.ProgressCount;
-                    this.waitDialog.ProgressValue = e.ProgressIndex;
-                });
-        }
-
         /// <summary>全件 検索状態変更イベント</summary>
         /// <param name="sender">発生元オブジェクト</param>
         /// <param name="e">イベントデータ</param>
@@ -400,6 +375,7 @@ namespace Yomuko.Forms.Main
         /// <param name="e">イベントデータ</param>
         private void DetailList_CoverImagePaint(object sender, ItemEventArgs<BookModel> e)
         {
+            Debug.Print($"DetailList_CoverImagePaint:Start:{e.Item.CoverFileIndex}");
             if (e.Item == null || File.Exists(e.Item.FilePath) == false)
             {
                 this.picCover.Image = null;
@@ -422,6 +398,7 @@ namespace Yomuko.Forms.Main
             {
                 this.picCover.Image = null;
             }
+            Debug.Print("DetailList_CoverImagePaint:End");
         }
 
         /// <summary>詳細表示：キーダウンイベント</summary>
@@ -661,6 +638,8 @@ namespace Yomuko.Forms.Main
         {
             Process p = new Process();
             p.StartInfo.FileName = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            p.StartInfo.FileName = Path.GetDirectoryName(p.StartInfo.FileName);
+            p.StartInfo.FileName = Path.Combine(p.StartInfo.FileName, "yomuko.exe");
             p.StartInfo.Arguments = string.Format(@"""{0}"" {1}", filePath, pageIndex);
 
             p.Start();

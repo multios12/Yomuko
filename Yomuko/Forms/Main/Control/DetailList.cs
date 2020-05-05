@@ -33,6 +33,8 @@
 
         private FieldType fieldType;
 
+        public bool IsLoaded { get; set; }
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -184,6 +186,11 @@
         {
             this.CoverPaintTimer.Enabled = false;
 
+            if (!this.IsLoaded)
+            {
+                return;
+            }
+
             if ((this.SeriesListView.Visible == true && this.SeriesListView.SelectedIndices.Count == 0)
                 || (this.SeriesListView.Visible == false && this.DetailListView.SelectedIndices.Count == 0))
             {
@@ -274,6 +281,7 @@
         /// <param name="e">イベント情報</param>
         private void SeriesListView_Resize(object sender, EventArgs e)
         {
+            Debug.Print("SeriesListView_Resize");
             this.CoverPaintTimer_Tick(this, null);
         }
 
@@ -319,6 +327,7 @@
         {
             this.CoverPaintTimer.Enabled = false;
             this.CoverPaintTimer.Enabled = true;
+            Debug.Print("SeriesListView_ItemSelectionChanged:CoverPaintTimer:True");
         }
         #endregion
 
@@ -356,8 +365,15 @@
         private void DetailListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             this.CoverPaintTimer.Enabled = false;
+
+            if (!this.IsLoaded)
+            {
+                return;
+            }
+
             this.books.SearchedItems[e.ItemIndex].IsDuplicate = !this.books.SearchedItems[e.ItemIndex].FileExists();
             this.CoverPaintTimer.Enabled = this.books.SearchedItems[e.ItemIndex].FileExists();
+            Debug.Print("DetailListView_ItemSelectionChanged:CoverPaintTimer:");
         }
 
         /// <summary>詳細リストビュー  ビューアイテム作成イベント</summary>

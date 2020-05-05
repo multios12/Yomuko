@@ -11,11 +11,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Forms\Commons\MainForm-DESKTOP-EQ7SF8N.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Forms\Commons\MainForm.cs.bak" />
     <None Remove="Resources\yomuko.ico" />
     <None Remove="Resources\yomuko.png" />
   </ItemGroup>
@@ -31,12 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Forms\Commons\WaitDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\Commons\WaitDialog.Designer.cs">
-      <DependentUpon>WaitDialog.cs</DependentUpon>
-    </Compile>
     <Compile Update="Forms\Main\BookToAnotherForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,9 +104,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Forms\Commons\WaitDialog.resx">
-      <DependentUpon>WaitDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Update="Forms\Main\BookToAnotherForm.resx">
       <DependentUpon>BookToAnotherForm.cs</DependentUpon>
     </EmbeddedResource>
