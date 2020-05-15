@@ -11,6 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yomuko", "Yomuko\Yomuko.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShelfSync", "ShelfSync\ShelfSync.csproj", "{6EF55093-BC3D-4784-B557-8C696324B200}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F8E12F9C-C502-4562-928A-82C980791C0B}"
+	ProjectSection(SolutionItems) = preProject
+		publish-ArchiveImager.bat = publish-ArchiveImager.bat
+		publish.bat = publish.bat
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU

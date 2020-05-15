@@ -1,5 +1,6 @@
 ﻿namespace ArchiveImager2
 {
+    using ArchiveImager;
     using SharpCompress.Archives;
     using System;
     using System.Collections.Generic;
@@ -14,6 +15,20 @@
         /// <param name="args">コマンドライン引数</param>
         public static void Main(string[] args)
         {
+            if(args.Length == 2 && args[0].ToLower() == "encode")
+            {
+                var value = Base64URL.Encode(args[1]);
+                Console.Write(value);
+                Environment.Exit(0);
+                return;
+            }
+            else if (args.Length == 2 && args[0].ToLower() == "decode")
+            {
+                var value = Base64URL.Encode(args[1]);
+                Console.Write(value);
+                Environment.Exit(0);
+                return;
+            }
 
             int index;
             if (args.Length == 0 || !File.Exists(args[0]))
@@ -97,6 +112,26 @@
                     sourceStream.CopyTo(distStream);
                 }
             }
+        }
+
+
+        /// <summary>
+        /// 指定された文字列のハッシュを作成し返す
+        /// </summary>
+        /// <param name="value">エンコードする文字列</param>
+        /// <returns>ハッシュ文字列</returns>
+        private static string EncodeBase64Url(string value)
+        {
+            return Base64URL.Encode(value);
+        }
+
+        /// <summary>
+        /// 指定されたBase64Url文字列から元の文字列を返す
+        /// </summary>
+        /// <param name="value"></param>
+        private static string DecodeBase64Url(string value)
+        {
+            return Base64URL.Decode(value);
         }
     }
 }

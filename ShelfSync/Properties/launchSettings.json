@@ -2,7 +2,7 @@
   "profiles": {
     "ShelfSync": {
       "commandName": "Project",
-      "commandLineArgs": "\"D:\\result\""
+      "commandLineArgs": "\"E:\\コミック\""
     }
   }
 }

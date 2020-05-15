@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Runtime.CompilerServices;
     using Yomuko.Book;
     using Yomuko.Shelf;
 
@@ -14,6 +15,8 @@
 
         private static ShelfModel shelf = new ShelfModel();
 
+        private static Dictionary<string, BookModel> sortedbooks = new Dictionary<string, BookModel>();
+
         /// <summary>ベースフォルダが指定されている場合、ベースフォルダを検索し、登録されていないデータを新たに登録します</summary>
         /// <param name="baseFolderPath">ベースフォルダリスト</param>
         /// <exception cref="DirectoryNotFoundException">ベースフォルダが存在しない。または指定されていない</exception>
@@ -21,6 +24,10 @@
         {
             shelf = shelf.ReadJson(baseFolderPath);
             Array.ForEach(shelf.Books.ToArray(), b => b.Status = AnalyzeResult.NotRunning);
+            foreach (var b in shelf.Books.Where(b => sortedbooks.ContainsKey(b.Hash)))
+            {
+                sortedbooks.Add(b.Hash, b);
+            }
 
             // ファイルの検索と除外処理
             var syncPaths = new HashSet<string>(shelf.Books.Select(b => b.FilePath.ToLower()).OrderBy(v => v));
@@ -40,7 +47,7 @@
             var books = shelf.Books.Where(b => b.Status == AnalyzeResult.NotRunning);
             foreach (var book in books)
             {
-                if(!book.FileExists())
+                if (!book.FileExists())
                 {
                     book.Status = AnalyzeResult.FileNotFound;
                     Console.WriteLine($"{LabelAttributeUtils.GetLabelName(book.Status)}>{book.FilePath}");
@@ -65,7 +72,8 @@
             }
 
             // 同一ハッシュチェック
-            BookModel movedModel = shelf.Books.Where(b => b.Hash == book.Hash).FirstOrDefault();
+            BookModel movedModel = sortedbooks.ContainsKey(book.Hash) ? sortedbooks[book.Hash] : null;
+            //BookModel movedModel =  shelf.Books.Where(b => b.Hash == book.Hash).FirstOrDefault();
 
             if (movedModel != null && (movedModel.Status != AnalyzeResult.NotRunning || !movedModel.FileExists()))
             {
@@ -84,6 +92,7 @@
             // 同じハッシュを持つファイルが無い（新規ファイル）
             book.Status = AnalyzeResult.Success;
             shelf.Books.Add(book);
+            sortedbooks.Add(book.Hash, book);
             return book;
         }
 
