@@ -135,15 +135,15 @@
         /// <param name="e">イベント情報</param>
         private void OK_Button_Click(object sender, EventArgs e)
         {
-            this.Book.Title = this.cboTitle.Text;
-            this.Book.SubTitle = this.SubTitleTextBox.Text;
-            this.Book.Writer = this.cboWriter.Text;
-            this.Book.PublishingCompany = this.cboPublisher.Text;
-            this.Book.Junle = this.txtJunle.Text;
-            this.Book.Memo = this.txtMemo.Text;
+            this.Book.Title = this.cboTitle.Text.Trim();
+            this.Book.SubTitle = this.SubTitleTextBox.Text.Trim();
+            this.Book.Writer = this.cboWriter.Text.Trim();
+            this.Book.PublishingCompany = this.cboPublisher.Text.Trim();
+            this.Book.Junle = this.txtJunle.Text.Trim();
+            this.Book.Memo = this.txtMemo.Text.Trim();
             this.Book.UpdateDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-            this.Book.No = this.txtNO.Text;
-            this.Book.Type = this.BookTypeComboBox.Text;
+            this.Book.No = this.txtNO.Text.Trim();
+            this.Book.Type = this.BookTypeComboBox.Text.Trim();
             this.Book.IsComplete = this.CompleteCheckBox.Checked;
 
             this.Book.CoverFileIndex = (int)this.CoverIndexUpDown.Value;
@@ -155,18 +155,18 @@
 
             if (this.Book.Type.IndexOf("写真集") > -1)
             {
-                this.Book.Photographer = this.cboPhotographer.Text;
+                this.Book.Photographer = this.cboPhotographer.Text.Trim();
             }
             else
             {
                 if (this.Book.Type.IndexOf("コミック") > -1)
                 {
-                    this.Book.CarryMagazine = this.cboPhotographer.Text;
+                    this.Book.CarryMagazine = this.cboPhotographer.Text.Trim();
                 }
 
                 if (DateTime.TryParse(this.SaleDateTextBox.Text, out DateTime d))
                 {
-                    this.Book.ReleaseDate = this.SaleDateTextBox.Text;
+                    this.Book.ReleaseDate = this.SaleDateTextBox.Text.Trim();
                 }
             }
 

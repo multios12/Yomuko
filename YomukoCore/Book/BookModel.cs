@@ -136,7 +136,7 @@
             ma = Regex.Match(fileName, @"\[[^\]]*\]");
             if (ma.Length > 0)
             {
-                this.Writer = Regex.Match(ma.Value, @"[^\]|\[]+").Value;
+                this.Writer = Regex.Match(ma.Value, @"[^\]|\[]+").Value.Trim();
                 fileName = fileName.Replace(Regex.Match(fileName, @"\[[^\]]*\]").Value, string.Empty);
             }
 
