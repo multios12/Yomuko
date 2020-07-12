@@ -135,8 +135,14 @@
                 }
 
                 var list = this.SearchedItems.ToArray();
-                list = this.isSortOrderAsc
-                    ? list.OrderBy(b => b.GetSortKey(this.sortKey)).ToArray() : list.OrderByDescending(b => b.GetSortKey(this.sortKey)).ToArray();
+                if (this.isSortOrderAsc)
+                {
+                    list = list.OrderBy(b => b.GetValue(this.SortKey)).ThenBy(b => b.GetValue(FieldType.Title)).ToArray();
+                }
+                else
+                {
+                    list = list.OrderByDescending(b => b.GetValue(this.SortKey)).ThenByDescending(b => b.GetValue(FieldType.Title)).ToArray();
+                }
                 this.SearchedItems.Clear();
                 Array.ForEach(list.ToArray(), b => this.SearchedItems.Add(b));
 
@@ -158,8 +164,14 @@
                 {
                     this.isSortOrderAsc = value;
                     var list = this.SearchedItems.AsEnumerable();
-                    list = this.isSortOrderAsc
-                        ? list.OrderBy(b => b.GetSortKey(this.sortKey)) : list.OrderByDescending(b => b.GetSortKey(this.sortKey));
+                    if (this.isSortOrderAsc)
+                    {
+                        list = list.OrderBy(b => b.GetValue(this.SortKey)).ThenBy(b => b.GetValue(FieldType.Title)).ToArray();
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(b => b.GetValue(this.SortKey)).ThenByDescending(b => b.GetValue(FieldType.Title)).ToArray();
+                    }
                     Array.ForEach(list.ToArray(), b => this.SearchedItems.Add(b));
 
                     this.OnPropertyChanged(new PropertyChangedEventArgs(nameof(this.SearchedItems)));
@@ -267,7 +279,7 @@
             }
 
             // 検索条件による抽出
-            BookModel[] list;
+            IEnumerable<BookModel> list;
             if (this.searchCriticas.Count > 0 && this.searchCriticas[0].IsDuplicate)
             {
                 this.CreateEliminateValue();
@@ -279,23 +291,27 @@
                         return false;
                     }
                     return b.EliminateTitle == c.EliminateTitle;
-                })).ToArray();
+                }));
             }
             else
             {
-                list = this.Where(book => this.searchCriticas.FirstOrDefault(s => !s.Check(book)) == null).ToArray();
+                list = this.Where(book => this.searchCriticas.FirstOrDefault(s => !s.Check(book)) == null);
             }
 
             Debug.Print("[{0}]{1}:{2}", DateTime.Now.ToString("HH:mm:ss"), "BookList.Fill:Filled", sw.ElapsedMilliseconds);
 
             // ソート
-            list = this.isSortOrderAsc
-                ? list.OrderBy(b => b.GetSortKey(this.sortKey)).ToArray() : list.OrderByDescending(b => b.GetSortKey(this.sortKey)).ToArray();
+            if (this.isSortOrderAsc)
+            {
+                list = list.OrderBy(b => b.GetValue(this.SortKey)).ThenBy(b => b.GetValue(FieldType.Title));
+            } else
+            {
+                list = list.OrderByDescending(b => b.GetValue(this.SortKey)).ThenByDescending(b => b.GetValue(FieldType.Title));
+            }
             Debug.Print("[{0}]{1}:{2}", DateTime.Now.ToString("HH:mm:ss"), "BookList.Fill:Sorted", sw.ElapsedMilliseconds);
-            this.SearchedItems.Clear();
 
+            this.SearchedItems.Clear();
             this.SearchedItems.AddRange(list);
-            //Array.ForEach(list, b => this.SearchedItems.Add(b));
 
             Debug.Print("[{0}]{1}:{2}", DateTime.Now.ToString("HH:mm:ss"), "BookList.Fill:SortedToArray", sw.ElapsedMilliseconds);
 

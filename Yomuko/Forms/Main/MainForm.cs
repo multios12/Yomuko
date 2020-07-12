@@ -498,6 +498,10 @@ namespace Yomuko.Forms.Main
                 return;
             }
 
+            this.shelf = null;
+            this.DialogResult = DialogResult.Retry;
+            this.Close();
+
             using (var form = new SyncForm())
             {
                 form.Owner = this;

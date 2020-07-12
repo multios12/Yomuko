@@ -394,23 +394,6 @@
             }
         }
 
-        /// <summary>ソートキーを生成して返します。</summary>
-        /// <param name="keyFieldType">キー生成元項目</param>
-        /// <returns>ソートキー</returns>
-        public string GetSortKey(FieldType keyFieldType)
-        {
-            StringBuilder builder = new StringBuilder();
-
-            builder.Append(this.GetValue(keyFieldType));
-
-            if (keyFieldType != FieldType.Title && keyFieldType != FieldType.Title)
-            {
-                builder.Append(this.GetFormatValue(FieldType.Title));
-            }
-
-            return builder.ToString();
-        }
-
         /// <summary>指定された項目の値を返します。</summary>
         /// <param name="fieldType">項目種類</param>
         /// <param name="collectSubTitle">サブタイトルをまとめて表示する場合、True</param>
