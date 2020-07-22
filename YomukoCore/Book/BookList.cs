@@ -91,9 +91,9 @@
         /// </summary>
         /// <param name="item">モデル</param>
         /// <returns>正常に終了した場合、true</returns>
-        public new bool Remove(BookModel item)
+        public new bool Remove(BookModel item, bool isParent = false)
         {
-            if (this.Parent != null)
+            if (this.Parent != null && !isParent)
             {
                 this.Parent.Remove(item);
             }

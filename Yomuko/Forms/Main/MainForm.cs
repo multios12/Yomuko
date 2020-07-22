@@ -354,7 +354,7 @@ namespace Yomuko.Forms.Main
             {
                 if (!this.finds.GetSearchCriterias()[0].Check(model))
                 {
-                    this.finds.Remove(model);
+                    this.finds.Remove(model, true);
                 }
             }
 

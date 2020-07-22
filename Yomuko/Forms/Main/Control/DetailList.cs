@@ -628,21 +628,15 @@
             }
 
             this.DetailListView.SuspendLayout();
-            var models = this.GetSelectedBooks().ToList();
-            models.ForEach(m => m.FileMove(distFolderPath));
-
-            foreach (var model in models)
+            foreach (var model in this.GetSelectedBooks())
             {
-                if (!this.books.GetSearchCriterias()[0].Check(model))
-                {
-                    this.books.SearchedItems.Remove(model);
-                }
+                model.FileMove(distFolderPath);
             }
 
             this.DetailListView.VirtualListSize = this.books.SearchedItems.Count;
 
-            var eventArgs = new ItemEventArgs<IEnumerable<BookModel>>(models);
-            this.ItemChanged(sender, eventArgs);
+            var eventArgs = new ItemEventArgs<IEnumerable<BookModel>>(this.GetSelectedBooks());
+            // this.ItemChanged(sender, eventArgs);
 
             this.DetailListView.ResumeLayout();
             this.DetailListView.Refresh();

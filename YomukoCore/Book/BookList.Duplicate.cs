@@ -54,7 +54,9 @@
                     continue;
                 }
 
-                string value = model.GetFormatValue(FieldType.Title, true).Trim();
+                string value = model.GetFormatValue(FieldType.Title, true);
+                value = value.Replace("[DL版]", "");
+                value = value.Trim();
                 value = Utils.Kanaxas.ToHankaku(value);
                 value = value.ToLower();
 
