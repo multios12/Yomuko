@@ -1,10 +1,13 @@
 ﻿namespace Yomuko.Image
 {
+    using SharpCompress.Archives.Zip;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Drawing;
+    using System.Drawing.Imaging;
     using System.IO;
+    using System.Linq;
 
     /// <summary>
     /// 画像が入った圧縮ファイルを操作するためのクラス
@@ -427,6 +430,69 @@
             }
         }
 
+        /// <summary>
+        /// 指定された画像をカバーページとして設定する
+        /// </summary>
+        public void SetCover(Image img)
+        {
+
+            var name = Path.GetTempFileName();
+            try
+            {
+                if (Path.GetExtension(this.FilePath).ToLower() != ".zip")
+                {
+                    return;
+                }
+
+                using (ZipArchive archive = ZipArchive.Open(this.FilePath))
+                {
+                    var eps = new EncoderParameters(1);
+                    var ep = eps.Param[0] = new EncoderParameter(Encoder.Quality, 70);
+
+                    // イメージエンコーダに関する情報を取得する
+                    var ici = this.GetEncoderInfo(ImageFormat.Png);
+
+                    var memory = new MemoryStream();
+                    img.Save(memory, ici, eps);
+                    memory.Position = 0;
+                    var entry = archive.Entries.Where(k => k.Key == "__cover.png").FirstOrDefault();
+                    if (entry != null)
+                    {
+                        archive.Entries.Remove(entry);
+                    }
+                    archive.AddEntry("__cover.png", memory);
+                    using (var stream = new FileStream(name, FileMode.Open, FileAccess.ReadWrite))
+                    {
+                        archive.SaveTo(stream);
+                    }
+
+
+                }
+                File.Move(name, this.FilePath, true);
+            }
+            catch (Exception e)
+            {
+                return;
+            }
+        }
+
+        private ImageCodecInfo GetEncoderInfo(ImageFormat format)
+        {
+            ImageCodecInfo[] encoders = ImageCodecInfo.GetImageEncoders();
+
+            int j = 0;
+            while (j < encoders.Length)
+            {
+                if (encoders[j].FormatID == format.Guid)
+                {
+                    return encoders[j];
+                }
+
+                j += 1;
+            }
+
+            return null;
+        }
         #region IDisposable Support
 
         /// <summary>リソースを解放します。</summary>

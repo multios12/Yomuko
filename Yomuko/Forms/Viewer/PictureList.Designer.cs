@@ -30,8 +30,8 @@
             this.components = new System.ComponentModel.Container();
             this.spcMain = new System.Windows.Forms.SplitContainer();
             this.fileNamePanel1 = new Yomuko.Forms.Property.FileNamePanel();
-            this.FileNameLabel = new System.Windows.Forms.LinkLabel();
             this.FileListBox = new System.Windows.Forms.ListBox();
+            this.FileNameLabel = new System.Windows.Forms.LinkLabel();
             this.PagePictureBox = new System.Windows.Forms.PictureBox();
             this.cmsSubMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ExitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,54 +54,59 @@
             // 
             this.spcMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.spcMain.Location = new System.Drawing.Point(0, 0);
+            this.spcMain.Margin = new System.Windows.Forms.Padding(4);
             this.spcMain.Name = "spcMain";
             // 
             // spcMain.Panel1
             // 
             this.spcMain.Panel1.Controls.Add(this.fileNamePanel1);
-            this.spcMain.Panel1.Controls.Add(this.FileNameLabel);
             this.spcMain.Panel1.Controls.Add(this.FileListBox);
+            this.spcMain.Panel1.Controls.Add(this.FileNameLabel);
             // 
             // spcMain.Panel2
             // 
             this.spcMain.Panel2.Controls.Add(this.PagePictureBox);
-            this.spcMain.Size = new System.Drawing.Size(1069, 718);
-            this.spcMain.SplitterDistance = 354;
+            this.spcMain.Size = new System.Drawing.Size(1247, 898);
+            this.spcMain.SplitterDistance = 412;
+            this.spcMain.SplitterWidth = 5;
             this.spcMain.TabIndex = 0;
             this.spcMain.TabStop = false;
             // 
             // fileNamePanel1
             // 
             this.fileNamePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fileNamePanel1.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.fileNamePanel1.Location = new System.Drawing.Point(0, 24);
+            this.fileNamePanel1.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.fileNamePanel1.Location = new System.Drawing.Point(0, 30);
+            this.fileNamePanel1.Margin = new System.Windows.Forms.Padding(4);
             this.fileNamePanel1.Name = "fileNamePanel1";
-            this.fileNamePanel1.Size = new System.Drawing.Size(354, 694);
+            this.fileNamePanel1.Size = new System.Drawing.Size(412, 868);
             this.fileNamePanel1.TabIndex = 2;
             this.fileNamePanel1.Visible = false;
-            // 
-            // FileNameLabel
-            // 
-            this.FileNameLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.FileNameLabel.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.FileNameLabel.Location = new System.Drawing.Point(0, 0);
-            this.FileNameLabel.Name = "FileNameLabel";
-            this.FileNameLabel.Size = new System.Drawing.Size(354, 24);
-            this.FileNameLabel.TabIndex = 10;
-            this.FileNameLabel.TabStop = true;
-            this.FileNameLabel.Text = "ファイル名";
-            this.FileNameLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.FileNameLabel_LinkClicked);
             // 
             // FileListBox
             // 
             this.FileListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FileListBox.FormattingEnabled = true;
-            this.FileListBox.ItemHeight = 12;
-            this.FileListBox.Location = new System.Drawing.Point(0, 0);
+            this.FileListBox.ItemHeight = 15;
+            this.FileListBox.Location = new System.Drawing.Point(0, 30);
+            this.FileListBox.Margin = new System.Windows.Forms.Padding(4);
             this.FileListBox.Name = "FileListBox";
-            this.FileListBox.Size = new System.Drawing.Size(354, 718);
+            this.FileListBox.Size = new System.Drawing.Size(412, 868);
             this.FileListBox.TabIndex = 9;
             this.FileListBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FileListBox_MouseClick);
+            // 
+            // FileNameLabel
+            // 
+            this.FileNameLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.FileNameLabel.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.FileNameLabel.Location = new System.Drawing.Point(0, 0);
+            this.FileNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.FileNameLabel.Name = "FileNameLabel";
+            this.FileNameLabel.Size = new System.Drawing.Size(412, 30);
+            this.FileNameLabel.TabIndex = 10;
+            this.FileNameLabel.TabStop = true;
+            this.FileNameLabel.Text = "ファイル名";
+            this.FileNameLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.FileNameLabel_LinkClicked);
             // 
             // PagePictureBox
             // 
@@ -109,8 +114,9 @@
             this.PagePictureBox.ContextMenuStrip = this.cmsSubMenu;
             this.PagePictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PagePictureBox.Location = new System.Drawing.Point(0, 0);
+            this.PagePictureBox.Margin = new System.Windows.Forms.Padding(4);
             this.PagePictureBox.Name = "PagePictureBox";
-            this.PagePictureBox.Size = new System.Drawing.Size(711, 718);
+            this.PagePictureBox.Size = new System.Drawing.Size(830, 898);
             this.PagePictureBox.TabIndex = 1;
             this.PagePictureBox.TabStop = false;
             this.PagePictureBox.SizeChanged += new System.EventHandler(this.PagePictureBox_SizeChanged);
@@ -185,11 +191,12 @@
             // 
             // PictureList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.spcMain);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "PictureList";
-            this.Size = new System.Drawing.Size(1069, 718);
+            this.Size = new System.Drawing.Size(1247, 898);
             this.spcMain.Panel1.ResumeLayout(false);
             this.spcMain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.spcMain)).EndInit();

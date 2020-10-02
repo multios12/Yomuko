@@ -39,9 +39,8 @@
             this.GroupListBox = new System.Windows.Forms.ListBox();
             this.picCover = new System.Windows.Forms.PictureBox();
             this.cmsCover = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.smiCoverLeft = new System.Windows.Forms.ToolStripMenuItem();
-            this.右側を表示ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.全体を表示ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.smiCoverCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.smiCoverPaste = new System.Windows.Forms.ToolStripMenuItem();
             this.spcDetail = new System.Windows.Forms.SplitContainer();
             this.SearchFinderClearButton = new System.Windows.Forms.Button();
             this.SearchFinderComboBox = new System.Windows.Forms.ComboBox();
@@ -121,9 +120,10 @@
             this.sspMain.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.sspMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sslInfomation});
-            this.sspMain.Location = new System.Drawing.Point(0, 419);
+            this.sspMain.Location = new System.Drawing.Point(0, 529);
             this.sspMain.Name = "sspMain";
-            this.sspMain.Size = new System.Drawing.Size(976, 22);
+            this.sspMain.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
+            this.sspMain.Size = new System.Drawing.Size(1139, 22);
             this.sspMain.TabIndex = 3;
             this.sspMain.Text = "StatusStrip1";
             // 
@@ -131,6 +131,7 @@
             // 
             this.MainSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainSplitContainer.Location = new System.Drawing.Point(0, 24);
+            this.MainSplitContainer.Margin = new System.Windows.Forms.Padding(4);
             this.MainSplitContainer.Name = "MainSplitContainer";
             // 
             // MainSplitContainer.Panel1
@@ -140,8 +141,9 @@
             // MainSplitContainer.Panel2
             // 
             this.MainSplitContainer.Panel2.Controls.Add(this.spcDetail);
-            this.MainSplitContainer.Size = new System.Drawing.Size(976, 395);
-            this.MainSplitContainer.SplitterDistance = 194;
+            this.MainSplitContainer.Size = new System.Drawing.Size(1139, 505);
+            this.MainSplitContainer.SplitterDistance = 226;
+            this.MainSplitContainer.SplitterWidth = 5;
             this.MainSplitContainer.TabIndex = 2;
             this.MainSplitContainer.TabStop = false;
             // 
@@ -151,6 +153,7 @@
             this.spcList.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.spcList.IsSplitterFixed = true;
             this.spcList.Location = new System.Drawing.Point(0, 0);
+            this.spcList.Margin = new System.Windows.Forms.Padding(4);
             this.spcList.Name = "spcList";
             this.spcList.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -161,7 +164,7 @@
             // spcList.Panel2
             // 
             this.spcList.Panel2.Controls.Add(this.spcCover);
-            this.spcList.Size = new System.Drawing.Size(194, 395);
+            this.spcList.Size = new System.Drawing.Size(226, 505);
             this.spcList.SplitterDistance = 25;
             this.spcList.SplitterWidth = 1;
             this.spcList.TabIndex = 2;
@@ -173,9 +176,10 @@
             this.GroupTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.GroupTypeComboBox.FormattingEnabled = true;
             this.GroupTypeComboBox.Location = new System.Drawing.Point(0, 0);
+            this.GroupTypeComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.GroupTypeComboBox.MaxDropDownItems = 20;
             this.GroupTypeComboBox.Name = "GroupTypeComboBox";
-            this.GroupTypeComboBox.Size = new System.Drawing.Size(194, 20);
+            this.GroupTypeComboBox.Size = new System.Drawing.Size(226, 23);
             this.GroupTypeComboBox.TabIndex = 0;
             this.GroupTypeComboBox.DropDownClosed += new System.EventHandler(this.GroupTypeComboBox_DropDownClosed);
             this.GroupTypeComboBox.Leave += new System.EventHandler(this.GroupTypeComboBox_Leave);
@@ -184,6 +188,7 @@
             // 
             this.spcCover.Dock = System.Windows.Forms.DockStyle.Fill;
             this.spcCover.Location = new System.Drawing.Point(0, 0);
+            this.spcCover.Margin = new System.Windows.Forms.Padding(4);
             this.spcCover.Name = "spcCover";
             this.spcCover.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -194,8 +199,9 @@
             // spcCover.Panel2
             // 
             this.spcCover.Panel2.Controls.Add(this.picCover);
-            this.spcCover.Size = new System.Drawing.Size(194, 369);
-            this.spcCover.SplitterDistance = 178;
+            this.spcCover.Size = new System.Drawing.Size(226, 479);
+            this.spcCover.SplitterDistance = 231;
+            this.spcCover.SplitterWidth = 5;
             this.spcCover.TabIndex = 3;
             this.spcCover.TabStop = false;
             // 
@@ -204,10 +210,11 @@
             this.GroupListBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.GroupListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GroupListBox.FormattingEnabled = true;
-            this.GroupListBox.ItemHeight = 12;
+            this.GroupListBox.ItemHeight = 15;
             this.GroupListBox.Location = new System.Drawing.Point(0, 0);
+            this.GroupListBox.Margin = new System.Windows.Forms.Padding(4);
             this.GroupListBox.Name = "GroupListBox";
-            this.GroupListBox.Size = new System.Drawing.Size(194, 178);
+            this.GroupListBox.Size = new System.Drawing.Size(226, 231);
             this.GroupListBox.TabIndex = 0;
             this.GroupListBox.SelectedIndexChanged += new System.EventHandler(this.GroupListBox_SelectedIndexChanged);
             // 
@@ -217,44 +224,43 @@
             this.picCover.ContextMenuStrip = this.cmsCover;
             this.picCover.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picCover.Location = new System.Drawing.Point(0, 0);
+            this.picCover.Margin = new System.Windows.Forms.Padding(4);
             this.picCover.Name = "picCover";
-            this.picCover.Size = new System.Drawing.Size(194, 187);
+            this.picCover.Size = new System.Drawing.Size(226, 243);
             this.picCover.TabIndex = 0;
             this.picCover.TabStop = false;
+            this.picCover.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picCover_MouseDown);
             // 
             // cmsCover
             // 
             this.cmsCover.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmsCover.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.smiCoverLeft,
-            this.右側を表示ToolStripMenuItem,
-            this.全体を表示ToolStripMenuItem});
+            this.smiCoverCopy,
+            this.smiCoverPaste});
             this.cmsCover.Name = "cmsCover";
-            this.cmsCover.Size = new System.Drawing.Size(132, 70);
+            this.cmsCover.Size = new System.Drawing.Size(176, 48);
+            this.cmsCover.Opening += new System.ComponentModel.CancelEventHandler(this.cmsCover_Opening);
             // 
-            // smiCoverLeft
+            // smiCoverCopy
             // 
-            this.smiCoverLeft.Name = "smiCoverLeft";
-            this.smiCoverLeft.Size = new System.Drawing.Size(131, 22);
-            this.smiCoverLeft.Text = "左側を表示";
+            this.smiCoverCopy.Name = "smiCoverCopy";
+            this.smiCoverCopy.Size = new System.Drawing.Size(175, 22);
+            this.smiCoverCopy.Text = "カバー画像をコピー";
+            this.smiCoverCopy.Click += new System.EventHandler(this.smiCoverCopy_Click);
             // 
-            // 右側を表示ToolStripMenuItem
+            // smiCoverPaste
             // 
-            this.右側を表示ToolStripMenuItem.Name = "右側を表示ToolStripMenuItem";
-            this.右側を表示ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
-            this.右側を表示ToolStripMenuItem.Text = "右側を表示";
-            // 
-            // 全体を表示ToolStripMenuItem
-            // 
-            this.全体を表示ToolStripMenuItem.Name = "全体を表示ToolStripMenuItem";
-            this.全体を表示ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
-            this.全体を表示ToolStripMenuItem.Text = "全体を表示";
+            this.smiCoverPaste.Name = "smiCoverPaste";
+            this.smiCoverPaste.Size = new System.Drawing.Size(175, 22);
+            this.smiCoverPaste.Text = "カバー画像に貼り付け";
+            this.smiCoverPaste.Click += new System.EventHandler(this.smiCoverPaste_Click);
             // 
             // spcDetail
             // 
             this.spcDetail.Dock = System.Windows.Forms.DockStyle.Fill;
             this.spcDetail.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.spcDetail.Location = new System.Drawing.Point(0, 0);
+            this.spcDetail.Margin = new System.Windows.Forms.Padding(4);
             this.spcDetail.Name = "spcDetail";
             this.spcDetail.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -268,17 +274,19 @@
             // spcDetail.Panel2
             // 
             this.spcDetail.Panel2.Controls.Add(this.DetailList);
-            this.spcDetail.Size = new System.Drawing.Size(778, 395);
+            this.spcDetail.Size = new System.Drawing.Size(908, 505);
             this.spcDetail.SplitterDistance = 25;
+            this.spcDetail.SplitterWidth = 5;
             this.spcDetail.TabIndex = 1;
             this.spcDetail.TabStop = false;
             // 
             // SearchFinderClearButton
             // 
             this.SearchFinderClearButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SearchFinderClearButton.Location = new System.Drawing.Point(714, 2);
+            this.SearchFinderClearButton.Location = new System.Drawing.Point(833, 2);
+            this.SearchFinderClearButton.Margin = new System.Windows.Forms.Padding(4);
             this.SearchFinderClearButton.Name = "SearchFinderClearButton";
-            this.SearchFinderClearButton.Size = new System.Drawing.Size(64, 23);
+            this.SearchFinderClearButton.Size = new System.Drawing.Size(75, 29);
             this.SearchFinderClearButton.TabIndex = 3;
             this.SearchFinderClearButton.Text = "クリア";
             this.SearchFinderClearButton.UseVisualStyleBackColor = true;
@@ -290,9 +298,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SearchFinderComboBox.FormattingEnabled = true;
-            this.SearchFinderComboBox.Location = new System.Drawing.Point(227, 3);
+            this.SearchFinderComboBox.Location = new System.Drawing.Point(265, 4);
+            this.SearchFinderComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.SearchFinderComboBox.Name = "SearchFinderComboBox";
-            this.SearchFinderComboBox.Size = new System.Drawing.Size(481, 20);
+            this.SearchFinderComboBox.Size = new System.Drawing.Size(560, 23);
             this.SearchFinderComboBox.TabIndex = 2;
             this.SearchFinderComboBox.Leave += new System.EventHandler(this.SearchFinderComboBox_LostFocus);
             // 
@@ -300,18 +309,20 @@
             // 
             this.cboFinderType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboFinderType.FormattingEnabled = true;
-            this.cboFinderType.Location = new System.Drawing.Point(56, 3);
+            this.cboFinderType.Location = new System.Drawing.Point(65, 4);
+            this.cboFinderType.Margin = new System.Windows.Forms.Padding(4);
             this.cboFinderType.Name = "cboFinderType";
-            this.cboFinderType.Size = new System.Drawing.Size(166, 20);
+            this.cboFinderType.Size = new System.Drawing.Size(193, 23);
             this.cboFinderType.TabIndex = 1;
             this.cboFinderType.Leave += new System.EventHandler(this.SearchFinderComboBox_LostFocus);
             // 
             // Label1
             // 
             this.Label1.AutoSize = true;
-            this.Label1.Location = new System.Drawing.Point(11, 6);
+            this.Label1.Location = new System.Drawing.Point(13, 8);
+            this.Label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label1.Name = "Label1";
-            this.Label1.Size = new System.Drawing.Size(38, 12);
+            this.Label1.Size = new System.Drawing.Size(41, 15);
             this.Label1.TabIndex = 0;
             this.Label1.Text = "フィルタ";
             // 
@@ -320,14 +331,17 @@
             this.DetailList.AllowDrop = true;
             this.DetailList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DetailList.IsCollectSubtitle = false;
+            this.DetailList.IsLoaded = false;
             this.DetailList.Location = new System.Drawing.Point(0, 0);
-            this.DetailList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DetailList.Margin = new System.Windows.Forms.Padding(5);
             this.DetailList.Name = "DetailList";
-            this.DetailList.Size = new System.Drawing.Size(778, 366);
+            this.DetailList.Search = null;
+            this.DetailList.Size = new System.Drawing.Size(908, 475);
             this.DetailList.TabIndex = 0;
+            this.DetailList.Value = null;
+            this.DetailList.SearchSelected += new System.EventHandler<Yomuko.Forms.Main.Control.SelectSearchEventArgs>(this.DetailList_SearchSelected);
             this.DetailList.SeriesModeChanged += new System.EventHandler(this.DetailList_SeriesModeChanged);
             this.DetailList.BookmarksShown += new System.EventHandler(this.DetailList_BookmarksShown);
-            this.DetailList.SearchSelected += new System.EventHandler<Control.SelectSearchEventArgs>(this.DetailList_SearchSelected);
             // 
             // ファイルFToolStripMenuItem
             // 
@@ -406,7 +420,8 @@
             this.ヘルプHToolStripMenuItem});
             this.MenuStrip1.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip1.Name = "MenuStrip1";
-            this.MenuStrip1.Size = new System.Drawing.Size(976, 24);
+            this.MenuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            this.MenuStrip1.Size = new System.Drawing.Size(1139, 24);
             this.MenuStrip1.TabIndex = 13;
             this.MenuStrip1.Text = "MenuStrip1";
             // 
@@ -605,18 +620,17 @@
             // 
             this.BookmarkList1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BookmarkList1.Location = new System.Drawing.Point(0, 24);
-            this.BookmarkList1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BookmarkList1.Margin = new System.Windows.Forms.Padding(5);
             this.BookmarkList1.Name = "BookmarkList1";
-            this.BookmarkList1.Size = new System.Drawing.Size(976, 417);
+            this.BookmarkList1.Size = new System.Drawing.Size(1139, 527);
             this.BookmarkList1.TabIndex = 14;
             this.BookmarkList1.TabStop = false;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(976, 441);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
+            this.ClientSize = new System.Drawing.Size(1139, 551);
             this.Controls.Add(this.MainSplitContainer);
             this.Controls.Add(this.sspMain);
             this.Controls.Add(this.BookmarkList1);
@@ -624,9 +638,11 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.MenuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "cl";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.sspMain.ResumeLayout(false);
             this.sspMain.PerformLayout();
@@ -693,9 +709,6 @@
         System.Windows.Forms.ToolStripSeparator ToolStripSeparator3;
         System.Windows.Forms.ToolStripSeparator ToolStripSeparator4;
         System.Windows.Forms.ContextMenuStrip cmsCover;
-        System.Windows.Forms.ToolStripMenuItem smiCoverLeft;
-        System.Windows.Forms.ToolStripMenuItem 右側を表示ToolStripMenuItem;
-        System.Windows.Forms.ToolStripMenuItem 全体を表示ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ShowDisplayAllMenuItem;
         private System.Windows.Forms.ToolStripMenuItem smiFit;
         private System.Windows.Forms.ToolStripMenuItem smiFitWidth;
@@ -710,5 +723,7 @@
         private System.Windows.Forms.ToolStripSeparator ToolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem ShowFileListMenuItem;
         private System.Windows.Forms.ToolStripMenuItem smiDisplayAll;
+        private System.Windows.Forms.ToolStripMenuItem smiCoverCopy;
+        private System.Windows.Forms.ToolStripMenuItem smiCoverPaste;
     }
 }

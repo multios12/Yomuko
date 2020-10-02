@@ -100,7 +100,9 @@
                 {
                     PageIndex = model.PageIndex
                 };
+
                 this.picCover.Image = archiveBook.PagePicture;
+                this.picCover.Tag = model;
             }
             catch (Exception)
             {
@@ -125,6 +127,44 @@
             this.BookmarkListView.Items[this.BookmarkListView.SelectedIndices[0]].Remove();
         }
         #endregion
+
+        /// <param name="sender">発生元オブジェクト</param>
+        /// <param name="e">イベント情報</param>
+        private void PicCover_MouseMove(object sender, MouseEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <param name="sender">発生元オブジェクト</param>
+        /// <param name="e">イベント情報</param>
+        private void PicCover_MouseUp(object sender, MouseEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <param name="sender">発生元オブジェクト</param>
+        /// <param name="e">イベント情報</param>
+        private void PicCover_MouseDown(object sender, MouseEventArgs e)
+        {
+            //マウスの左ボタンだけが押されている時のみドラッグできるようにする
+            if (e.Button == MouseButtons.Left)
+            {
+
+                var model = (BookModel)this.picCover.Tag;
+                using (var s = ArchiveImagerHelper.GetStream(model.FilePath, model.CoverFileIndex))
+                {
+                    var b = new System.Drawing.Bitmap(s);
+                    var dataObj = new DataObject();
+                    dataObj.SetData(DataFormats.Bitmap, s);
+                    picCover.DoDragDrop(dataObj, DragDropEffects.All);
+                }
+
+            }
+            else
+            {
+            }
+        }
+
 
         /// <summary>選択されたモデルを返します。</summary>
         /// <returns>モデル</returns>

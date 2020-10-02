@@ -1,5 +1,6 @@
 ﻿namespace Yomuko.Forms.Viewer
 {
+    using SharpCompress.Archives;
     using System;
     using System.Windows.Forms;
 
@@ -14,46 +15,42 @@
             this.InitializeComponent();
         }
 
-        /// <summary>選択アイテム変更イベント</summary>
-        /// <param name="sender">発生元オブジェクト</param>
-        /// <param name="e">イベントデータ</param>
-        private void PictureList1_SelectedItemChanged(object sender, ArchiveMovedEventArgs e)
+        private void ViewerForm_KeyDown(object sender, KeyEventArgs e)
         {
-            // int nextIndex = DetailList.DetailListIndex + e.Direction;
-
-            // if (nextIndex >= 0 && nextIndex < DetailList.Books.SearchedItems.Count)
-            // {
-            //    DetailList.DetailListIndex = nextIndex;
-            //    e.NextFileName = DetailList.Books.SearchedItems[nextIndex].FilePath;
-            // }
+            if (e.Control && e.KeyCode == Keys.C)
+            {
+                // 画像データをクリップボードにコピーする
+                Clipboard.SetImage(this.pictureList1.Picture);
+            }
+            if (e.Control && e.KeyCode == Keys.B)
+            {
+                //クリップボードにあるデータの取得
+                System.Drawing.Image img = Clipboard.GetImage();
+                if (img != null)
+                {
+                    //データが取得できたときは表示する
+                    this.pictureList1.SetCover(img);
+                }
+            } else if (e.KeyCode == Keys.Enter)
+            {
+                if (!e.Control)
+                {
+                    this.SelectNextControl(this.ActiveControl, !e.Shift, true, true, true);
+                }
+            }
+            else if (e.KeyCode == Keys.F11)
+            {
+            }
         }
 
-        /// <summary>キーダウン発生前イベント</summary>
-        /// <param name="sender">発生元オブジェクト</param>
-        /// <param name="e">イベントデータ</param>
-        private void PictureList1_UserPreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        private void ViewerForm_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // switch (e.KeyCode)
-            // {
-            //    case Keys.F2:
-            //        this.DetailList.ShowPropertyDialog();
-            //        break;
-            // }
+            if (e.KeyChar == '\r')
+            {
+                e.Handled = true;
+            }
         }
 
-        /// <summary>ブックマーク追加イベント</summary>
-        /// <param name="sender">発生元オブジェクト</param>
-        /// <param name="e">イベントデータ</param>
-        private void PictureList1_BookmarkAdded(object sender, PageEventArgs e)
-        {
-            // var model = this.shelf.Books.FirstOrDefault(b => b.FilePath == e.FilePath);
-
-            // if (model != null)
-            // {
-            //    BookmarkModel bookmark = new BookmarkModel(model.Hash, e.PageIndex);
-            //    this.shelf.Bookmarks.Add(bookmark);
-            // }
-        }
 
         /// <summary>クローズイベント</summary>
         /// <param name="sender">発生元オブジェクト</param>

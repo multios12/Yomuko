@@ -2,10 +2,13 @@
 {
     using System;
     using System.Diagnostics;
+    using System.Drawing;
     using System.IO;
+    using SharpCompress.Archives.Zip;
     using System.Linq;
     using System.Windows.Forms;
     using Yomuko.Image;
+    using System.Drawing.Imaging;
 
     /// <summary>
     /// ファイルリスト付き、圧縮ファイル内画像表示コントロール
@@ -26,6 +29,8 @@
             this.InitializeComponent();
             this.fileNamePanel1.SaveClick += this.FileNamePanel1_SaveClick;
         }
+
+#region パブリック変数
 
         /// <summary>クローズ発生イベント</summary>
         public event EventHandler ArchiveClosed;
@@ -80,6 +85,7 @@
                 this.DrawPicture(this.PagePictureBox);
             }
         }
+        #endregion
 
         /// <summary>指定されたファイルを表示します</summary>
         /// <param name="path">`ファイルのパス</param>
@@ -103,7 +109,7 @@
                 this.DrawPicture(this.PagePictureBox);
 
                 this.fileNamePanel1.SetFilePath(path);
-                this.FileNameLabel.Text = System.IO.Path.GetFileName(path);
+                this.FileNameLabel.Text = Path.GetFileName(path);
             }
             catch (Exception ex)
             {
@@ -122,7 +128,39 @@
             return true;
         }
 
-        #region イベントプロシージャ 画像表示
+        public bool VisibleFilePanel { 
+            get
+            {
+                return fileNamePanel1.Visible;
+            }
+            set
+            {
+                fileNamePanel1.Visible = value;
+                this.FileListBox.Visible = !value;
+
+            }
+
+        }
+
+        public Image Picture
+        {
+            get
+            {
+
+                using (Stream s = ArchiveImagerHelper.GetStream(this.archiveBook.FilePath, this.archiveBook.PageIndex))
+                {
+                    Bitmap b = new Bitmap(s);
+
+                    return b;
+                }
+            }
+        }
+        internal void SetCover(Image img)
+        {
+            this.archiveBook.SetCover(img);
+        }
+
+        #region イベント 画像表示
 
         /// <summary>ページ ダブルクリックイベント</summary>
         /// <param name="sender">発生元オブジェクト</param>

@@ -34,7 +34,10 @@
             process.WaitForExit(2000);
             var value = process.StandardOutput.ReadToEnd();
             Debug.Print("ArchiveImagerHelper.Open:End");
-            return value.Split(new string[] { "\r\n" }, StringSplitOptions.None).ToList();
+
+            var l = value.Split(new string[] { "\r\n" }, StringSplitOptions.None).Where(f => !String.IsNullOrEmpty(f));
+
+            return l.ToList();
         }
 
         /// <summary>

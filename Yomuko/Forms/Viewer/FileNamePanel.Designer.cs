@@ -48,7 +48,6 @@
             this.ChangeButton2 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.SaveButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.CancelButton = new System.Windows.Forms.Button();
             this.ClearButton3 = new System.Windows.Forms.Button();
             this.ChangeButton3 = new System.Windows.Forms.Button();
@@ -271,7 +270,7 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.SaveButton.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SaveButton.Location = new System.Drawing.Point(19, 792);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(77, 23);
@@ -279,15 +278,6 @@
             this.SaveButton.Text = "保存";
             this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBox1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(220, 23);
-            this.textBox1.TabIndex = 15;
             // 
             // CancelButton
             // 
@@ -399,7 +389,6 @@
             this.Controls.Add(this.ChangeButton3);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.CancelButton);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.ClearButton2);
             this.Controls.Add(this.ChangeButton2);
@@ -420,7 +409,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Name = "FileNamePanel";
             this.Size = new System.Drawing.Size(220, 840);
             this.Load += new System.EventHandler(this.FileNamePanel_Load);
@@ -450,7 +439,6 @@
         private System.Windows.Forms.Button ChangeButton2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button SaveButton;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.Button ClearButton3;
         private System.Windows.Forms.Button ChangeButton3;

@@ -53,9 +53,12 @@
             this.ClientSize = new System.Drawing.Size(887, 561);
             this.Controls.Add(this.pictureList1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "ViewerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ViewerForm_KeyDown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ViewerForm_KeyPress);
             this.ResumeLayout(false);
 
         }

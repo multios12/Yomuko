@@ -392,6 +392,7 @@ namespace Yomuko.Forms.Main
                     archiveBook.DrawWidth = this.picCover.Width;
                     archiveBook.PageIndex = e.Item.CoverFileIndex;
                     this.picCover.Image = archiveBook.PagePicture;
+                    this.picCover.Tag = e.Item;
                 }
             }
             catch (Exception exe)
@@ -657,6 +658,78 @@ namespace Yomuko.Forms.Main
             this.pageSizeMenuItems.Values.ToList().ForEach(m => m.Checked = false);
             this.shelf.PageSize = value;
             this.pageSizeMenuItems[value].Checked = true;
+        }
+
+        private void picCover_MouseDown(object sender, MouseEventArgs e)
+        {
+            //マウスの左ボタンだけが押されている時のみドラッグできるようにする
+            if (e.Button == MouseButtons.Left)
+            {
+
+                var model = (BookModel)this.picCover.Tag;
+                using (var s = ArchiveImagerHelper.GetStream(model.FilePath, model.CoverFileIndex))
+                {
+                    var b = new System.Drawing.Bitmap(s);
+                    var dataObj = new DataObject();
+                    dataObj.SetData(DataFormats.Bitmap, s);
+                    picCover.DoDragDrop(picCover.Image, DragDropEffects.Copy);
+                }
+
+            }
+            else
+            {
+            }
+        }
+
+        private void smiCoverCopy_Click(object sender, EventArgs e)
+        {
+            var model = (BookModel)this.picCover.Tag;
+            using (var s = ArchiveImagerHelper.GetStream(model.FilePath, model.CoverFileIndex))
+            {
+                var b = new System.Drawing.Bitmap(s);
+                // 画像データをクリップボードにコピーする
+                Clipboard.SetImage(b);
+            }
+
+
+
+        }
+
+        private void smiCoverPaste_Click(object sender, EventArgs e)
+        {
+            //クリップボードにあるデータの取得
+            System.Drawing.Image img = Clipboard.GetImage();
+            var model = (BookModel)this.picCover.Tag;
+            if (img != null)
+            {
+                var a = new ArchiveModel(model.FilePath);
+                a.SetCover(img);
+
+                try
+                {
+                    model.CoverFileIndex = 0;
+                    using (var archiveBook = new ArchiveModel(model.FilePath))
+                    {
+                        archiveBook.ResizeHeight = this.picCover.Height;
+                        archiveBook.ResizeWidth = this.picCover.Width;
+                        archiveBook.DrawHeight = this.picCover.Height;
+                        archiveBook.DrawWidth = this.picCover.Width;
+                        archiveBook.PageIndex = model.CoverFileIndex;
+                        this.picCover.Image = archiveBook.PagePicture;
+                    }
+                }
+                catch (Exception exe)
+                {
+                    this.picCover.Image = null;
+                }
+            }
+        }
+
+        private void cmsCover_Opening(object sender, CancelEventArgs e)
+        {
+            System.Drawing.Image img = Clipboard.GetImage();
+            this.smiCoverPaste.Enabled = (img != null);
+
         }
     }
 }

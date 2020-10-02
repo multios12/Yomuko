@@ -20,6 +20,7 @@
 
         public event SaveClickEventHandler SaveClick;
 
+
         public void SetFilePath(string filePath)
         {
             this.model = new BookModel(filePath);
@@ -32,6 +33,7 @@
             this.NameTextBox7.Text = this.model.SubTitle;
         }
 
+        #region イベント
         private void ClearButton_Click(object sender, EventArgs e)
         {
             var button = (Button)sender;
@@ -56,23 +58,6 @@
             textBox2.Text = text;
         }
 
-        /// <summary>
-        /// フォームに配置されているコントロールを名前で探す
-        /// （フォームクラスのフィールドをフィールド名で探す）
-        /// </summary>
-        /// <param name="name">コントロール（フィールド）の名前</param>
-        /// <returns>見つかった時は、コントロールのオブジェクト。
-        /// 見つからなかった時は、null(VB.NETではNothing)。</returns>
-        private Control FindControlByFieldName(string name)
-        {
-            Type t = this.GetType();
-
-            FieldInfo fi = t.GetField(
-                name,
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-
-            return (Control)fi?.GetValue(this);
-        }
 
         private void FileNamePanel_Load(object sender, EventArgs e)
         {
@@ -124,6 +109,36 @@
             this.SaveClick(args);
         }
 
+        private void NameTextBox_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyData == Keys.Down)
+            {
+
+            }
+        }
+
+        #endregion
+
+        #region プライベートメソッド
+        /// <summary>
+        /// フォームに配置されているコントロールを名前で探す
+        /// （フォームクラスのフィールドをフィールド名で探す）
+        /// </summary>
+        /// <param name="name">コントロール（フィールド）の名前</param>
+        /// <returns>見つかった時は、コントロールのオブジェクト。
+        /// 見つからなかった時は、null(VB.NETではNothing)。</returns>
+        private Control FindControlByFieldName(string name)
+        {
+            Type t = this.GetType();
+
+            FieldInfo fi = t.GetField(
+                name,
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+
+            return (Control)fi?.GetValue(this);
+        }
+
+
         private string CreateList(ComboBox.ObjectCollection collection, string value)
         {
             var list1 = collection.Cast<string>().Where(v => v != value);
@@ -136,13 +151,6 @@
 
             return string.Join("\r", list1);
         }
-
-        private void NameTextBox_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if (e.KeyData == Keys.Down)
-            {
-
-            }
-        }
+        #endregion
     }
 }
