@@ -102,7 +102,7 @@
                 {
                     var targetShelf = new ShelfModel();
                     targetShelf = targetShelf.ReadJson(filePath);
-                    title = targetShelf.Title;
+                    title = String.IsNullOrEmpty(targetShelf.Title) ? filePath : targetShelf.Title;
 
                     this.shelfDictionary.Add(filePath, title);
                 }

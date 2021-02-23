@@ -45,8 +45,26 @@ namespace Yomuko.Forms.Main
                 { PageSizeConstants.Percent400, this.smiPercent400 }
             };
 
-            this.DetailList.ItemSelected += this.DetailList_ItemSelected;
+            DetailVerticalContainer.Panel2Collapsed = true;
+            this.DetailList.ItemShown += this.DetailList_ItemShown;
             this.DetailList.ItemChanged += this.DetailList_ItemChanged;
+            this.DetailList.ItemPropertyShown += this.DetailList_ItemPropertyShown;
+            this.DetailList.ItemSelected += DetailList_ItemSelected;
+        }
+
+        private void DetailList_ItemPropertyShown(object sender, ItemEventArgs<BookModel> e)
+        {
+            this.innerProperty1.Books = new List<BookModel>() { e.Item };
+            this.DetailVerticalContainer.Panel2Collapsed = false;
+            this.innerProperty1.InitialFocus();
+        }
+
+        private void DetailList_ItemSelected(object sender, ItemEventArgs<BookModel> e)
+        {
+            if(!this.DetailVerticalContainer.Panel2Collapsed)
+            {
+                this.innerProperty1.Books = new List<BookModel>() { e.Item };
+            }
         }
 
         /// <summary>
@@ -137,6 +155,7 @@ namespace Yomuko.Forms.Main
             this.DetailList.CoverImagePaint += this.DetailList_CoverImagePaint;
             this.shelf.Books.SearchCriteriasChanged += this.Books_SearchItemsChanged;
             this.finds.PropertyChanged += this.Finds_PropertyChanged;
+            this.innerProperty1.ItemChanged += this.InnerProperty_ItemChanged;
             Debug.Print("FormLoad完了-----------------------------------");
             this.DetailList.IsLoaded = true;
         }
@@ -340,8 +359,13 @@ namespace Yomuko.Forms.Main
         /// <summary>詳細表示：選択イベント</summary>
         /// <param name="sender">発生元オブジェクト</param>
         /// <param name="e">イベントデータ</param>
-        private void DetailList_ItemSelected(object sender, ItemEventArgs<BookModel> e)
+        private void DetailList_ItemShown(object sender, ItemEventArgs<BookModel> e)
         {
+            if (!this.DetailVerticalContainer.Panel2Collapsed)
+            {
+                this.innerProperty1.Books = new List<BookModel>() { e.Item };
+            }
+
             this.ShowArchive(e.Item.FilePath);
         }
 
@@ -395,7 +419,7 @@ namespace Yomuko.Forms.Main
                     this.picCover.Tag = e.Item;
                 }
             }
-            catch (Exception exe)
+            catch (Exception ex)
             {
                 this.picCover.Image = null;
             }
@@ -718,7 +742,7 @@ namespace Yomuko.Forms.Main
                         this.picCover.Image = archiveBook.PagePicture;
                     }
                 }
-                catch (Exception exe)
+                catch (Exception ex)
                 {
                     this.picCover.Image = null;
                 }
@@ -730,6 +754,20 @@ namespace Yomuko.Forms.Main
             System.Drawing.Image img = Clipboard.GetImage();
             this.smiCoverPaste.Enabled = (img != null);
 
+        }
+
+        private void InnerProperty_ItemChanged(object sender, ItemEventArgs<BookModel> e)
+        {
+            if (e.Item == null)
+            {
+                this.DetailVerticalContainer.Panel2Collapsed = true;
+                this.DetailList.Focus();
+                return;
+            }
+
+            this.shelf.FileNames.ChangeFileName(e.Item);
+            this.DetailList.Refresh();
+            this.DetailList.Focus();
         }
     }
 }

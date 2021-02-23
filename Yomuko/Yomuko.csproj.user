@@ -13,6 +13,9 @@
     <Compile Update="Forms\Main\Control\DetailList.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Forms\Main\Control\InnerProperty.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Forms\Main\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

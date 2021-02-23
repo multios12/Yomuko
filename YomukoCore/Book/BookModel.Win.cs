@@ -76,12 +76,14 @@
             {
                 string distFilePath = Path.Combine(distPath, Path.GetFileName(this.FilePath));
 
-                if (File.Exists(distFilePath))
+                var i = 1;
+                while( File.Exists(distFilePath))
                 {
-                    distFilePath = Path.GetFileNameWithoutExtension(distFilePath) + DateTime.Now.ToString("yyyyMMdd") +
-                        Path.GetRandomFileName();
+                    distFilePath = Path.GetFileNameWithoutExtension(distFilePath) + "(" + i + ")";
                     distFilePath += Path.GetExtension(this.FilePath);
                     distFilePath = Path.Combine(distPath, distFilePath);
+
+                    i++;
                 }
 
                 File.Move(this.FilePath, distFilePath);

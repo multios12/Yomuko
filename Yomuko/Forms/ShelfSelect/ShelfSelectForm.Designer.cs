@@ -29,8 +29,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShelfSelectForm));
             this.SelectListView = new System.Windows.Forms.ListView();
-            this.ColumnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ColumnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ColumnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.ColumnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.cmsBookList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.DeleteMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CreateButton = new System.Windows.Forms.Button();
@@ -49,6 +49,7 @@
             this.SelectListView.ContextMenuStrip = this.cmsBookList;
             this.SelectListView.FullRowSelect = true;
             this.SelectListView.GridLines = true;
+            this.SelectListView.HideSelection = false;
             this.SelectListView.LabelEdit = true;
             this.SelectListView.Location = new System.Drawing.Point(18, 13);
             this.SelectListView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -80,12 +81,12 @@
             this.cmsBookList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.DeleteMenuItem});
             this.cmsBookList.Name = "cmsBookList";
-            this.cmsBookList.Size = new System.Drawing.Size(99, 26);
+            this.cmsBookList.Size = new System.Drawing.Size(109, 28);
             // 
             // DeleteMenuItem
             // 
             this.DeleteMenuItem.Name = "DeleteMenuItem";
-            this.DeleteMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.DeleteMenuItem.Size = new System.Drawing.Size(108, 24);
             this.DeleteMenuItem.Text = "削除";
             this.DeleteMenuItem.Click += new System.EventHandler(this.DeleteMenuItem_Click);
             // 
@@ -103,12 +104,12 @@
             // 
             // ShelfSelectForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(976, 578);
             this.Controls.Add(this.CreateButton);
             this.Controls.Add(this.SelectListView);
-            this.Font = new System.Drawing.Font("游ゴシック", 11.25F);
+            this.Font = new System.Drawing.Font("游ゴシック", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "ShelfSelectForm";

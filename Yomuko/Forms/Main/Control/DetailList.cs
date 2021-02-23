@@ -45,8 +45,14 @@
 
         #region パブリックイベント
 
+        /// <summary>書籍表示イベント</summary>
+        public event EventHandler<ItemEventArgs<BookModel>> ItemShown;
+
         /// <summary>書籍選択イベント</summary>
         public event EventHandler<ItemEventArgs<BookModel>> ItemSelected;
+
+        /// <summary>書籍プロパティ表示イベント</summary>
+        public event EventHandler<ItemEventArgs<BookModel>> ItemPropertyShown;
 
         /// <summary>情報変更イベント</summary>
         public event EventHandler<ItemEventArgs<IEnumerable<BookModel>>> ItemChanged;
@@ -62,6 +68,7 @@
 
         /// <summary>しおりボタン選択イベント</summary>
         public event EventHandler BookmarksShown;
+
         #endregion
 
         #region パブリックプロパティ
@@ -325,6 +332,8 @@
         /// <param name="e">イベント情報</param>
         private void SeriesListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
+            var series = this.books.SeriesItems[e.ItemIndex];
+            this.ItemSelected(sender, new ItemEventArgs<BookModel>(series.FirstBook));
             this.CoverPaintTimer.Enabled = false;
             this.CoverPaintTimer.Enabled = true;
             Debug.Print("SeriesListView_ItemSelectionChanged:CoverPaintTimer:True");
@@ -370,6 +379,8 @@
             {
                 return;
             }
+
+            this.ItemSelected(sender, new ItemEventArgs<BookModel>(this.books.SearchedItems[e.ItemIndex]));
 
             this.books.SearchedItems[e.ItemIndex].IsDuplicate = !this.books.SearchedItems[e.ItemIndex].FileExists();
             this.CoverPaintTimer.Enabled = this.books.SearchedItems[e.ItemIndex].FileExists();
@@ -425,7 +436,7 @@
             }
             else if (model.FileExists())
             {
-                this.ItemSelected(sender, new ItemEventArgs<BookModel>(model));
+                this.ItemShown(sender, new ItemEventArgs<BookModel>(model));
                 return;
             }
 
@@ -537,7 +548,9 @@
             {
                 return;
             }
-
+            
+            this.ItemPropertyShown(sender, new ItemEventArgs<BookModel>(model));
+            /*
             // プロパティ画面の表示
             using (var dialog = new PropertyDialog() { Book = model, Shelf = this.Shelf })
             {
@@ -547,6 +560,7 @@
                     this.CoverImagePaint(sender, ev);
                 }
             }
+            */
         }
 
         /// <summary>プロパティの一括変更メニューアイテム クリックイベント</summary>

@@ -10,6 +10,10 @@
     <ApplicationIcon>Resources\yomuko.ico</ApplicationIcon>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="Resources\yomuko.ico" />
     <None Remove="Resources\yomuko.png" />

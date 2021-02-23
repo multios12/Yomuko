@@ -54,7 +54,7 @@
             // 
             this.spcMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.spcMain.Location = new System.Drawing.Point(0, 0);
-            this.spcMain.Margin = new System.Windows.Forms.Padding(4);
+            this.spcMain.Margin = new System.Windows.Forms.Padding(5);
             this.spcMain.Name = "spcMain";
             // 
             // spcMain.Panel1
@@ -64,8 +64,9 @@
             // spcMain.Panel2
             // 
             this.spcMain.Panel2.Controls.Add(this.spcList);
-            this.spcMain.Size = new System.Drawing.Size(980, 400);
-            this.spcMain.SplitterDistance = 320;
+            this.spcMain.Size = new System.Drawing.Size(1120, 533);
+            this.spcMain.SplitterDistance = 365;
+            this.spcMain.SplitterWidth = 5;
             this.spcMain.TabIndex = 2;
             this.spcMain.TabStop = false;
             // 
@@ -76,7 +77,7 @@
             this.picCover.Location = new System.Drawing.Point(0, 0);
             this.picCover.Margin = new System.Windows.Forms.Padding(0);
             this.picCover.Name = "picCover";
-            this.picCover.Size = new System.Drawing.Size(320, 400);
+            this.picCover.Size = new System.Drawing.Size(365, 533);
             this.picCover.TabIndex = 0;
             this.picCover.TabStop = false;
             // 
@@ -85,29 +86,30 @@
             this.spcList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.spcList.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.spcList.Location = new System.Drawing.Point(0, 0);
-            this.spcList.Margin = new System.Windows.Forms.Padding(4);
+            this.spcList.Margin = new System.Windows.Forms.Padding(5);
             this.spcList.Name = "spcList";
             this.spcList.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // spcList.Panel1
             // 
             this.spcList.Panel1.Controls.Add(this.ReturnButton);
+            this.spcList.Panel1MinSize = 40;
             // 
             // spcList.Panel2
             // 
             this.spcList.Panel2.Controls.Add(this.BookmarkListView);
-            this.spcList.Size = new System.Drawing.Size(656, 400);
-            this.spcList.SplitterDistance = 31;
-            this.spcList.SplitterWidth = 5;
+            this.spcList.Size = new System.Drawing.Size(750, 533);
+            this.spcList.SplitterDistance = 40;
+            this.spcList.SplitterWidth = 7;
             this.spcList.TabIndex = 1;
             this.spcList.TabStop = false;
             // 
             // ReturnButton
             // 
-            this.ReturnButton.Location = new System.Drawing.Point(4, 0);
-            this.ReturnButton.Margin = new System.Windows.Forms.Padding(4);
+            this.ReturnButton.Location = new System.Drawing.Point(5, 0);
+            this.ReturnButton.Margin = new System.Windows.Forms.Padding(5);
             this.ReturnButton.Name = "ReturnButton";
-            this.ReturnButton.Size = new System.Drawing.Size(88, 30);
+            this.ReturnButton.Size = new System.Drawing.Size(101, 40);
             this.ReturnButton.TabIndex = 1;
             this.ReturnButton.TabStop = false;
             this.ReturnButton.Text = "戻る";
@@ -126,10 +128,10 @@
             this.BookmarkListView.FullRowSelect = true;
             this.BookmarkListView.HideSelection = false;
             this.BookmarkListView.Location = new System.Drawing.Point(0, 0);
-            this.BookmarkListView.Margin = new System.Windows.Forms.Padding(4);
+            this.BookmarkListView.Margin = new System.Windows.Forms.Padding(5);
             this.BookmarkListView.MultiSelect = false;
             this.BookmarkListView.Name = "BookmarkListView";
-            this.BookmarkListView.Size = new System.Drawing.Size(656, 364);
+            this.BookmarkListView.Size = new System.Drawing.Size(750, 486);
             this.BookmarkListView.TabIndex = 1;
             this.BookmarkListView.UseCompatibleStateImageBehavior = false;
             this.BookmarkListView.View = System.Windows.Forms.View.Details;
@@ -161,23 +163,23 @@
             this.ContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.DeleteMenuItem});
             this.ContextMenuStrip1.Name = "ContextMenuStrip1";
-            this.ContextMenuStrip1.Size = new System.Drawing.Size(115, 26);
+            this.ContextMenuStrip1.Size = new System.Drawing.Size(130, 28);
             // 
             // DeleteMenuItem
             // 
             this.DeleteMenuItem.Name = "DeleteMenuItem";
-            this.DeleteMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.DeleteMenuItem.Size = new System.Drawing.Size(129, 24);
             this.DeleteMenuItem.Text = "削除(&D)";
             this.DeleteMenuItem.Click += new System.EventHandler(this.DeleteMenuItem_Click);
             // 
             // BookmarkList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.spcMain);
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "BookmarkList";
-            this.Size = new System.Drawing.Size(980, 400);
+            this.Size = new System.Drawing.Size(1120, 533);
             this.spcMain.Panel1.ResumeLayout(false);
             this.spcMain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.spcMain)).EndInit();
