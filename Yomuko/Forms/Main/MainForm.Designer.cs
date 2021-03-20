@@ -280,7 +280,7 @@ namespace Yomuko.Forms.Main
             this.DetailVerticalContainer.Panel2.Controls.Add(this.innerProperty1);
             this.DetailVerticalContainer.Panel2MinSize = 300;
             this.DetailVerticalContainer.Size = new System.Drawing.Size(1038, 683);
-            this.DetailVerticalContainer.SplitterDistance = 265;
+            this.DetailVerticalContainer.SplitterDistance = 229;
             this.DetailVerticalContainer.SplitterWidth = 10;
             this.DetailVerticalContainer.TabIndex = 16;
             this.DetailVerticalContainer.Text = "splitContainer1";
@@ -305,7 +305,7 @@ namespace Yomuko.Forms.Main
             // spcDetail.Panel2
             // 
             this.spcDetail.Panel2.Controls.Add(this.DetailList);
-            this.spcDetail.Size = new System.Drawing.Size(1038, 265);
+            this.spcDetail.Size = new System.Drawing.Size(1038, 229);
             this.spcDetail.SplitterDistance = 40;
             this.spcDetail.SplitterWidth = 7;
             this.spcDetail.TabIndex = 1;
@@ -329,12 +329,11 @@ namespace Yomuko.Forms.Main
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SearchFinderComboBox.FormattingEnabled = true;
-            this.SearchFinderComboBox.Location = new System.Drawing.Point(303, -61);
+            this.SearchFinderComboBox.Location = new System.Drawing.Point(304, 3);
             this.SearchFinderComboBox.Margin = new System.Windows.Forms.Padding(5);
             this.SearchFinderComboBox.Name = "SearchFinderComboBox";
-            this.SearchFinderComboBox.Size = new System.Drawing.Size(639, 28);
+            this.SearchFinderComboBox.Size = new System.Drawing.Size(638, 28);
             this.SearchFinderComboBox.TabIndex = 2;
-            this.SearchFinderComboBox.Leave += new System.EventHandler(this.SearchFinderComboBox_LostFocus);
             // 
             // cboFinderType
             // 
@@ -345,7 +344,6 @@ namespace Yomuko.Forms.Main
             this.cboFinderType.Name = "cboFinderType";
             this.cboFinderType.Size = new System.Drawing.Size(220, 28);
             this.cboFinderType.TabIndex = 1;
-            this.cboFinderType.Leave += new System.EventHandler(this.SearchFinderComboBox_LostFocus);
             // 
             // Label1
             // 
@@ -367,7 +365,7 @@ namespace Yomuko.Forms.Main
             this.DetailList.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.DetailList.Name = "DetailList";
             this.DetailList.Search = null;
-            this.DetailList.Size = new System.Drawing.Size(1038, 218);
+            this.DetailList.Size = new System.Drawing.Size(1038, 182);
             this.DetailList.TabIndex = 0;
             this.DetailList.Value = null;
             this.DetailList.SearchSelected += new System.EventHandler<Yomuko.Forms.Main.Control.SelectSearchEventArgs>(this.DetailList_SearchSelected);
@@ -380,7 +378,7 @@ namespace Yomuko.Forms.Main
             this.innerProperty1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.innerProperty1.Location = new System.Drawing.Point(0, 0);
             this.innerProperty1.Name = "innerProperty1";
-            this.innerProperty1.Size = new System.Drawing.Size(1038, 408);
+            this.innerProperty1.Size = new System.Drawing.Size(1038, 444);
             this.innerProperty1.TabIndex = 15;
             // 
             // ファイルFToolStripMenuItem

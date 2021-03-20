@@ -325,13 +325,6 @@ namespace Yomuko.Forms.Main
             if (e.PropertyName == nameof(this.finds.SearchedItems))
             {
                 this.DetailList.IsCollectSubtitle = this.shelf.CollectSubTitle;
-
-                var a = (MethodInvoker)delegate
-                {
-                    this.sslInfomation.Text = Resources.Information.FormatWith(this.DetailList.Books.SearchedItems.Count, this.shelf.Books.Count);
-                };
-
-                this.Invoke(a);
             }
         }
         #endregion
@@ -400,6 +393,8 @@ namespace Yomuko.Forms.Main
         private void DetailList_CoverImagePaint(object sender, ItemEventArgs<BookModel> e)
         {
             Debug.Print($"DetailList_CoverImagePaint:Start:{e.Item.CoverFileIndex}");
+            this.sslInfomation.Text = Resources.Information.FormatWith(this.DetailList.Books.SearchedItems.Count, this.shelf.Books.Count);
+
             if (e.Item == null || File.Exists(e.Item.FilePath) == false)
             {
                 this.picCover.Image = null;
@@ -446,7 +441,8 @@ namespace Yomuko.Forms.Main
         {
             this.cboFinderType.SelectedItem = e.FieldType.LabelName();
             this.SearchFinderComboBox.Text = e.Value;
-            this.SearchFinderComboBox_LostFocus(sender, null);
+            var searchItem = new SearchModel(BookModel.GetFieldType(this.cboFinderType.Text), this.SearchFinderComboBox.Text);
+            this.shelf.Books.RefreshSearchCriterias(searchItem);
             this.GroupListBox.Focus();
 
             // 検索フィルタ表示
@@ -637,19 +633,11 @@ namespace Yomuko.Forms.Main
             switch (e.KeyData)
             {
                 case Keys.Enter:
-                    this.SearchFinderComboBox_LostFocus(sender, e);
+                    var searchItem = new SearchModel(BookModel.GetFieldType(this.cboFinderType.Text), this.SearchFinderComboBox.Text);
+                    this.shelf.Books.RefreshSearchCriterias(searchItem);
                     this.GroupListBox.Focus();
                     break;
             }
-        }
-
-        /// <summary>検索種別コンボボックス フォーカス喪失イベント</summary>
-        /// <param name="sender">発生元オブジェクト</param>
-        /// <param name="e">イベントデータ</param>
-        private void SearchFinderComboBox_LostFocus(object sender, EventArgs e)
-        {
-            var searchItem = new SearchModel(BookModel.GetFieldType(this.cboFinderType.Text), this.SearchFinderComboBox.Text);
-            this.shelf.Books.RefreshSearchCriterias(searchItem);
         }
 
         /// <summary>検索ボタン クリックイベント</summary>
@@ -659,7 +647,8 @@ namespace Yomuko.Forms.Main
         {
             this.cboFinderType.SelectedIndex = 0;
             this.SearchFinderComboBox.Text = string.Empty;
-            this.SearchFinderComboBox_LostFocus(sender, e);
+            var searchItem = new SearchModel(BookModel.GetFieldType(this.cboFinderType.Text), this.SearchFinderComboBox.Text);
+            this.shelf.Books.RefreshSearchCriterias(searchItem);
             this.GroupListBox.Focus();
         }
         #endregion
