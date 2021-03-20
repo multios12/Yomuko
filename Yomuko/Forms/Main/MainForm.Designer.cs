@@ -280,7 +280,7 @@ namespace Yomuko.Forms.Main
             this.DetailVerticalContainer.Panel2.Controls.Add(this.innerProperty1);
             this.DetailVerticalContainer.Panel2MinSize = 300;
             this.DetailVerticalContainer.Size = new System.Drawing.Size(1038, 683);
-            this.DetailVerticalContainer.SplitterDistance = 277;
+            this.DetailVerticalContainer.SplitterDistance = 265;
             this.DetailVerticalContainer.SplitterWidth = 10;
             this.DetailVerticalContainer.TabIndex = 16;
             this.DetailVerticalContainer.Text = "splitContainer1";
@@ -305,7 +305,7 @@ namespace Yomuko.Forms.Main
             // spcDetail.Panel2
             // 
             this.spcDetail.Panel2.Controls.Add(this.DetailList);
-            this.spcDetail.Size = new System.Drawing.Size(1038, 277);
+            this.spcDetail.Size = new System.Drawing.Size(1038, 265);
             this.spcDetail.SplitterDistance = 40;
             this.spcDetail.SplitterWidth = 7;
             this.spcDetail.TabIndex = 1;
@@ -367,7 +367,7 @@ namespace Yomuko.Forms.Main
             this.DetailList.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.DetailList.Name = "DetailList";
             this.DetailList.Search = null;
-            this.DetailList.Size = new System.Drawing.Size(1038, 230);
+            this.DetailList.Size = new System.Drawing.Size(1038, 218);
             this.DetailList.TabIndex = 0;
             this.DetailList.Value = null;
             this.DetailList.SearchSelected += new System.EventHandler<Yomuko.Forms.Main.Control.SelectSearchEventArgs>(this.DetailList_SearchSelected);
@@ -380,7 +380,7 @@ namespace Yomuko.Forms.Main
             this.innerProperty1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.innerProperty1.Location = new System.Drawing.Point(0, 0);
             this.innerProperty1.Name = "innerProperty1";
-            this.innerProperty1.Size = new System.Drawing.Size(1038, 396);
+            this.innerProperty1.Size = new System.Drawing.Size(1038, 408);
             this.innerProperty1.TabIndex = 15;
             // 
             // ファイルFToolStripMenuItem

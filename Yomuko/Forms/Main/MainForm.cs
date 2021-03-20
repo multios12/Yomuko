@@ -523,6 +523,10 @@ namespace Yomuko.Forms.Main
                 return;
             }
 
+            // 同期直前のデータ保存
+            this.shelf.Columns = this.DetailList.GetColumns();
+            this.shelf.WriteJson();
+
             this.shelf = null;
             this.DialogResult = DialogResult.Retry;
             this.Close();

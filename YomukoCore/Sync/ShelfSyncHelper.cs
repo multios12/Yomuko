@@ -3,11 +3,14 @@
     using System;
     using System.Diagnostics;
     using System.IO;
-    using System.Text;
 
     /// <summary>
-    /// 本棚ファイル同期
+    /// 本棚ファイル同期ヘルパー
     /// </summary>
+    /// <remarks>
+    /// ShelfSync.exeを呼びだし、同期処理を行うためのヘルパークラス
+    /// 同期処理そのものは、ShelfSyncプロジェクトの、Syncクラスに存在している
+    /// </remarks>
     public class ShelfSyncHelper
     {
 
