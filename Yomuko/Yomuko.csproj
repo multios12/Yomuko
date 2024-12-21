@@ -25,6 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="SharpCompress" Version="0.38.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ArchiveImager\ArchiveImager.csproj" />
     <ProjectReference Include="..\YomukoCore\YomukoCore.csproj" />
   </ItemGroup>
